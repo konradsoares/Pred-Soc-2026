@@ -1,0 +1,61 @@
+# ------------------------
+# Node
+# ------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ------------------------
+# Environment / Secrets
+# ------------------------
+.env
+.env.*
+docker/.env
+docker/*.env
+
+# Any file that might contain tokens/secrets
+*secrets*
+*secret*
+*token*
+*apikey*
+*api_key*
+*credentials*
+
+# Explicit configs (adjust if needed)
+config/*.local.js
+config/private.js
+
+# ------------------------
+# Output / Generated files
+# ------------------------
+output/
+logs/
+*.log
+
+# AI tips / reports
+tips-*.json
+tips-*.html
+
+# ------------------------
+# OS / Editor
+# ------------------------
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# ------------------------
+# Docker (optional ignore)
+# ------------------------
+docker/postgres/data/
+docker/postgres/volume/
+
+# ------------------------
+# Misc
+# ------------------------
+coverage/
+.tmp/
+.cache/
