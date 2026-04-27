@@ -2,8 +2,9 @@ const env = require('../config/env');
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-function formatTargetDate() {
+function formatTargetDate(offsetDays = 0) {
   const d = new Date();
+  d.setDate(d.getDate() + offsetDays);
 
   const yyyy = d.getFullYear();
   const mm = String(d.getMonth() + 1).padStart(2, '0');
@@ -44,86 +45,33 @@ function detectCompetitionType(name) {
   if (!n) return 'league';
   if (n.includes('friendly')) return 'friendly';
   if (n.includes('cup')) return 'cup';
-  if (
-    n.includes('playoff') ||
-    n.includes('play-offs') ||
-    n.includes('tournament') ||
-    n.includes('super cup') ||
-    n.includes('supercup')
-  ) {
-    return 'tournament';
-  }
 
   return 'league';
 }
 
 function extractKickoffTime(match, date) {
   const raw = normalizeText(match.find('.date, .time').first().text());
-  const timeMatch = raw.match(/\b(\d{1,2}):(\d{2})\b/);
+  const m = raw.match(/\b(\d{1,2}):(\d{2})\b/);
 
-  if (timeMatch) {
-    const hh = timeMatch[1].padStart(2, '0');
-    const mm = timeMatch[2];
-    return new Date(`${date}T${hh}:${mm}:00Z`).toISOString();
-  }
+  if (!m) return new Date(`${date}T12:00:00Z`).toISOString();
 
-  const ownHeader = normalizeText(match.find('.teams .ownheader').first().text());
-  const ownHeaderMatch = ownHeader.match(/\b(\d{4}-\d{2}-\d{2})\s+(\d{1,2}):(\d{2})\b/);
+  const hh = m[1].padStart(2, '0');
+  const mm = m[2];
 
-  if (ownHeaderMatch) {
-    const hh = ownHeaderMatch[2].padStart(2, '0');
-    const mm = ownHeaderMatch[3];
-    return new Date(`${date}T${hh}:${mm}:00Z`).toISOString();
-  }
-
-  return new Date(`${date}T12:00:00Z`).toISOString();
-}
-
-function cleanHeaderText(raw) {
-  let text = normalizeText(raw);
-
-  if (!text) return '';
-
-  const marker = 'your prediction';
-  const idx = text.toLowerCase().indexOf(marker);
-  if (idx >= 0) {
-    text = normalizeText(text.slice(idx + marker.length));
-  }
-
-  text = text.replace(/^[-: ]+/, '').trim();
-  return text;
+  return new Date(`${date}T${hh}:${mm}:00Z`).toISOString();
 }
 
 function extractCountryAndCompetition(match) {
-  const competitionContainer = match.closest('.competition');
-  let headerText = '';
+  const container = match.closest('.competition');
+  const header = normalizeText(container.find('.header').first().text());
 
-  if (competitionContainer.length) {
-    headerText = cleanHeaderText(competitionContainer.find('.header').first().text());
+  if (!header) {
+    return { country: 'Unknown', competition: 'Unknown Competition' };
   }
 
-  if (!headerText) {
-    const prevCompetition = match.prevAll('.competition').first();
-    if (prevCompetition.length) {
-      headerText = cleanHeaderText(prevCompetition.find('.header').first().text());
-    }
-  }
+  const cleaned = header.split('your prediction').pop().trim();
+  const parts = cleaned.split(/\s+-\s+/);
 
-  if (!headerText) {
-    const rawHeader = cleanHeaderText(match.prevAll('.header').first().text());
-    if (rawHeader) {
-      headerText = rawHeader;
-    }
-  }
-
-  if (!headerText) {
-    return {
-      country: 'Unknown',
-      competition: 'Unknown Competition'
-    };
-  }
-
-  const parts = headerText.split(/\s+-\s+/);
   if (parts.length >= 2) {
     return {
       country: normalizeText(parts[0]),
@@ -133,42 +81,29 @@ function extractCountryAndCompetition(match) {
 
   return {
     country: 'Unknown',
-    competition: headerText
+    competition: cleaned
   };
 }
 
-function extractCountryFromCompareUrl(compareUrl) {
-  if (!compareUrl) return null;
-
-  const decoded = decodeURIComponent(compareUrl.replace(/\+/g, ' '));
-  const match = decoded.match(/\/compare\/teams\/[^/]+\(([^)]+)\)\/[^/]+\(([^)]+)\)/i);
-
-  if (!match) return null;
-
-  const country1 = normalizeText(match[1]);
-  const country2 = normalizeText(match[2]);
-
-  if (country1 && country1 === country2) return country1;
-  return country1 || country2 || null;
-}
-
 function extractCompareUrl(match, home, away) {
-  const href = match.find('.actions .info a[href*="/compare/teams/"], a[href*="/compare/teams/"]').first().attr('href');
+  const href = match.find('a[href*="/compare/teams/"]').first().attr('href');
 
   if (href) {
-    if (/^https?:\/\//i.test(href)) return href;
-    return `${env.SCRAPER_BASE_URL}${href.startsWith('/') ? '' : '/'}${href}`;
+    if (href.startsWith('http')) return href;
+    return `${env.SCRAPER_BASE_URL}${href}`;
   }
 
   return `${env.SCRAPER_BASE_URL}/compare/teams/${encodeURIComponent(home)}/${encodeURIComponent(away)}`;
 }
 
-async function fetchTodayFixtures() {
-  const date = formatTargetDate();
-  const url = `${env.SCRAPER_BASE_URL}/predictions/date/${date}/competition`;	
+// 🔥 MAIN FIX → explicit date param
+async function fetchFixturesByDate(date) {
+  const url = `${env.SCRAPER_BASE_URL}/predictions/date/${date}/`;
+
+  console.log(`Scraping: ${url}`);
 
   const res = await axios.get(url, {
-    timeout: Number(env.SCRAPER_TIMEOUT_MS || 30000),
+    timeout: 30000,
     headers: { 'User-Agent': 'Mozilla/5.0' }
   });
 
@@ -178,37 +113,30 @@ async function fetchTodayFixtures() {
   $('.match').each((_, el) => {
     const match = $(el);
 
-    const home = normalizeText(match.find('.hostteam .name a').first().text());
-    const away = normalizeText(match.find('.guestteam .name a').first().text());
-    const tip = normalizeText(match.find('.tip .value div').first().text());
+    const home = normalizeText(match.find('.hostteam .name a').text());
+    const away = normalizeText(match.find('.guestteam .name a').text());
+    const tip = normalizeText(match.find('.tip .value div').text());
 
     if (!home || !away) return;
 
     const predictions = [];
-    match.find('.coefrow > .coefbox .value, .coefbox .value').each((_, p) => {
-      const value = parseNumber($(p).text());
-      if (value !== null) predictions.push(value);
+    match.find('.coefbox .value').each((_, p) => {
+      const v = parseNumber($(p).text());
+      if (v !== null) predictions.push(v);
     });
 
-    const compareUrl = extractCompareUrl(match, home, away);
-    const parsed = extractCountryAndCompetition(match);
-    const fallbackCountry = extractCountryFromCompareUrl(compareUrl);
-
-    const country = parsed.country !== 'Unknown' ? parsed.country : (fallbackCountry || 'Unknown');
-    const competition = parsed.competition || 'Unknown Competition';
-    const kickoffUtc = extractKickoffTime(match, date);
-    const competitionType = detectCompetitionType(competition);
+    const { country, competition } = extractCountryAndCompetition(match);
 
     results.push({
       external_id: `statarea:${date}:${slugify(home)}:${slugify(away)}`,
-      kickoff_utc: kickoffUtc,
+      kickoff_utc: extractKickoffTime(match, date),
       country,
       competition,
-      competition_type: competitionType,
-      is_friendly: competitionType === 'friendly',
+      competition_type: detectCompetitionType(competition),
+      is_friendly: false,
       home_team: home,
       away_team: away,
-      compare_url: compareUrl,
+      compare_url: extractCompareUrl(match, home, away),
       source_name: 'statarea',
       tip: tip || null,
       prob_home: predictions[0] ?? null,
@@ -216,26 +144,19 @@ async function fetchTodayFixtures() {
       prob_away: predictions[2] ?? null,
       prob_over_25: predictions[6] ?? null,
       prob_under_25: predictions[7] ?? null,
-      raw_payload: {
-        scraped_date: date,
-        country,
-        competition,
-        compare_url: compareUrl,
-        tip,
-        predictions
-      }
+      raw_payload: { predictions }
     });
   });
 
-  const unique = new Map();
-  for (const item of results) {
-    const key = `${item.external_id}|${item.kickoff_utc}`;
-    if (!unique.has(key)) {
-      unique.set(key, item);
-    }
-  }
-
-  return [...unique.values()];
+  console.log(`Parsed ${results.length} fixtures`);
+  return results;
 }
 
-module.exports = { fetchTodayFixtures };
+async function fetchTodayFixtures() {
+  return fetchFixturesByDate(formatTargetDate(0));
+}
+
+module.exports = {
+  fetchTodayFixtures,
+  fetchFixturesByDate
+};
