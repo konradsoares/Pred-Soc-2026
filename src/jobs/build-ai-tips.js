@@ -188,7 +188,7 @@ async function loadTodayDataset(client, targetDate) {
     WHERE f.kickoff_utc >= NOW() AND f.kickoff_utc >= ($1::date + $2::time) AND f.kickoff_utc <= ($1::date + $3::time)
     ORDER BY f.kickoff_utc ASC, f.id ASC
     `,
-    [targetDate]
+    [targetDate, WINDOW_START, WINDOW_END]
   );
 
   return result.rows.map((row) => {
@@ -446,15 +446,17 @@ async function callOpenAIForTips(config, payload) {
 
 function writeOutputFile(targetDate, data) {
   ensureOutputDir();
-  const filename = path.join(OUTPUT_DIR, `tips-${targetDate}.json`);
+  const filename = path.join(OUTPUT_DIR, `tips-${targetDate}-${WINDOW}.json`);
   fs.writeFileSync(filename, JSON.stringify(data, null, 2), 'utf8');
   return filename;
 }
 
 async function deleteExistingBatchForDate(client, targetDate) {
   await client.query(
-    `DELETE FROM sent_tip_batches WHERE tip_date = $1::date`,
-    [targetDate]
+    `DELETE FROM sent_tip_batches
+     WHERE tip_date = $1::date
+       AND tip_window = $2`,
+    [targetDate, WINDOW]
   );
 }
 
@@ -465,15 +467,17 @@ async function insertTipBatch(client, targetDate, tipsFile, config) {
     `
     INSERT INTO sent_tip_batches (
       tip_date,
+      tip_window,
       bankroll,
       currency,
       raw_payload
     )
-    VALUES ($1, $2, $3, $4)
+    VALUES ($1, $2, $3, $4, $5)
     RETURNING id
     `,
     [
       targetDate,
+      WINDOW,
       staking.daily_bankroll || null,
       staking.currency || 'EUR',
       JSON.stringify(tipsFile)
@@ -626,6 +630,9 @@ async function main() {
     if (!config.ai.enabled) {
       const tipsFile = {
         date: targetDate,
+        window: WINDOW,
+        window_start: WINDOW_START,
+        window_end: WINDOW_END,
         payload,
         ai_tips: {
           staking_plan: config.staking || {},
