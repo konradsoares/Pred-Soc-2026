@@ -1,0 +1,54 @@
+{
+  "schedule": {
+    "cron_time": "0 5 * * *",
+    "timezone": "Europe/Dublin"
+  },
+  "prediction": {
+    "target_fixture_date_offset_days": 1,
+    "min_model_confidence": 0.62,
+    "max_single_pick_odds": 2.2,
+    "min_single_pick_odds": 1.35,
+    "max_acca_legs": 3,
+    "min_acca_total_odds": 3.0,
+    "max_acca_total_odds": 5.0,
+    "allow_system_bets": true,
+    "max_daily_picks": 12
+  },
+  "email": {
+    "enabled": true,
+    "from": "konrad.soares@gmail.com",
+    "to": ["konrad.soares@gmail.com"],
+    "subject_prefix": "[PredSoc]",
+    "smtp_host": "smtp.gmail.com",
+    "smtp_port": 587,
+    "secure": false,
+    "user_env": "SMTP_USER",
+    "pass_env": "SMTP_PASS"
+  },
+  "ai": {
+    "enabled": true,
+    "provider": "openai",
+    "model": "gpt-5.4-mini",
+    "use_responses_api": true,
+    "temperature": 0.2,
+    "max_output_tokens": 2500,
+    "api_key_env": "OPENAI_API_KEY"
+  },
+  "filters": {
+    "exclude_friendlies": true,
+    "exclude_unknown_competitions": true,
+    "exclude_youth_teams": true,
+    "min_h2h_matches": 3,
+    "min_recent_matches": 8
+  },
+  "staking": {
+  "daily_bankroll": 10,
+  "currency": "EUR",
+  "singles_pct": 70,
+  "accumulators_pct": 20,
+  "systems_pct": 10,
+  "max_single_stake": 2.5,
+  "max_acca_stake": 1,
+  "max_system_stake": 1
+  }
+}

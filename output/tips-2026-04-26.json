@@ -1,0 +1,2230 @@
+{
+  "date": "2026-04-26",
+  "payload": {
+    "date": "2026-04-26",
+    "rules": {
+      "min_confidence": 0.62,
+      "min_acca_total_odds": 3,
+      "max_acca_total_odds": 5,
+      "max_acca_legs": 3,
+      "allow_system_bets": true
+    },
+    "staking": {
+      "daily_bankroll": 10,
+      "currency": "EUR",
+      "singles_pct": 70,
+      "accumulators_pct": 20,
+      "systems_pct": 10,
+      "max_single_stake": 2.5,
+      "max_acca_stake": 1,
+      "max_system_stake": 1
+    },
+    "notes": {
+      "synthetic_odds": true,
+      "synthetic_odds_basis": "Odds are approximated from probabilities with margin-adjusted implied probability.",
+      "staking_warning": "Staking plan distributes risk but does not guarantee profit."
+    },
+    "fixtures": [
+      {
+        "fixture_id": "803",
+        "kickoff_utc": "2026-04-26T18:30:00.000Z",
+        "compare_url": "http://www.statarea.com/compare/teams/Debreceni+VSC (Hungary)/Gyori+Eto+FC (Hungary)",
+        "country": "HUNGARY",
+        "competition": "NB I",
+        "home_team": "Debreceni VSC",
+        "away_team": "Gyori Eto FC",
+        "source_tip": "X2",
+        "prob_home": 29,
+        "prob_draw": 30,
+        "prob_away": 41,
+        "prob_over_25": 84,
+        "prob_under_25": 64,
+        "h2h": {
+          "matches_considered": 10,
+          "home_wins": 5,
+          "draws": 5,
+          "away_wins": 0,
+          "home_goals": 23,
+          "away_goals": 9
+        },
+        "recent_form": {
+          "home": {
+            "wins": 4,
+            "draws": 4,
+            "losses": 2,
+            "failed_to_score": 3,
+            "btts": 3,
+            "over_25": 6
+          },
+          "away": {
+            "wins": 7,
+            "draws": 2,
+            "losses": 1,
+            "failed_to_score": 1,
+            "btts": 7,
+            "over_25": 7
+          }
+        },
+        "available_markets": [
+          {
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 64,
+            "odds": 1.47
+          },
+          {
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 70,
+            "odds": 1.35
+          }
+        ]
+      },
+      {
+        "fixture_id": "1060",
+        "kickoff_utc": "2026-04-26T18:30:00.000Z",
+        "compare_url": "http://www.statarea.com/compare/teams/Olimpia+Grudziadz (Poland)/Warta+Poznan (Poland)",
+        "country": "POLAND",
+        "competition": "II LIGA",
+        "home_team": "Olimpia Grudziadz",
+        "away_team": "Warta Poznan",
+        "source_tip": "1X",
+        "prob_home": 44,
+        "prob_draw": 30,
+        "prob_away": 26,
+        "prob_over_25": 89,
+        "prob_under_25": 58,
+        "h2h": {
+          "matches_considered": null,
+          "home_wins": null,
+          "draws": null,
+          "away_wins": null,
+          "home_goals": null,
+          "away_goals": null
+        },
+        "recent_form": {
+          "home": {
+            "wins": 6,
+            "draws": 1,
+            "losses": 3,
+            "failed_to_score": 2,
+            "btts": 6,
+            "over_25": 6
+          },
+          "away": {
+            "wins": 5,
+            "draws": 3,
+            "losses": 2,
+            "failed_to_score": 1,
+            "btts": 6,
+            "over_25": 5
+          }
+        },
+        "available_markets": [
+          {
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 70,
+            "odds": 1.35
+          }
+        ]
+      },
+      {
+        "fixture_id": "1087",
+        "kickoff_utc": "2026-04-26T18:30:00.000Z",
+        "compare_url": "http://www.statarea.com/compare/teams/TSV+Havelse (Germany)/VfB+Stuttgart+II (Germany)",
+        "country": "GERMANY",
+        "competition": "3. LIGA",
+        "home_team": "TSV Havelse",
+        "away_team": "VfB Stuttgart II",
+        "source_tip": "2",
+        "prob_home": 35,
+        "prob_draw": 25,
+        "prob_away": 40,
+        "prob_over_25": 93,
+        "prob_under_25": 70,
+        "h2h": {
+          "matches_considered": null,
+          "home_wins": null,
+          "draws": null,
+          "away_wins": null,
+          "home_goals": null,
+          "away_goals": null
+        },
+        "recent_form": {
+          "home": {
+            "wins": 3,
+            "draws": 1,
+            "losses": 6,
+            "failed_to_score": 1,
+            "btts": 8,
+            "over_25": 8
+          },
+          "away": {
+            "wins": 3,
+            "draws": 2,
+            "losses": 5,
+            "failed_to_score": 1,
+            "btts": 8,
+            "over_25": 7
+          }
+        },
+        "available_markets": [
+          {
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 70,
+            "odds": 1.35
+          },
+          {
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 65,
+            "odds": 1.45
+          }
+        ]
+      },
+      {
+        "fixture_id": "754",
+        "kickoff_utc": "2026-04-26T19:00:00.000Z",
+        "compare_url": "http://www.statarea.com/compare/teams/Vojvodina (Serbia)/Zeleznicar+Pancevo (Serbia)",
+        "country": "SERBIA",
+        "competition": "SUPER LIGA CHAMPIONSHIP ROUND",
+        "home_team": "Vojvodina",
+        "away_team": "Zeleznicar Pancevo",
+        "source_tip": "1",
+        "prob_home": 59,
+        "prob_draw": 23,
+        "prob_away": 18,
+        "prob_over_25": 85,
+        "prob_under_25": 65,
+        "h2h": {
+          "matches_considered": null,
+          "home_wins": null,
+          "draws": null,
+          "away_wins": null,
+          "home_goals": null,
+          "away_goals": null
+        },
+        "recent_form": {
+          "home": {
+            "wins": 5,
+            "draws": 2,
+            "losses": 3,
+            "failed_to_score": 4,
+            "btts": 4,
+            "over_25": 6
+          },
+          "away": {
+            "wins": 4,
+            "draws": 3,
+            "losses": 3,
+            "failed_to_score": 3,
+            "btts": 4,
+            "over_25": 6
+          }
+        },
+        "available_markets": [
+          {
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 65,
+            "odds": 1.45
+          }
+        ]
+      },
+      {
+        "fixture_id": "800",
+        "kickoff_utc": "2026-04-26T19:00:00.000Z",
+        "compare_url": "http://www.statarea.com/compare/teams/Independiente+Rivadavia (Argentina)/Gimnasia+Mendoza (Argentina)",
+        "country": "ARGENTINA",
+        "competition": "APERTURA",
+        "home_team": "Independiente Rivadavia",
+        "away_team": "Gimnasia Mendoza",
+        "source_tip": "1X",
+        "prob_home": 57,
+        "prob_draw": 31,
+        "prob_away": 12,
+        "prob_over_25": 70,
+        "prob_under_25": 37,
+        "h2h": {
+          "matches_considered": null,
+          "home_wins": null,
+          "draws": null,
+          "away_wins": null,
+          "home_goals": null,
+          "away_goals": null
+        },
+        "recent_form": {
+          "home": {
+            "wins": 6,
+            "draws": 3,
+            "losses": 1,
+            "failed_to_score": 1,
+            "btts": 6,
+            "over_25": 4
+          },
+          "away": {
+            "wins": 2,
+            "draws": 4,
+            "losses": 4,
+            "failed_to_score": 3,
+            "btts": 6,
+            "over_25": 3
+          }
+        },
+        "available_markets": [
+          {
+            "market": "goals",
+            "pick": "over_2_5",
+            "prob": 70,
+            "odds": 1.35
+          },
+          {
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 69,
+            "odds": 1.37
+          }
+        ]
+      },
+      {
+        "fixture_id": "822",
+        "kickoff_utc": "2026-04-26T19:00:00.000Z",
+        "compare_url": "http://www.statarea.com/compare/teams/AGF (Denmark)/FC+Midtjylland (Denmark)",
+        "country": "DENMARK",
+        "competition": "SUPERLIGAEN CHAMPIONSHIP PLAYOFF",
+        "home_team": "AGF",
+        "away_team": "FC Midtjylland",
+        "source_tip": "X2",
+        "prob_home": 37,
+        "prob_draw": 32,
+        "prob_away": 31,
+        "prob_over_25": 85,
+        "prob_under_25": 61,
+        "h2h": {
+          "matches_considered": 10,
+          "home_wins": 0,
+          "draws": 5,
+          "away_wins": 5,
+          "home_goals": 6,
+          "away_goals": 16
+        },
+        "recent_form": {
+          "home": {
+            "wins": 2,
+            "draws": 5,
+            "losses": 3,
+            "failed_to_score": 1,
+            "btts": 8,
+            "over_25": 4
+          },
+          "away": {
+            "wins": 4,
+            "draws": 4,
+            "losses": 2,
+            "failed_to_score": 2,
+            "btts": 7,
+            "over_25": 5
+          }
+        },
+        "available_markets": [
+          {
+            "market": "double_chance",
+            "pick": "1X",
+            "prob": 69,
+            "odds": 1.37
+          },
+          {
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 68,
+            "odds": 1.39
+          }
+        ]
+      },
+      {
+        "fixture_id": "866",
+        "kickoff_utc": "2026-04-26T19:00:00.000Z",
+        "compare_url": "http://www.statarea.com/compare/teams/Nueva+Chicago (Argentina)/Colegiales (Argentina)",
+        "country": "ARGENTINA",
+        "competition": "PRIMERA NACIONAL",
+        "home_team": "Nueva Chicago",
+        "away_team": "Colegiales",
+        "source_tip": "1X",
+        "prob_home": 48,
+        "prob_draw": 35,
+        "prob_away": 17,
+        "prob_over_25": 76,
+        "prob_under_25": 46,
+        "h2h": {
+          "matches_considered": null,
+          "home_wins": null,
+          "draws": null,
+          "away_wins": null,
+          "home_goals": null,
+          "away_goals": null
+        },
+        "recent_form": {
+          "home": {
+            "wins": 4,
+            "draws": 4,
+            "losses": 2,
+            "failed_to_score": 5,
+            "btts": 3,
+            "over_25": 4
+          },
+          "away": {
+            "wins": 3,
+            "draws": 2,
+            "losses": 5,
+            "failed_to_score": 3,
+            "btts": 4,
+            "over_25": 3
+          }
+        },
+        "available_markets": [
+          {
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          }
+        ]
+      },
+      {
+        "fixture_id": "869",
+        "kickoff_utc": "2026-04-26T19:00:00.000Z",
+        "compare_url": "http://www.statarea.com/compare/teams/Tristan+Suarez (Argentina)/Gimnasia+Y+Tiro (Argentina)",
+        "country": "ARGENTINA",
+        "competition": "PRIMERA NACIONAL",
+        "home_team": "Tristan Suarez",
+        "away_team": "Gimnasia Y Tiro",
+        "source_tip": "1X",
+        "prob_home": 49,
+        "prob_draw": 33,
+        "prob_away": 18,
+        "prob_over_25": 69,
+        "prob_under_25": 36,
+        "h2h": {
+          "matches_considered": null,
+          "home_wins": null,
+          "draws": null,
+          "away_wins": null,
+          "home_goals": null,
+          "away_goals": null
+        },
+        "recent_form": {
+          "home": {
+            "wins": 4,
+            "draws": 5,
+            "losses": 1,
+            "failed_to_score": 5,
+            "btts": 2,
+            "over_25": 2
+          },
+          "away": {
+            "wins": 3,
+            "draws": 3,
+            "losses": 4,
+            "failed_to_score": 4,
+            "btts": 5,
+            "over_25": 3
+          }
+        },
+        "available_markets": [
+          {
+            "market": "goals",
+            "pick": "over_2_5",
+            "prob": 69,
+            "odds": 1.37
+          },
+          {
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 67,
+            "odds": 1.41
+          }
+        ]
+      },
+      {
+        "fixture_id": "870",
+        "kickoff_utc": "2026-04-26T19:00:00.000Z",
+        "compare_url": "http://www.statarea.com/compare/teams/Deportivo+Moron (Argentina)/Racing+de+Cordoba (Argentina)",
+        "country": "ARGENTINA",
+        "competition": "PRIMERA NACIONAL",
+        "home_team": "Deportivo Moron",
+        "away_team": "Racing de Cordoba",
+        "source_tip": "1X",
+        "prob_home": 53,
+        "prob_draw": 30,
+        "prob_away": 17,
+        "prob_over_25": 58,
+        "prob_under_25": 33,
+        "h2h": {
+          "matches_considered": null,
+          "home_wins": null,
+          "draws": null,
+          "away_wins": null,
+          "home_goals": null,
+          "away_goals": null
+        },
+        "recent_form": {
+          "home": {
+            "wins": 6,
+            "draws": 1,
+            "losses": 3,
+            "failed_to_score": 1,
+            "btts": 4,
+            "over_25": 4
+          },
+          "away": {
+            "wins": 4,
+            "draws": 2,
+            "losses": 4,
+            "failed_to_score": 5,
+            "btts": 3,
+            "over_25": 5
+          }
+        },
+        "available_markets": [
+          {
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 70,
+            "odds": 1.35
+          }
+        ]
+      },
+      {
+        "fixture_id": "911",
+        "kickoff_utc": "2026-04-26T19:00:00.000Z",
+        "compare_url": "http://www.statarea.com/compare/teams/Dinamo+Bucuresti (Romania)/Rapid+Bucuresti (Romania)",
+        "country": "ROMANIA",
+        "competition": "SUPERLIGA CHAMPIONSHIP ROUND",
+        "home_team": "Dinamo Bucuresti",
+        "away_team": "Rapid Bucuresti",
+        "source_tip": "1X",
+        "prob_home": 45,
+        "prob_draw": 35,
+        "prob_away": 20,
+        "prob_over_25": 72,
+        "prob_under_25": 45,
+        "h2h": {
+          "matches_considered": 10,
+          "home_wins": 0,
+          "draws": 3,
+          "away_wins": 7,
+          "home_goals": 6,
+          "away_goals": 18
+        },
+        "recent_form": {
+          "home": {
+            "wins": 2,
+            "draws": 3,
+            "losses": 5,
+            "failed_to_score": 3,
+            "btts": 6,
+            "over_25": 3
+          },
+          "away": {
+            "wins": 3,
+            "draws": 3,
+            "losses": 4,
+            "failed_to_score": 3,
+            "btts": 7,
+            "over_25": 5
+          }
+        },
+        "available_markets": [
+          {
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          }
+        ]
+      },
+      {
+        "fixture_id": "1112",
+        "kickoff_utc": "2026-04-26T19:00:00.000Z",
+        "compare_url": "http://www.statarea.com/compare/teams/KA+Akureyri (Iceland)/Keflavik (Iceland)",
+        "country": "ICELAND",
+        "competition": "BESTA DEILDIN",
+        "home_team": "KA Akureyri",
+        "away_team": "Keflavik",
+        "source_tip": "1",
+        "prob_home": 56,
+        "prob_draw": 21,
+        "prob_away": 23,
+        "prob_over_25": 92,
+        "prob_under_25": 68,
+        "h2h": {
+          "matches_considered": 10,
+          "home_wins": 6,
+          "draws": 1,
+          "away_wins": 3,
+          "home_goals": 23,
+          "away_goals": 17
+        },
+        "recent_form": {
+          "home": {
+            "wins": 3,
+            "draws": 2,
+            "losses": 5,
+            "failed_to_score": 4,
+            "btts": 5,
+            "over_25": 4
+          },
+          "away": {
+            "wins": 4,
+            "draws": 3,
+            "losses": 3,
+            "failed_to_score": 1,
+            "btts": 8,
+            "over_25": 8
+          }
+        },
+        "available_markets": [
+          {
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 68,
+            "odds": 1.39
+          }
+        ]
+      },
+      {
+        "fixture_id": "848",
+        "kickoff_utc": "2026-04-26T19:15:00.000Z",
+        "compare_url": "http://www.statarea.com/compare/teams/NK+Bravo (Slovenia)/Maribor (Slovenia)",
+        "country": "SLOVENIA",
+        "competition": "PRVA LIGA",
+        "home_team": "NK Bravo",
+        "away_team": "Maribor",
+        "source_tip": "2",
+        "prob_home": 30,
+        "prob_draw": 27,
+        "prob_away": 43,
+        "prob_over_25": 79,
+        "prob_under_25": 53,
+        "h2h": {
+          "matches_considered": 10,
+          "home_wins": 2,
+          "draws": 4,
+          "away_wins": 4,
+          "home_goals": 14,
+          "away_goals": 17
+        },
+        "recent_form": {
+          "home": {
+            "wins": 6,
+            "draws": 1,
+            "losses": 3,
+            "failed_to_score": 2,
+            "btts": 6,
+            "over_25": 5
+          },
+          "away": {
+            "wins": 5,
+            "draws": 3,
+            "losses": 2,
+            "failed_to_score": 2,
+            "btts": 3,
+            "over_25": 3
+          }
+        },
+        "available_markets": [
+          {
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 70,
+            "odds": 1.35
+          }
+        ]
+      }
+    ],
+    "accumulator_candidates": [
+      {
+        "name": "acca_3_803_1087_754",
+        "legs": [
+          {
+            "fixture_id": "803",
+            "home_team": "Debreceni VSC",
+            "away_team": "Gyori Eto FC",
+            "country": "HUNGARY",
+            "competition": "NB I",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 64,
+            "odds": 1.47
+          },
+          {
+            "fixture_id": "1087",
+            "home_team": "TSV Havelse",
+            "away_team": "VfB Stuttgart II",
+            "country": "GERMANY",
+            "competition": "3. LIGA",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "754",
+            "home_team": "Vojvodina",
+            "away_team": "Zeleznicar Pancevo",
+            "country": "SERBIA",
+            "competition": "SUPER LIGA CHAMPIONSHIP ROUND",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 65,
+            "odds": 1.45
+          }
+        ],
+        "total_odds": 3.09
+      },
+      {
+        "name": "acca_3_803_1087_822",
+        "legs": [
+          {
+            "fixture_id": "803",
+            "home_team": "Debreceni VSC",
+            "away_team": "Gyori Eto FC",
+            "country": "HUNGARY",
+            "competition": "NB I",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 64,
+            "odds": 1.47
+          },
+          {
+            "fixture_id": "1087",
+            "home_team": "TSV Havelse",
+            "away_team": "VfB Stuttgart II",
+            "country": "GERMANY",
+            "competition": "3. LIGA",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "822",
+            "home_team": "AGF",
+            "away_team": "FC Midtjylland",
+            "country": "DENMARK",
+            "competition": "SUPERLIGAEN CHAMPIONSHIP PLAYOFF",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 63,
+            "odds": 1.5
+          }
+        ],
+        "total_odds": 3.2
+      },
+      {
+        "name": "acca_3_803_1087_866",
+        "legs": [
+          {
+            "fixture_id": "803",
+            "home_team": "Debreceni VSC",
+            "away_team": "Gyori Eto FC",
+            "country": "HUNGARY",
+            "competition": "NB I",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 64,
+            "odds": 1.47
+          },
+          {
+            "fixture_id": "1087",
+            "home_team": "TSV Havelse",
+            "away_team": "VfB Stuttgart II",
+            "country": "GERMANY",
+            "competition": "3. LIGA",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "866",
+            "home_team": "Nueva Chicago",
+            "away_team": "Colegiales",
+            "country": "ARGENTINA",
+            "competition": "PRIMERA NACIONAL",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          }
+        ],
+        "total_odds": 3.09
+      },
+      {
+        "name": "acca_3_803_1087_869",
+        "legs": [
+          {
+            "fixture_id": "803",
+            "home_team": "Debreceni VSC",
+            "away_team": "Gyori Eto FC",
+            "country": "HUNGARY",
+            "competition": "NB I",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 64,
+            "odds": 1.47
+          },
+          {
+            "fixture_id": "1087",
+            "home_team": "TSV Havelse",
+            "away_team": "VfB Stuttgart II",
+            "country": "GERMANY",
+            "competition": "3. LIGA",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "869",
+            "home_team": "Tristan Suarez",
+            "away_team": "Gimnasia Y Tiro",
+            "country": "ARGENTINA",
+            "competition": "PRIMERA NACIONAL",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 67,
+            "odds": 1.41
+          }
+        ],
+        "total_odds": 3.01
+      },
+      {
+        "name": "acca_3_803_1087_911",
+        "legs": [
+          {
+            "fixture_id": "803",
+            "home_team": "Debreceni VSC",
+            "away_team": "Gyori Eto FC",
+            "country": "HUNGARY",
+            "competition": "NB I",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 64,
+            "odds": 1.47
+          },
+          {
+            "fixture_id": "1087",
+            "home_team": "TSV Havelse",
+            "away_team": "VfB Stuttgart II",
+            "country": "GERMANY",
+            "competition": "3. LIGA",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "911",
+            "home_team": "Dinamo Bucuresti",
+            "away_team": "Rapid Bucuresti",
+            "country": "ROMANIA",
+            "competition": "SUPERLIGA CHAMPIONSHIP ROUND",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          }
+        ],
+        "total_odds": 3.09
+      },
+      {
+        "name": "acca_3_803_754_822",
+        "legs": [
+          {
+            "fixture_id": "803",
+            "home_team": "Debreceni VSC",
+            "away_team": "Gyori Eto FC",
+            "country": "HUNGARY",
+            "competition": "NB I",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 64,
+            "odds": 1.47
+          },
+          {
+            "fixture_id": "754",
+            "home_team": "Vojvodina",
+            "away_team": "Zeleznicar Pancevo",
+            "country": "SERBIA",
+            "competition": "SUPER LIGA CHAMPIONSHIP ROUND",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "822",
+            "home_team": "AGF",
+            "away_team": "FC Midtjylland",
+            "country": "DENMARK",
+            "competition": "SUPERLIGAEN CHAMPIONSHIP PLAYOFF",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 63,
+            "odds": 1.5
+          }
+        ],
+        "total_odds": 3.2
+      },
+      {
+        "name": "acca_3_803_754_866",
+        "legs": [
+          {
+            "fixture_id": "803",
+            "home_team": "Debreceni VSC",
+            "away_team": "Gyori Eto FC",
+            "country": "HUNGARY",
+            "competition": "NB I",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 64,
+            "odds": 1.47
+          },
+          {
+            "fixture_id": "754",
+            "home_team": "Vojvodina",
+            "away_team": "Zeleznicar Pancevo",
+            "country": "SERBIA",
+            "competition": "SUPER LIGA CHAMPIONSHIP ROUND",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "866",
+            "home_team": "Nueva Chicago",
+            "away_team": "Colegiales",
+            "country": "ARGENTINA",
+            "competition": "PRIMERA NACIONAL",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          }
+        ],
+        "total_odds": 3.09
+      },
+      {
+        "name": "acca_3_803_754_869",
+        "legs": [
+          {
+            "fixture_id": "803",
+            "home_team": "Debreceni VSC",
+            "away_team": "Gyori Eto FC",
+            "country": "HUNGARY",
+            "competition": "NB I",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 64,
+            "odds": 1.47
+          },
+          {
+            "fixture_id": "754",
+            "home_team": "Vojvodina",
+            "away_team": "Zeleznicar Pancevo",
+            "country": "SERBIA",
+            "competition": "SUPER LIGA CHAMPIONSHIP ROUND",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "869",
+            "home_team": "Tristan Suarez",
+            "away_team": "Gimnasia Y Tiro",
+            "country": "ARGENTINA",
+            "competition": "PRIMERA NACIONAL",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 67,
+            "odds": 1.41
+          }
+        ],
+        "total_odds": 3.01
+      },
+      {
+        "name": "acca_3_803_754_911",
+        "legs": [
+          {
+            "fixture_id": "803",
+            "home_team": "Debreceni VSC",
+            "away_team": "Gyori Eto FC",
+            "country": "HUNGARY",
+            "competition": "NB I",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 64,
+            "odds": 1.47
+          },
+          {
+            "fixture_id": "754",
+            "home_team": "Vojvodina",
+            "away_team": "Zeleznicar Pancevo",
+            "country": "SERBIA",
+            "competition": "SUPER LIGA CHAMPIONSHIP ROUND",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "911",
+            "home_team": "Dinamo Bucuresti",
+            "away_team": "Rapid Bucuresti",
+            "country": "ROMANIA",
+            "competition": "SUPERLIGA CHAMPIONSHIP ROUND",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          }
+        ],
+        "total_odds": 3.09
+      },
+      {
+        "name": "acca_3_803_800_822",
+        "legs": [
+          {
+            "fixture_id": "803",
+            "home_team": "Debreceni VSC",
+            "away_team": "Gyori Eto FC",
+            "country": "HUNGARY",
+            "competition": "NB I",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 64,
+            "odds": 1.47
+          },
+          {
+            "fixture_id": "800",
+            "home_team": "Independiente Rivadavia",
+            "away_team": "Gimnasia Mendoza",
+            "country": "ARGENTINA",
+            "competition": "APERTURA",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 69,
+            "odds": 1.37
+          },
+          {
+            "fixture_id": "822",
+            "home_team": "AGF",
+            "away_team": "FC Midtjylland",
+            "country": "DENMARK",
+            "competition": "SUPERLIGAEN CHAMPIONSHIP PLAYOFF",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 63,
+            "odds": 1.5
+          }
+        ],
+        "total_odds": 3.02
+      },
+      {
+        "name": "acca_3_803_822_866",
+        "legs": [
+          {
+            "fixture_id": "803",
+            "home_team": "Debreceni VSC",
+            "away_team": "Gyori Eto FC",
+            "country": "HUNGARY",
+            "competition": "NB I",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 64,
+            "odds": 1.47
+          },
+          {
+            "fixture_id": "822",
+            "home_team": "AGF",
+            "away_team": "FC Midtjylland",
+            "country": "DENMARK",
+            "competition": "SUPERLIGAEN CHAMPIONSHIP PLAYOFF",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "866",
+            "home_team": "Nueva Chicago",
+            "away_team": "Colegiales",
+            "country": "ARGENTINA",
+            "competition": "PRIMERA NACIONAL",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          }
+        ],
+        "total_odds": 3.2
+      },
+      {
+        "name": "acca_3_803_822_869",
+        "legs": [
+          {
+            "fixture_id": "803",
+            "home_team": "Debreceni VSC",
+            "away_team": "Gyori Eto FC",
+            "country": "HUNGARY",
+            "competition": "NB I",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 64,
+            "odds": 1.47
+          },
+          {
+            "fixture_id": "822",
+            "home_team": "AGF",
+            "away_team": "FC Midtjylland",
+            "country": "DENMARK",
+            "competition": "SUPERLIGAEN CHAMPIONSHIP PLAYOFF",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "869",
+            "home_team": "Tristan Suarez",
+            "away_team": "Gimnasia Y Tiro",
+            "country": "ARGENTINA",
+            "competition": "PRIMERA NACIONAL",
+            "market": "goals",
+            "pick": "over_2_5",
+            "prob": 69,
+            "odds": 1.37
+          }
+        ],
+        "total_odds": 3.02
+      },
+      {
+        "name": "acca_3_803_822_869",
+        "legs": [
+          {
+            "fixture_id": "803",
+            "home_team": "Debreceni VSC",
+            "away_team": "Gyori Eto FC",
+            "country": "HUNGARY",
+            "competition": "NB I",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 64,
+            "odds": 1.47
+          },
+          {
+            "fixture_id": "822",
+            "home_team": "AGF",
+            "away_team": "FC Midtjylland",
+            "country": "DENMARK",
+            "competition": "SUPERLIGAEN CHAMPIONSHIP PLAYOFF",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "869",
+            "home_team": "Tristan Suarez",
+            "away_team": "Gimnasia Y Tiro",
+            "country": "ARGENTINA",
+            "competition": "PRIMERA NACIONAL",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 67,
+            "odds": 1.41
+          }
+        ],
+        "total_odds": 3.11
+      },
+      {
+        "name": "acca_3_803_822_911",
+        "legs": [
+          {
+            "fixture_id": "803",
+            "home_team": "Debreceni VSC",
+            "away_team": "Gyori Eto FC",
+            "country": "HUNGARY",
+            "competition": "NB I",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 64,
+            "odds": 1.47
+          },
+          {
+            "fixture_id": "822",
+            "home_team": "AGF",
+            "away_team": "FC Midtjylland",
+            "country": "DENMARK",
+            "competition": "SUPERLIGAEN CHAMPIONSHIP PLAYOFF",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "911",
+            "home_team": "Dinamo Bucuresti",
+            "away_team": "Rapid Bucuresti",
+            "country": "ROMANIA",
+            "competition": "SUPERLIGA CHAMPIONSHIP ROUND",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          }
+        ],
+        "total_odds": 3.2
+      },
+      {
+        "name": "acca_3_803_822_1112",
+        "legs": [
+          {
+            "fixture_id": "803",
+            "home_team": "Debreceni VSC",
+            "away_team": "Gyori Eto FC",
+            "country": "HUNGARY",
+            "competition": "NB I",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 64,
+            "odds": 1.47
+          },
+          {
+            "fixture_id": "822",
+            "home_team": "AGF",
+            "away_team": "FC Midtjylland",
+            "country": "DENMARK",
+            "competition": "SUPERLIGAEN CHAMPIONSHIP PLAYOFF",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "1112",
+            "home_team": "KA Akureyri",
+            "away_team": "Keflavik",
+            "country": "ICELAND",
+            "competition": "BESTA DEILDIN",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 68,
+            "odds": 1.39
+          }
+        ],
+        "total_odds": 3.06
+      },
+      {
+        "name": "acca_3_803_866_869",
+        "legs": [
+          {
+            "fixture_id": "803",
+            "home_team": "Debreceni VSC",
+            "away_team": "Gyori Eto FC",
+            "country": "HUNGARY",
+            "competition": "NB I",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 64,
+            "odds": 1.47
+          },
+          {
+            "fixture_id": "866",
+            "home_team": "Nueva Chicago",
+            "away_team": "Colegiales",
+            "country": "ARGENTINA",
+            "competition": "PRIMERA NACIONAL",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "869",
+            "home_team": "Tristan Suarez",
+            "away_team": "Gimnasia Y Tiro",
+            "country": "ARGENTINA",
+            "competition": "PRIMERA NACIONAL",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 67,
+            "odds": 1.41
+          }
+        ],
+        "total_odds": 3.01
+      },
+      {
+        "name": "acca_3_803_866_911",
+        "legs": [
+          {
+            "fixture_id": "803",
+            "home_team": "Debreceni VSC",
+            "away_team": "Gyori Eto FC",
+            "country": "HUNGARY",
+            "competition": "NB I",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 64,
+            "odds": 1.47
+          },
+          {
+            "fixture_id": "866",
+            "home_team": "Nueva Chicago",
+            "away_team": "Colegiales",
+            "country": "ARGENTINA",
+            "competition": "PRIMERA NACIONAL",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "911",
+            "home_team": "Dinamo Bucuresti",
+            "away_team": "Rapid Bucuresti",
+            "country": "ROMANIA",
+            "competition": "SUPERLIGA CHAMPIONSHIP ROUND",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          }
+        ],
+        "total_odds": 3.09
+      },
+      {
+        "name": "acca_3_803_869_911",
+        "legs": [
+          {
+            "fixture_id": "803",
+            "home_team": "Debreceni VSC",
+            "away_team": "Gyori Eto FC",
+            "country": "HUNGARY",
+            "competition": "NB I",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 64,
+            "odds": 1.47
+          },
+          {
+            "fixture_id": "869",
+            "home_team": "Tristan Suarez",
+            "away_team": "Gimnasia Y Tiro",
+            "country": "ARGENTINA",
+            "competition": "PRIMERA NACIONAL",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 67,
+            "odds": 1.41
+          },
+          {
+            "fixture_id": "911",
+            "home_team": "Dinamo Bucuresti",
+            "away_team": "Rapid Bucuresti",
+            "country": "ROMANIA",
+            "competition": "SUPERLIGA CHAMPIONSHIP ROUND",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          }
+        ],
+        "total_odds": 3.01
+      },
+      {
+        "name": "acca_3_1087_754_822",
+        "legs": [
+          {
+            "fixture_id": "1087",
+            "home_team": "TSV Havelse",
+            "away_team": "VfB Stuttgart II",
+            "country": "GERMANY",
+            "competition": "3. LIGA",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "754",
+            "home_team": "Vojvodina",
+            "away_team": "Zeleznicar Pancevo",
+            "country": "SERBIA",
+            "competition": "SUPER LIGA CHAMPIONSHIP ROUND",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "822",
+            "home_team": "AGF",
+            "away_team": "FC Midtjylland",
+            "country": "DENMARK",
+            "competition": "SUPERLIGAEN CHAMPIONSHIP PLAYOFF",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 63,
+            "odds": 1.5
+          }
+        ],
+        "total_odds": 3.15
+      },
+      {
+        "name": "acca_3_1087_754_866",
+        "legs": [
+          {
+            "fixture_id": "1087",
+            "home_team": "TSV Havelse",
+            "away_team": "VfB Stuttgart II",
+            "country": "GERMANY",
+            "competition": "3. LIGA",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "754",
+            "home_team": "Vojvodina",
+            "away_team": "Zeleznicar Pancevo",
+            "country": "SERBIA",
+            "competition": "SUPER LIGA CHAMPIONSHIP ROUND",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "866",
+            "home_team": "Nueva Chicago",
+            "away_team": "Colegiales",
+            "country": "ARGENTINA",
+            "competition": "PRIMERA NACIONAL",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          }
+        ],
+        "total_odds": 3.05
+      },
+      {
+        "name": "acca_3_1087_754_911",
+        "legs": [
+          {
+            "fixture_id": "1087",
+            "home_team": "TSV Havelse",
+            "away_team": "VfB Stuttgart II",
+            "country": "GERMANY",
+            "competition": "3. LIGA",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "754",
+            "home_team": "Vojvodina",
+            "away_team": "Zeleznicar Pancevo",
+            "country": "SERBIA",
+            "competition": "SUPER LIGA CHAMPIONSHIP ROUND",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "911",
+            "home_team": "Dinamo Bucuresti",
+            "away_team": "Rapid Bucuresti",
+            "country": "ROMANIA",
+            "competition": "SUPERLIGA CHAMPIONSHIP ROUND",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          }
+        ],
+        "total_odds": 3.05
+      },
+      {
+        "name": "acca_3_1087_822_866",
+        "legs": [
+          {
+            "fixture_id": "1087",
+            "home_team": "TSV Havelse",
+            "away_team": "VfB Stuttgart II",
+            "country": "GERMANY",
+            "competition": "3. LIGA",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "822",
+            "home_team": "AGF",
+            "away_team": "FC Midtjylland",
+            "country": "DENMARK",
+            "competition": "SUPERLIGAEN CHAMPIONSHIP PLAYOFF",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "866",
+            "home_team": "Nueva Chicago",
+            "away_team": "Colegiales",
+            "country": "ARGENTINA",
+            "competition": "PRIMERA NACIONAL",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          }
+        ],
+        "total_odds": 3.15
+      },
+      {
+        "name": "acca_3_1087_822_869",
+        "legs": [
+          {
+            "fixture_id": "1087",
+            "home_team": "TSV Havelse",
+            "away_team": "VfB Stuttgart II",
+            "country": "GERMANY",
+            "competition": "3. LIGA",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "822",
+            "home_team": "AGF",
+            "away_team": "FC Midtjylland",
+            "country": "DENMARK",
+            "competition": "SUPERLIGAEN CHAMPIONSHIP PLAYOFF",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "869",
+            "home_team": "Tristan Suarez",
+            "away_team": "Gimnasia Y Tiro",
+            "country": "ARGENTINA",
+            "competition": "PRIMERA NACIONAL",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 67,
+            "odds": 1.41
+          }
+        ],
+        "total_odds": 3.07
+      },
+      {
+        "name": "acca_3_1087_822_911",
+        "legs": [
+          {
+            "fixture_id": "1087",
+            "home_team": "TSV Havelse",
+            "away_team": "VfB Stuttgart II",
+            "country": "GERMANY",
+            "competition": "3. LIGA",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "822",
+            "home_team": "AGF",
+            "away_team": "FC Midtjylland",
+            "country": "DENMARK",
+            "competition": "SUPERLIGAEN CHAMPIONSHIP PLAYOFF",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "911",
+            "home_team": "Dinamo Bucuresti",
+            "away_team": "Rapid Bucuresti",
+            "country": "ROMANIA",
+            "competition": "SUPERLIGA CHAMPIONSHIP ROUND",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          }
+        ],
+        "total_odds": 3.15
+      },
+      {
+        "name": "acca_3_1087_822_1112",
+        "legs": [
+          {
+            "fixture_id": "1087",
+            "home_team": "TSV Havelse",
+            "away_team": "VfB Stuttgart II",
+            "country": "GERMANY",
+            "competition": "3. LIGA",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "822",
+            "home_team": "AGF",
+            "away_team": "FC Midtjylland",
+            "country": "DENMARK",
+            "competition": "SUPERLIGAEN CHAMPIONSHIP PLAYOFF",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "1112",
+            "home_team": "KA Akureyri",
+            "away_team": "Keflavik",
+            "country": "ICELAND",
+            "competition": "BESTA DEILDIN",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 68,
+            "odds": 1.39
+          }
+        ],
+        "total_odds": 3.02
+      },
+      {
+        "name": "acca_3_1087_866_911",
+        "legs": [
+          {
+            "fixture_id": "1087",
+            "home_team": "TSV Havelse",
+            "away_team": "VfB Stuttgart II",
+            "country": "GERMANY",
+            "competition": "3. LIGA",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "866",
+            "home_team": "Nueva Chicago",
+            "away_team": "Colegiales",
+            "country": "ARGENTINA",
+            "competition": "PRIMERA NACIONAL",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "911",
+            "home_team": "Dinamo Bucuresti",
+            "away_team": "Rapid Bucuresti",
+            "country": "ROMANIA",
+            "competition": "SUPERLIGA CHAMPIONSHIP ROUND",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          }
+        ],
+        "total_odds": 3.05
+      },
+      {
+        "name": "acca_3_754_822_866",
+        "legs": [
+          {
+            "fixture_id": "754",
+            "home_team": "Vojvodina",
+            "away_team": "Zeleznicar Pancevo",
+            "country": "SERBIA",
+            "competition": "SUPER LIGA CHAMPIONSHIP ROUND",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "822",
+            "home_team": "AGF",
+            "away_team": "FC Midtjylland",
+            "country": "DENMARK",
+            "competition": "SUPERLIGAEN CHAMPIONSHIP PLAYOFF",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "866",
+            "home_team": "Nueva Chicago",
+            "away_team": "Colegiales",
+            "country": "ARGENTINA",
+            "competition": "PRIMERA NACIONAL",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          }
+        ],
+        "total_odds": 3.15
+      },
+      {
+        "name": "acca_3_754_822_869",
+        "legs": [
+          {
+            "fixture_id": "754",
+            "home_team": "Vojvodina",
+            "away_team": "Zeleznicar Pancevo",
+            "country": "SERBIA",
+            "competition": "SUPER LIGA CHAMPIONSHIP ROUND",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "822",
+            "home_team": "AGF",
+            "away_team": "FC Midtjylland",
+            "country": "DENMARK",
+            "competition": "SUPERLIGAEN CHAMPIONSHIP PLAYOFF",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "869",
+            "home_team": "Tristan Suarez",
+            "away_team": "Gimnasia Y Tiro",
+            "country": "ARGENTINA",
+            "competition": "PRIMERA NACIONAL",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 67,
+            "odds": 1.41
+          }
+        ],
+        "total_odds": 3.07
+      },
+      {
+        "name": "acca_3_754_822_911",
+        "legs": [
+          {
+            "fixture_id": "754",
+            "home_team": "Vojvodina",
+            "away_team": "Zeleznicar Pancevo",
+            "country": "SERBIA",
+            "competition": "SUPER LIGA CHAMPIONSHIP ROUND",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "822",
+            "home_team": "AGF",
+            "away_team": "FC Midtjylland",
+            "country": "DENMARK",
+            "competition": "SUPERLIGAEN CHAMPIONSHIP PLAYOFF",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "911",
+            "home_team": "Dinamo Bucuresti",
+            "away_team": "Rapid Bucuresti",
+            "country": "ROMANIA",
+            "competition": "SUPERLIGA CHAMPIONSHIP ROUND",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          }
+        ],
+        "total_odds": 3.15
+      },
+      {
+        "name": "acca_3_754_822_1112",
+        "legs": [
+          {
+            "fixture_id": "754",
+            "home_team": "Vojvodina",
+            "away_team": "Zeleznicar Pancevo",
+            "country": "SERBIA",
+            "competition": "SUPER LIGA CHAMPIONSHIP ROUND",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "822",
+            "home_team": "AGF",
+            "away_team": "FC Midtjylland",
+            "country": "DENMARK",
+            "competition": "SUPERLIGAEN CHAMPIONSHIP PLAYOFF",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "1112",
+            "home_team": "KA Akureyri",
+            "away_team": "Keflavik",
+            "country": "ICELAND",
+            "competition": "BESTA DEILDIN",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 68,
+            "odds": 1.39
+          }
+        ],
+        "total_odds": 3.02
+      },
+      {
+        "name": "acca_3_754_866_911",
+        "legs": [
+          {
+            "fixture_id": "754",
+            "home_team": "Vojvodina",
+            "away_team": "Zeleznicar Pancevo",
+            "country": "SERBIA",
+            "competition": "SUPER LIGA CHAMPIONSHIP ROUND",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "866",
+            "home_team": "Nueva Chicago",
+            "away_team": "Colegiales",
+            "country": "ARGENTINA",
+            "competition": "PRIMERA NACIONAL",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "911",
+            "home_team": "Dinamo Bucuresti",
+            "away_team": "Rapid Bucuresti",
+            "country": "ROMANIA",
+            "competition": "SUPERLIGA CHAMPIONSHIP ROUND",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          }
+        ],
+        "total_odds": 3.05
+      },
+      {
+        "name": "acca_3_822_866_869",
+        "legs": [
+          {
+            "fixture_id": "822",
+            "home_team": "AGF",
+            "away_team": "FC Midtjylland",
+            "country": "DENMARK",
+            "competition": "SUPERLIGAEN CHAMPIONSHIP PLAYOFF",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "866",
+            "home_team": "Nueva Chicago",
+            "away_team": "Colegiales",
+            "country": "ARGENTINA",
+            "competition": "PRIMERA NACIONAL",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "869",
+            "home_team": "Tristan Suarez",
+            "away_team": "Gimnasia Y Tiro",
+            "country": "ARGENTINA",
+            "competition": "PRIMERA NACIONAL",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 67,
+            "odds": 1.41
+          }
+        ],
+        "total_odds": 3.07
+      },
+      {
+        "name": "acca_3_822_866_911",
+        "legs": [
+          {
+            "fixture_id": "822",
+            "home_team": "AGF",
+            "away_team": "FC Midtjylland",
+            "country": "DENMARK",
+            "competition": "SUPERLIGAEN CHAMPIONSHIP PLAYOFF",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "866",
+            "home_team": "Nueva Chicago",
+            "away_team": "Colegiales",
+            "country": "ARGENTINA",
+            "competition": "PRIMERA NACIONAL",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "911",
+            "home_team": "Dinamo Bucuresti",
+            "away_team": "Rapid Bucuresti",
+            "country": "ROMANIA",
+            "competition": "SUPERLIGA CHAMPIONSHIP ROUND",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          }
+        ],
+        "total_odds": 3.15
+      },
+      {
+        "name": "acca_3_822_866_1112",
+        "legs": [
+          {
+            "fixture_id": "822",
+            "home_team": "AGF",
+            "away_team": "FC Midtjylland",
+            "country": "DENMARK",
+            "competition": "SUPERLIGAEN CHAMPIONSHIP PLAYOFF",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "866",
+            "home_team": "Nueva Chicago",
+            "away_team": "Colegiales",
+            "country": "ARGENTINA",
+            "competition": "PRIMERA NACIONAL",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "1112",
+            "home_team": "KA Akureyri",
+            "away_team": "Keflavik",
+            "country": "ICELAND",
+            "competition": "BESTA DEILDIN",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 68,
+            "odds": 1.39
+          }
+        ],
+        "total_odds": 3.02
+      },
+      {
+        "name": "acca_3_822_869_911",
+        "legs": [
+          {
+            "fixture_id": "822",
+            "home_team": "AGF",
+            "away_team": "FC Midtjylland",
+            "country": "DENMARK",
+            "competition": "SUPERLIGAEN CHAMPIONSHIP PLAYOFF",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "869",
+            "home_team": "Tristan Suarez",
+            "away_team": "Gimnasia Y Tiro",
+            "country": "ARGENTINA",
+            "competition": "PRIMERA NACIONAL",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 67,
+            "odds": 1.41
+          },
+          {
+            "fixture_id": "911",
+            "home_team": "Dinamo Bucuresti",
+            "away_team": "Rapid Bucuresti",
+            "country": "ROMANIA",
+            "competition": "SUPERLIGA CHAMPIONSHIP ROUND",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          }
+        ],
+        "total_odds": 3.07
+      },
+      {
+        "name": "acca_3_822_911_1112",
+        "legs": [
+          {
+            "fixture_id": "822",
+            "home_team": "AGF",
+            "away_team": "FC Midtjylland",
+            "country": "DENMARK",
+            "competition": "SUPERLIGAEN CHAMPIONSHIP PLAYOFF",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "911",
+            "home_team": "Dinamo Bucuresti",
+            "away_team": "Rapid Bucuresti",
+            "country": "ROMANIA",
+            "competition": "SUPERLIGA CHAMPIONSHIP ROUND",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 65,
+            "odds": 1.45
+          },
+          {
+            "fixture_id": "1112",
+            "home_team": "KA Akureyri",
+            "away_team": "Keflavik",
+            "country": "ICELAND",
+            "competition": "BESTA DEILDIN",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 68,
+            "odds": 1.39
+          }
+        ],
+        "total_odds": 3.02
+      }
+    ]
+  },
+  "ai_tips": {
+    "staking_plan": {
+      "daily_bankroll": 10,
+      "currency": "EUR",
+      "singles_total": 7,
+      "accumulators_total": 2,
+      "systems_total": 1,
+      "notes": "Singles carry most of the bankroll. Accumulators are capped at 1 EUR each and kept to 2 EUR total. System bets are limited to 1 EUR total. Excluded fixtures are those without a qualifying market at or above the minimum confidence threshold."
+    },
+    "singles": [
+      {
+        "fixture_id": 803,
+        "market": "goals",
+        "pick": "under_2_5",
+        "odds": 1.47,
+        "stake": 1.5,
+        "confidence": 0.64,
+        "reason": "Best low-variance angle available; both the model probability and available market support under 2.5 goals."
+      },
+      {
+        "fixture_id": 1087,
+        "market": "goals",
+        "pick": "under_2_5",
+        "odds": 1.35,
+        "stake": 1.25,
+        "confidence": 0.7,
+        "reason": "Strongest confidence among the listed low-risk markets; away side also has a usable X2 option, but under 2.5 is the safer single."
+      },
+      {
+        "fixture_id": 754,
+        "market": "goals",
+        "pick": "under_2_5",
+        "odds": 1.45,
+        "stake": 1.25,
+        "confidence": 0.65,
+        "reason": "Home side favored and the market probability supports a controlled-scoring match."
+      },
+      {
+        "fixture_id": 822,
+        "market": "double_chance",
+        "pick": "X2",
+        "odds": 1.5,
+        "stake": 1.25,
+        "confidence": 0.63,
+        "reason": "Balanced matchup with away side protection and a solid historical edge in the head-to-head."
+      },
+      {
+        "fixture_id": 1112,
+        "market": "goals",
+        "pick": "under_2_5",
+        "odds": 1.39,
+        "stake": 1.25,
+        "confidence": 0.68,
+        "reason": "High over-2.5 environment in the data, but the listed under 2.5 market still clears the confidence threshold and offers a lower-variance angle."
+      }
+    ],
+    "accumulators": [
+      {
+        "name": "acca_3_803_1087_754",
+        "total_odds": 3.09,
+        "stake": 1,
+        "confidence": 0.66,
+        "reason": "Three-leg conservative accumulator built from the strongest low-variance selections with qualifying confidence and odds within the allowed range.",
+        "legs": [
+          {
+            "fixture_id": 803,
+            "market": "goals",
+            "pick": "under_2_5",
+            "odds": 1.47
+          },
+          {
+            "fixture_id": 1087,
+            "market": "goals",
+            "pick": "under_2_5",
+            "odds": 1.35
+          },
+          {
+            "fixture_id": 754,
+            "market": "goals",
+            "pick": "under_2_5",
+            "odds": 1.45
+          }
+        ]
+      },
+      {
+        "name": "acca_3_803_1087_822",
+        "total_odds": 3.2,
+        "stake": 1,
+        "confidence": 0.64,
+        "reason": "Keeps the same core low-risk legs while swapping in a second-chance away protection pick to diversify the slip slightly.",
+        "legs": [
+          {
+            "fixture_id": 803,
+            "market": "goals",
+            "pick": "under_2_5",
+            "odds": 1.47
+          },
+          {
+            "fixture_id": 1087,
+            "market": "goals",
+            "pick": "under_2_5",
+            "odds": 1.35
+          },
+          {
+            "fixture_id": 822,
+            "market": "double_chance",
+            "pick": "X2",
+            "odds": 1.5
+          }
+        ]
+      }
+    ],
+    "system_bets": [
+      {
+        "type": "2/3 system on selected acca legs",
+        "stake": 1,
+        "reason": "Small speculative system position to reduce variance versus a straight accumulator while keeping exposure limited to the best qualifying low-risk legs.",
+        "legs": [
+          {
+            "fixture_id": 803,
+            "market": "goals",
+            "pick": "under_2_5",
+            "odds": 1.47
+          },
+          {
+            "fixture_id": 1087,
+            "market": "goals",
+            "pick": "under_2_5",
+            "odds": 1.35
+          },
+          {
+            "fixture_id": 822,
+            "market": "double_chance",
+            "pick": "X2",
+            "odds": 1.5
+          }
+        ]
+      }
+    ],
+    "excluded_fixtures": [
+      {
+        "fixture_id": 1060,
+        "reason": "No available market meets the minimum confidence threshold."
+      },
+      {
+        "fixture_id": 800,
+        "reason": "No available market meets the minimum confidence threshold."
+      },
+      {
+        "fixture_id": 866,
+        "reason": "No available market meets the minimum confidence threshold."
+      },
+      {
+        "fixture_id": 869,
+        "reason": "No available market meets the minimum confidence threshold."
+      },
+      {
+        "fixture_id": 870,
+        "reason": "No available market meets the minimum confidence threshold."
+      },
+      {
+        "fixture_id": 911,
+        "reason": "No available market meets the minimum confidence threshold."
+      },
+      {
+        "fixture_id": 848,
+        "reason": "No available market meets the minimum confidence threshold."
+      }
+    ]
+  }
+}

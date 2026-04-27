@@ -1,0 +1,1216 @@
+◇ injected env (9) from docker/.env // tip: ⌁ auth for agents [www.vestauth.com]
+/home/konrad/projects/Pred-Soc-2026/node_modules/undici/lib/web/webidl/index.js:537
+webidl.is.File = webidl.util.MakeTypeAssertion(File)
+                                               ^
+
+ReferenceError: File is not defined
+    at Object.<anonymous> (/home/konrad/projects/Pred-Soc-2026/node_modules/undici/lib/web/webidl/index.js:537:48)
+    at Module._compile (node:internal/modules/cjs/loader:1356:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1414:10)
+    at Module.load (node:internal/modules/cjs/loader:1197:32)
+    at Module._load (node:internal/modules/cjs/loader:1013:12)
+    at Module.require (node:internal/modules/cjs/loader:1225:19)
+    at require (node:internal/modules/helpers:177:18)
+    at Object.<anonymous> (/home/konrad/projects/Pred-Soc-2026/node_modules/undici/lib/web/fetch/util.js:12:20)
+    at Module._compile (node:internal/modules/cjs/loader:1356:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1414:10)
+
+Node.js v18.19.1
+◇ injected env (9) from projects/Pred-Soc-2026/docker/.env // tip: ◈ secrets for agents [www.dotenvx.com]
+/home/konrad/projects/Pred-Soc-2026/node_modules/undici/lib/web/webidl/index.js:537
+webidl.is.File = webidl.util.MakeTypeAssertion(File)
+                                               ^
+
+ReferenceError: File is not defined
+    at Object.<anonymous> (/home/konrad/projects/Pred-Soc-2026/node_modules/undici/lib/web/webidl/index.js:537:48)
+    at Module._compile (node:internal/modules/cjs/loader:1356:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1414:10)
+    at Module.load (node:internal/modules/cjs/loader:1197:32)
+    at Module._load (node:internal/modules/cjs/loader:1013:12)
+    at Module.require (node:internal/modules/cjs/loader:1225:19)
+    at require (node:internal/modules/helpers:177:18)
+    at Object.<anonymous> (/home/konrad/projects/Pred-Soc-2026/node_modules/undici/lib/web/fetch/util.js:12:20)
+    at Module._compile (node:internal/modules/cjs/loader:1356:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1414:10)
+
+Node.js v18.19.1
+◇ injected env (9) from projects/Pred-Soc-2026/docker/.env // tip: ⌘ override existing { override: true }
+/home/konrad/projects/Pred-Soc-2026/node_modules/undici/lib/web/webidl/index.js:537
+webidl.is.File = webidl.util.MakeTypeAssertion(File)
+                                               ^
+
+ReferenceError: File is not defined
+    at Object.<anonymous> (/home/konrad/projects/Pred-Soc-2026/node_modules/undici/lib/web/webidl/index.js:537:48)
+    at Module._compile (node:internal/modules/cjs/loader:1356:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1414:10)
+    at Module.load (node:internal/modules/cjs/loader:1197:32)
+    at Module._load (node:internal/modules/cjs/loader:1013:12)
+    at Module.require (node:internal/modules/cjs/loader:1225:19)
+    at require (node:internal/modules/helpers:177:18)
+    at Object.<anonymous> (/home/konrad/projects/Pred-Soc-2026/node_modules/undici/lib/web/fetch/util.js:12:20)
+    at Module._compile (node:internal/modules/cjs/loader:1356:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1414:10)
+
+Node.js v18.19.1
+◇ injected env (9) from docker/.env // tip: ⌘ enable debugging { debug: true }
+Fetched 521 fixtures
+Saved: Torino vs Inter
+Saved: AC Milan vs Juventus
+Saved: Fiorentina vs Sassuolo
+Saved: Genoa vs Como
+Saved: Galatasaray vs Fenerbahce
+Saved: Genclerbirligi vs Kocaelispor
+Saved: Villarreal vs Celta Vigo
+Saved: Rayo Vallecano vs Real Sociedad
+Saved: Osasuna vs Sevilla
+Saved: Oviedo vs Elche
+Saved: Borussia Dortmund vs SC Freiburg
+Saved: VfB Stuttgart vs Werder Bremen
+Saved: Crvena Zvezda vs FK Partizan
+Saved: Novi Pazar vs Cukaricki
+Saved: OFK Beograd vs Radnik Surdulica
+Saved: Vojvodina vs Zeleznicar Pancevo
+Saved: Marseille vs Nice
+Saved: Lorient vs Strasbourg
+Saved: Rennes vs Nantes
+Saved: Le Havre vs Metz
+Saved: Paris FC vs Lille
+Saved: Bragantino vs Palmeiras
+Saved: Corinthians vs Vasco Da Gama
+Saved: Atletico Paranaense vs Vitoria
+Saved: Sao Paulo vs Mirassol
+Saved: Gremio vs Coritiba
+Saved: Chelsea vs Leeds
+Saved: Gent vs Club Brugge
+Saved: Anderlecht vs Union St. Gilloise
+Saved: KV Mechelen vs St Truiden
+Saved: Paide Lm vs Flora Tallinn
+Saved: Kalju Nomme vs Parnu JK Vaprus
+Saved: Independiente Medellin vs Fortaleza FC
+Saved: Deportivo Cali vs America De Cali
+Saved: Rionegro FC vs Once Caldas
+Saved: Toluca vs Leon
+Saved: Club America vs Atlas
+Saved: Pachuca vs U.N.A.M. - Pumas
+Saved: U.A.N.L. - Tigres vs Mazatlan FC
+Saved: Guadalajara-Chivas vs Club Tijuana
+Saved: FC Juarez vs Atletico San Luis
+Saved: Zenit vs Akhmat Grozny
+Saved: Dinamo Moscow vs FC Sochi
+Saved: FC Nizhny Novgorod vs Spartak Moscow
+Saved: Krasnodar vs FK Makhachkala
+Saved: Apoel vs Pafos FC
+Saved: Apollon Limassol vs Omonia
+Saved: Santa Clara vs SC Braga
+Saved: Estoril vs Famalicao
+Saved: Estrela Da Amadora vs FC Porto
+Saved: HNK Rijeka vs HNK Hajduk Split
+Saved: NK Dinamo Zagreb vs NK Varazdin
+Saved: Petrocub vs Sheriff Tiraspol
+Saved: Zaria Balti vs Milsami Orhei
+Saved: Libertad vs Olimpia
+Saved: 2 De Mayo vs Club Guarani
+Saved: Rapid Vienna vs Red Bull Salzburg
+Saved: Sturm Graz vs Austria Vienna
+Saved: River Plate vs Aldosivi
+Saved: Belgrano Cordoba vs Gimnasia L.P.
+Saved: Newells Old Boys vs Instituto Cordoba
+Saved: Independiente Rivadavia vs Gimnasia Mendoza
+Saved: KuPS vs HJK Helsinki
+Saved: Ferencvarosi TC vs Paks
+Saved: Debreceni VSC vs Gyori Eto FC
+Saved: Spartak Trnava vs Slovan Bratislava
+Saved: Huesca vs Zaragoza
+Saved: Cordoba vs Sporting Gijon
+Saved: Leganes vs FC Andorra
+Saved: Granada CF vs Almeria
+Saved: AD Ceuta vs Racing Santander
+Saved: Mirandes vs Cultural Leonesa
+Saved: Djurgarden vs Hammarby
+Saved: IFK Goteborg vs GAIS
+Saved: IF Brommapojkarna vs Vaesteraas IK
+Saved: Rangers vs Motherwell
+Saved: Hibernian vs Hearts
+Saved: Lillestrom vs Bodo/Glimt
+Saved: Molde vs Valerenga
+Saved: Aalesund vs Kristiansund BK
+Saved: Tromso vs Sandefjord
+Saved: KFUM Oslo vs Sarpsborg 08 FF
+Saved: Ham-Kam vs Start
+Saved: AGF vs FC Midtjylland
+Saved: SonderjyskE vs Brondby
+Saved: Viborg vs FC Nordsjaelland
+Saved: Lech Poznan vs Legia Warszawa
+Saved: Wisla Plock vs Radomiak Radom
+Saved: Widzew Lodz vs Motor Lublin
+Saved: Neftchi Baku vs Qarabag
+Saved: Shamakhi FK vs Kapaz
+Saved: Raja Casablanca vs FUS Rabat
+Saved: Renaissance Zemamra vs Maghreb Fes
+Saved: Renaissance Berkane vs Olympique Dcheira
+Saved: Real Espana vs CD Olimpia
+Saved: Platense FC vs Olancho FC
+Saved: Universidad De Concepcion vs Colo Colo
+Saved: Deportes La Serena vs Huachipato
+Saved: CA Bizertin vs Esperance ST
+Saved: CS Sfaxien vs Stade Tunisien
+Saved: Club Africain vs JS Kairouanaise
+Saved: ES Zarzis vs Olympique Beja
+Saved: SC Paderborn 07 vs FC Schalke 04
+Saved: VfL Bochum vs SpVgg Greuther Furth
+Saved: FC Nurnberg vs FC Magdeburg
+Saved: Lokomotiv Plovdiv vs Cherno More Varna
+Saved: Arda Kardzhali vs Botev Plovdiv
+Saved: BSC Young Boys vs FC St. Gallen
+Saved: FC Basel 1893 vs FC Sion
+Saved: Atletico Grau vs Alianza Lima
+Saved: UTC vs Cienciano
+Saved: Cusco FC vs Sport Huancayo
+Saved: Sport Boys vs Adc Juan Pablo II
+Saved: NK Bravo vs Maribor
+Saved: NK Celje vs Aluminij
+Saved: Primorje vs Radomlje
+Saved: Columbus Crew vs Philadelphia Union
+Saved: Inter Miami vs New England Revolution
+Saved: FC Cincinnati vs New York Red Bulls
+Saved: Seattle Sounders vs FC Dallas
+Saved: DC United vs Orlando City SC
+Saved: Chicago Fire vs Sporting Kansas City
+Saved: San Diego vs Portland Timbers
+Saved: Vancouver Whitecaps vs Colorado Rapids
+Saved: St. Louis City vs San Jose Earthquakes
+Saved: Austin FC vs Houston Dynamo
+Saved: Orlando Pirates vs Kaizer Chiefs
+Saved: Polokwane City vs Stellenbosch FC
+Saved: Richards Bay FC vs Mamelodi Sundowns
+Saved: TS Galaxy FC vs Magesi FC
+Saved: Colon Santa Fe vs Godoy Cruz
+Saved: Nueva Chicago vs Colegiales
+Saved: Agropecuario vs San Martin Tucuman
+Saved: Chacarita Juniors vs Midland
+Saved: Tristan Suarez vs Gimnasia Y Tiro
+Saved: Deportivo Moron vs Racing de Cordoba
+Saved: Acassuso vs Estudiantes B.A.
+Saved: Deportivo Madryn vs Defensores De Belgrano
+Saved: Atletico Guemes vs Atletico Atlanta
+Saved: Chaco For Ever vs Atletico Mitre
+Saved: Central Norte vs Ciudad de Bolivar
+Saved: Deportivo Maipu vs Almagro
+Saved: Jeonbuk Motors vs Pohang Steelers
+Saved: Ulsan Hyundai FC vs Daejeon Citizen
+Saved: Gwangju FC vs FC Anyang
+Saved: Bolivar vs Real Tomayapo
+Saved: Guabira vs Always Ready
+Saved: Cerro Largo vs Racing Montevideo
+Saved: Henan Jianye vs Shanghai Shenhua
+Saved: Dalian Zhixing vs Yunnan Yukun
+Saved: FC Astana vs FC Atyrau
+Saved: Kairat Almaty vs Spartak Semey
+Saved: Zhetysu vs Ulytau
+Saved: Atromitos Athinon vs Asteras Tripolis
+Saved: Larisa vs Panserraikos
+Saved: Kifisia vs Panaitolikos
+Saved: Xelaju vs Coban Imperial
+Saved: Malacateco vs Comunicaciones
+Saved: CSD Municipal vs Deportivo Mixco
+Saved: Deportivo Achuapa vs Antigua GFC
+Saved: Guastatoya vs Deportivo Marquense
+Saved: Aurora FC vs Mictlan
+Saved: CS Herediano vs Sporting San Jose
+Saved: Puntarenas FC vs Deportivo Saprissa
+Saved: Guadalupe FC vs CS Cartagines
+Saved: Independiente F.B.C. vs Guairena FC
+Saved: Benjamin Aceval vs Fernando De La Mora
+Saved: Chonburi FC vs Muangthong United
+Saved: Dragon Pathumwan Kanchanaburi vs Buriram United
+Saved: Ayutthaya United vs Prachuap FC
+Saved: Rayong FC vs Lamphun Warrior
+Saved: Melbourne City vs Adelaide United FC
+Saved: Sydney FC vs Auckland FC
+Saved: Dinamo Bucuresti vs Rapid Bucuresti
+Saved: Dziugas vs FK Zalgiris Vilnius
+Saved: Banga Gargzdai vs Hegelmann Litauen
+Saved: UTA Arad vs Farul Constanta
+Saved: Polissya Zhytomyr vs Obolon Kiev
+Saved: Kudrivka vs Shakhter Donetsk
+Saved: Kryvbas Kryvyi Rih vs Dinamo Kiev
+Saved: FK Decic vs Buducnost Podgorica
+Saved: Sutjeska Niksic vs Jezero
+Saved: Jedinstvo Bijelo Polje vs FK Bokelj
+Saved: FK Mladost DG vs Mornar
+Saved: Slavia Sofia vs Botev Vratsa
+Saved: MOL Fehervar FC vs Vasas
+Saved: Mezokovesd-Zsory vs FC Ajka
+Saved: Kecskemeti TE vs Tiszakecske FC
+Saved: Bekescsaba 1912 vs Karcagi Se
+Saved: Budafoki MTE vs Szeged-Csanad
+Saved: Csakvar vs Kozarmisleny FC
+Saved: Szentlorinc SE vs Bvsc Zuglo
+Saved: Belshina vs FC Gomel
+Saved: Torpedo Zhodino vs Arsenal Dzerzhinsk
+Saved: Stabaek vs Haugesund
+Saved: Sandnes ULF vs Stromsgodset
+Saved: Moss vs Lyn
+Saved: Raufoss vs Hodd
+Saved: Shillong Lajong FC vs Dempo SC
+Saved: Silkeborg vs Randers FC
+Saved: FC Fredericia vs Odense
+Saved: Cobreloa vs San Luis
+Saved: Curico Unido vs Deportes Puerto Montt
+Saved: Deportes Recoleta vs Antofagasta
+Saved: Hapoel Jerusalem vs Hapoel Haifa
+Saved: Ironi Tiberias vs Irony Kiryat Shmona
+Saved: Luis Angel Firpo vs FAS
+Saved: Alianza vs Zacatecoluca
+Saved: CD Cacahuatique vs Aguila
+Saved: AD Isidro Metapan vs Fuerte San Francisco
+Saved: Inter Fa vs Municipal Limeno
+Saved: Academia Cantolao vs Union Comercio
+Saved: Moghreb Tetouan vs Chabab Atlas Khenifra
+Saved: Racing De Casablanca vs KAC Kenitra
+Saved: Stade Marocain vs USM Oujda
+Saved: Ethnikos Achnas vs Olympiakos Nicosia
+Saved: HB Koge vs Aalborg
+Saved: Aarhus Fremad vs Hobro
+Saved: B93 Copenhagen vs Middelfart
+Saved: Metropolitanos FC vs Estudiantes FC
+Saved: Rudar Pljevlja vs FK Kom
+Saved: Dundee Utd vs Dundee
+Saved: Barry Town vs Haverfordwest County
+Saved: Neuchatel Xamax FC vs AC Bellinzona
+Saved: FC Stade LS Ouchy vs Yverdon-Sport FC
+Saved: FC ViOn Zlate Moravce vs FK Pohronie Dolna Zdana
+Saved: OFK Malzenice vs Lokomotiva Zvolen
+Saved: Slovan Bratislava B vs MSK Zilina B
+Saved: Juventude vs Londrina
+Saved: Ceara vs Vila Nova
+Saved: Sport Recife vs Novorizontino
+Saved: Sao Bernardo vs Goias
+Saved: Operario-PR vs Fortaleza
+Saved: Guidonia Montecelio vs Carpi
+Saved: Pontedera vs Livorno
+Saved: Campobasso vs Ascoli
+Saved: Forli vs Perugia
+Saved: Gubbio vs Pineto
+Saved: Arezzo vs Torres
+Saved: Ternana vs Pianese
+Saved: Vis Pesaro vs Sambenedettese
+Saved: FC Tatran Presov vs AS Trencin
+Saved: Persiba Balikpapan vs PSS Sleman
+Saved: Sportist Svoge vs Dunav Ruse
+Saved: Fratria vs CSKA Sofia II
+Saved: Servette FC vs FC Winterthur
+Saved: Shabab Al-Ordon vs Al-Hussein SC
+Saved: Al-Baqa A vs Al-Salt
+Saved: Atalanta (u23) vs Catania
+Saved: Foggia vs Salernitana
+Saved: Crotone vs Latina
+Saved: Benevento vs Audace Cerignola
+Saved: AZ Picerno vs ASD Sorrento
+Saved: Casertana vs Giugliano
+Saved: Cavese vs Cosenza
+Saved: Potenza vs Monopoli
+Saved: Team Altamura vs Casarano
+Saved: Trapani vs Siracusa
+Saved: Xerez Deportivo vs Xerez
+Saved: Almeria B vs Deportiva Minera
+Saved: Antoniano vs Recreativo Huelva
+Saved: Estepona vs CDA Aguilas FC
+Saved: CD Extremadura vs La Union CF
+Saved: CF Lorca Deportiva vs Yeclano
+Saved: Puente Genil vs Atletico Malagueno
+Saved: UCAM Murcia vs Real Jaen
+Saved: Lusitania Lourosa vs Pacos Ferreira
+Saved: Vizela vs Sporting CP B
+Saved: Benfica B vs Maritimo
+Saved: Penafiel vs FC Porto B
+Saved: Arsenal Sarandi vs Villa Dalmine
+Saved: Comunicaciones vs Dock Sud
+Saved: Deportivo Armenio vs San Martin Burzaco
+Saved: Deportivo Laferrere vs Liniers
+Saved: Anapolis FC vs Figueirense
+Saved: Santa Cruz vs Amazonas FC
+Saved: Barra FC vs Inter De Limeira
+Saved: Ituano vs Maringa
+Saved: Hercules vs Teruel
+Saved: Ce Europa vs Murcia
+Saved: Marbella vs Sabadell
+Saved: Tarazona vs Juventud Torremolinos CF
+Saved: Sevilla Atletico vs Algeciras
+Saved: Cartagena vs Gimnastic Tarragona
+Saved: FC Chelyabinsk vs Ural
+Saved: Rodina vs FC Ufa
+Saved: Rotor Volgograd vs Volga Ulyanovsk
+Saved: Yenisey Krasnoyarsk vs FK Neftekhimik
+Saved: Shinnik Yaroslavl vs SKA-Energiya
+Saved: Chernomorets Novorossiysk vs Sokol Saratov
+Saved: Kamaz Chelny vs FC Chayka
+Saved: CD Cacahuatique vs Aguila
+Saved: Sivasspor vs Igdir FK
+Saved: Amedspor vs BB Bodrumspor
+Saved: Erzurum BB vs Bandirmaspor
+Saved: Keciorengucu vs Manisa FK
+Saved: Pendikspor vs Boluspor
+Saved: Sakaryaspor vs Corumspor
+Saved: Sariyer vs Esenler Erokspor
+Saved: Amarante vs Belenenses
+Saved: Santarem vs Academica
+Saved: Samtredia vs Merani Martvili
+Saved: Shturmi vs Gareji
+Saved: ND Bilje vs NK Tabor Sezana
+Saved: NK Brinje Grosuplje vs Jesenice
+Saved: Zulte-Waregem vs La Louviere
+Saved: Suwon City FC vs Gimpo Citizen
+Saved: Seoul E-Land FC vs Hwaseong FC
+Saved: Cheongju FC vs Chungnam Asan
+Saved: IK Brage vs Varbergs BoIS FC
+Saved: IFK Varnamo vs IK Oddevold
+Saved: Banik Ostrava B vs Vysocina Jihlava
+Saved: Slavia Praha B vs Brno
+Saved: Sparta Praha B vs Opava
+Saved: Spaeri vs FC Dila Gori
+Saved: Ahrobiznes Volochysk vs Ingulets Petrove
+Saved: Roeselare vs Thes Sport
+Saved: Diegem vs Belisia Bilzen Sv
+Saved: K. Lyra-lierse vs Houtvenne
+Saved: KVV Zelzate vs Royal Knokke
+Saved: Ninove vs KFC Merelbeke
+Saved: Tienen vs Hoogstraten
+Saved: Olimpia Grudziadz vs Warta Poznan
+Saved: Podhale Nowy Targ vs Swit Skolwin
+Saved: Unia Skierniewice vs Sokol Kleczew
+Saved: Karlbergs BK vs Gefle IF
+Saved: Honefoss vs Levanger
+Saved: Odra Opole vs Polonia Bytom
+Saved: Wieczysta Krakow vs GKS Tychy
+Saved: Quepos Cambute vs CS Uruguay
+Saved: Matsumoto Yamaga vs Nagano Parceiro
+Saved: Wigry Suwalki vs GKS Belchatow
+Saved: Vendsyssel FF vs HIK
+Saved: Da Nang vs Viettel
+Saved: Kochi United vs Tokushima Vortis
+Saved: Ehime FC vs Kamatamare Sanuki
+Saved: Croatia Zmijavci vs Rudes
+Saved: Academia Puerto Cabello B vs Urena SC
+Saved: FK Auda vs FK Tukums 2000
+Saved: SpVgg Greuther Furth II vs FC Wurzburger Kickers
+Saved: BFC Preussen vs SV Babelsberg 03
+Saved: Chemnitzer FC vs ZFC Meuselwitz
+Saved: FSV 63 Luckenwalde vs FSV Zwickau
+Saved: Hallescher FC vs Hertha Berlin II
+Saved: Magdeburg II vs Carl Zeiss Jena
+Saved: FC Bocholt vs Borussia Dortmund II
+Saved: SV Rodinghausen vs FC Schalke 04 II
+Saved: Viktoria Koln vs Energie Cottbus
+Saved: Rot-Weiss Essen vs FC Saarbrucken
+Saved: TSV Havelse vs VfB Stuttgart II
+Saved: SV Drochtersen/Assel vs Altona 93
+Saved: Blau-Weiss Lohne vs SV Meppen
+Saved: Bremer SV vs Eintracht Norderstedt
+Saved: Hannoverscher SC vs VfB Lubeck
+Saved: Kickers Emden vs VfB Oldenburg
+Saved: Werder Bremen II vs Hamburger SV II
+Saved: Eintracht Trier vs Kickers Offenbach
+Saved: FSV Frankfurt vs TSV Steinbach
+Saved: Penang vs Sabah
+Saved: Coventry vs Wrexham
+Saved: Berazategui vs Victoriano Arenas
+Saved: Atletico Fenix vs Claypole
+Saved: Defensores De Cambaceres vs Puerto Nuevo
+Saved: Estrella Del Sur vs Centro Espanol
+Saved: Sacachispas vs Mercedes
+Saved: Bylis vs Teuta Durres
+Saved: FK Egnatia vs FK Vora
+Saved: Gandzasar vs Shirak FC
+Saved: FC Urartu vs FC Van
+Saved: Everton (w) vs Chelsea (w)
+Saved: London City Lionesses (w) vs Leicester (w)
+Saved: Tottenham (w) vs Manchester United Women
+Saved: Liverpool (w) vs West Ham (w)
+Saved: Eintracht Frankfurt (w) vs VfL Wolfsburg (w)
+Saved: Bayer Leverkusen (w) vs SC Freiburg (w)
+Saved: KA Akureyri vs Keflavik
+Saved: Ternana Femminile (w) vs Fiorentina (w)
+Saved: Geylang International vs Lion City Sailors
+Saved: Real Madrid (w) vs EDF Logrono (w)
+Saved: Pitea IF (w) vs Vittsjo Gik (w)
+Saved: Vanraure Hachinohe vs Blaublitz Akita
+Saved: Santos Laguna (w) vs Club Queretaro (w)
+Saved: Unionistas de Salamanca vs Athletic Club B
+Saved: Racing De Ferrol vs Real Aviles
+Saved: Marsaxlokk vs Valletta FC
+Saved: Gzira United vs Naxxar Lions
+Saved: Zabbar St Patrick vs Sliema Wanderers
+Saved: Jerv vs Traeff
+Saved: Brattvag vs Vidar
+Saved: FK Novosibirsk vs Tekstilshtik Ivanovo
+Saved: Kaluga vs Veles Moscow
+Saved: Mashuk-KMV vs Volgar Astrakhan
+Saved: Busan Transportation vs Gangneung City FC
+Saved: Chuncheon FC vs Mokpo City
+Saved: Siheung Citizen vs Yangpyeong FC
+Saved: Motala AIF FK vs Ahlafors IF
+Saved: Nantong Zhiyun vs Dalian Kuncheng
+Saved: Ad Marco 09 vs SC Braga B
+Saved: Sanjoanense vs Paredes
+Saved: Dinamo Vologda vs Zvezda St Petersburg
+Saved: Irkutsk vs Torpedo Vladimir
+Saved: Atletico Astorga vs Sarriana
+Saved: Bergantinos vs Ourense
+Saved: Burgos Promesas vs Salamanca CF UDS
+Saved: CD Lealtad vs Coruxo
+Saved: Gimnastica Segoviana vs Oviedo B
+Saved: Marino De Luanco vs UD Samano
+Saved: Deportivo Fabril vs Valladolid B
+Saved: Rayo Cantabria vs Real Avila
+Saved: UP Langreo vs Numancia
+Saved: Arsenal Tula 2 vs Spartak Tambov
+Saved: CD Alfaro vs SD Logrones
+Saved: CD Basconia vs Gernika
+Saved: Deportivo Aragon vs Real Union
+Saved: Ejea vs Eibar B
+Saved: Logrones CF vs UD Mutilvera
+Saved: Naxara CD vs Beasain
+Saved: Amorebieta vs Sestao River
+Saved: Tudelano vs Deportivo Alaves B
+Saved: Utebo vs CD Ebro
+Saved: Krylya Sovetov 2 vs Nosta
+Saved: Rubin 2 vs Dinamo Barnaul
+Saved: Alcoyano vs Sant Andreu
+Saved: Atletico Baleares vs Terrassa
+Saved: Barbastro vs Castellon B
+Saved: Girona B vs Torrent CF
+Saved: Ibiza Islas Pitiusas vs Ce Andratx
+Saved: Poblense vs Porreres
+Saved: Reus vs UE Olot
+Saved: Valencia B vs Espanyol B
+Saved: Sydney United 58 FC vs Wollongong Wolves
+Saved: Blacktown City vs Spirit FC
+Saved: Rockdale City Suns vs St George City
+Saved: Western Sydney Youth vs SD Raiders
+Saved: Vitkovice vs Polanka Nad Odrou
+Saved: Zlin B vs Sigma Olomouc B
+Saved: Vindbjart vs Viking 2
+Saved: CD Colonia Moscardo vs Navalcarnero
+Saved: Conquense vs Tenerife B
+Saved: Fuenlabrada vs Rayo Majadahonda
+Saved: Getafe B vs CF Intercity
+Saved: Las Palmas B vs Orihuela
+Saved: Quintanar Rey vs RSD Alcala
+Saved: Rayo Vallecano B vs UD Socuellamos CF
+Saved: San Sebastian De Los Reyes vs Real Madrid C
+Saved: Brumunddal vs Bjoerkelangen
+Saved: Arosa SC vs CD Boiro
+Saved: UD Somozas vs Compostela
+Saved: CC Mariners FC Youth vs Newcastle Jets Youth
+Saved: Crossing Schaerbeek vs U.R. Namur
+Saved: Asti vs SCD Ligorna
+Saved: Biellese vs Gozzano
+Saved: Derthona vs ASD Imperia
+Saved: Ssd Novaromentin vs Vado
+Saved: Nykopings Bis vs BK Forward
+Saved: Korsnaes If FK vs Enskede IK
+Saved: Taby FK vs Kungsangens IF
+Saved: Brisbane City vs Wolves FC
+Saved: Nykobing FC vs FA 2000
+Saved: Castellanzese vs Milan Futuro
+Saved: Villa dAlme vs FBC Oltrepo
+Saved: Torslanda IK vs BK Astrio
+Saved: Vastra Frolunda IF vs Lindome GIF
+Saved: Vejgaard BK vs Odder IGF
+Saved: Team TG FF vs Lucksta
+Saved: Brian Lignano vs Bassano
+Saved: Luparense vs Vigasio
+Saved: Unione La Rocca Altavilla vs Mestre
+Saved: Charlestown Azzurri vs Valentine Phoenix
+Saved: Cittadella Vis Modena vs Palazzolo
+Saved: Sasso Marconi vs Imolese
+Saved: Kristianstad FC vs Utsiktens BK
+Saved: Minnesota United 2 vs North Texas SC
+Saved: Monterey Bay FC vs Oakland Roots
+Saved: Sacramento Republic vs Spokane Velocity
+Saved: Orange County SC vs El Paso Locomotive
+Saved: Phoenix Rising vs Colorado Switchbacks
+Saved: FC Tulsa vs One Knoxville Sc
+Saved: Grosseto vs San Donato
+Saved: Indy Eleven vs Union Omaha
+Saved: Westchester Sc vs Portland Hearts Of Pine
+Saved: Hartford Athletic vs Rhode Island
+Saved: Pittsburgh Riverhounds vs Greenville Triumph SC
+Saved: Maceratese vs Giulianova
+Saved: Teramo vs Recanatese
+Saved: SPORTING JAX vs Miami FC
+Saved: Tampa Bay Rowdies vs Sarasota Paradise
+Saved: Lodigiani vs Monterotondo
+Saved: Ischia Isolaverde vs Montespaccato
+Saved: Olbia vs Anziolavinio
+Saved: Manfredonia vs Fidelis Andria
+Saved: Acireale vs Ragusa Calcio
+Saved: Athletic Club Palermo vs Savoia
+Saved: Igea Virtus Barcellona vs Messina
+Saved: Sambiase vs Nissa
+Saved: Douglas Haig vs Independiente de Chivilcoy
+Saved: Sportivo Belgrano vs El Linqueno
+Saved: Ca Bartolome Mitre vs Sarmiento De La Banda
+Saved: Juventud Unida Universitario vs Argentino Monte Maiz
+Saved: Sportivo Atenas vs Deportivo Rincon
+Saved: Alvarado vs Villa Mitre
+Saved: Guillermo Brown vs Kimberley
+Saved: Arsenal (w) vs Lyon (w)
+Saved: Araguaina vs Independencia
+Saved: Brasiliense vs Gama
+Saved: Oratorio vs Trem Dc
+Saved: Parnahyba vs Sampaio Correa
+Saved: Laguna Rn vs America-RN
+Saved: Maguary vs Central SC
+Saved: Decisao vs Retro FC Brasil
+Saved: Jacuipense vs Alagoinhas Atletico
+Saved: FC Cascavel vs Cianorte
+Saved: Guarany De Bage vs Sao Luiz
+Saved: Azuriz vs Sao Joseense
+Saved: Pacific FC vs Forge FC
+Saved: Ivinhema vs Operario MS
+Saved: Houston Dash (w) vs North Carolina Courage (w)
+Saved: Angel City FC (w) vs Portland Thorns (w)
+Saved: Atletico Morelia vs Mineros de Zacatecas
+Saved: Leca vs Vianense
+Saved: Real Apodaca FC vs Inter Playa del Carmen
+Done
+◇ injected env (9) from docker/.env // tip: ⌁ auth for agents [www.vestauth.com]
+Enriching fixture 14: Operario-PR vs Fluminense
+Enriching fixture 42: Persijap Jepara vs PSBS Biak Numfor
+Enriching fixture 154: Olympic FC vs Magic United Tfa
+Enriching fixture 159: Green Gully vs Preston Lions
+Enriching fixture 166: Queanbeyan City vs Belconnen United
+Enriching fixture 152: Hurstville Zagreb Fc vs Bankstown City Lions
+Enriching fixture 155: Capalaba FC vs North Star
+Enriching fixture 112: The Vissai Ninh Binh vs Hanoi FC
+Enriching fixture 135: Tusker FC vs Mara Sugar
+Enriching fixture 88: Kolos Kovalivka vs SC Poltava
+Enriching fixture 68: Hapoel Afula vs Ironi Modiin
+Enriching fixture 69: SC Kafr Qasim vs Hapoel Hadera
+Enriching fixture 93: Maccabi Petah Tikva vs Hapoel Kfar Shalem
+Enriching fixture 133: Kelantan United vs Selangor
+Enriching fixture 92: Pharco FC vs El Gouna FC
+Enriching fixture 168: Yantra 2019 vs Spartak Pleven
+Enriching fixture 30: AFC Hermannstadt vs Csikszereda
+Enriching fixture 71: Resovia Rzeszow vs LKS Lodz II
+Enriching fixture 99: Kustosija vs Lucko
+Enriching fixture 96: Tampere United vs VJS
+Enriching fixture 97: SalPa vs Inter Turku 2
+Enriching fixture 72: Stal Stalowa Wola vs Rekord Bielsko-Biala
+Enriching fixture 84: MuSa vs Honka
+Enriching fixture 106: Karlovac vs Dugopolje
+Enriching fixture 111: SC Bregenz vs WSC Hertha
+Enriching fixture 119: PK-35 Vantaa vs KTP
+Enriching fixture 120: Klubi-04 vs Mikkelin Palloilijat
+Enriching fixture 142: Tartu Kalev vs Tallinna Kalev U21
+Enriching fixture 137: Al Hazem vs Al-Riyadh
+Enriching fixture 85: NJS vs GrIFK
+Enriching fixture 115: FC Helsingor vs Ishoj IF
+Enriching fixture 134: Nuernberg (w) vs Hamburger Sv (w)
+Enriching fixture 20: CA Batna vs USM Alger
+Enriching fixture 82: Monza vs Modena
+Enriching fixture 91: El Geish vs Kahrbaa Alasmalia
+Enriching fixture 98: Ljungskile SK vs Helsingborg
+Enriching fixture 130: FC Gutersloh vs Sportfreunde Lotte
+Enriching fixture 141: Atletico Madrid B vs Betis Deportivo Balompie
+Enriching fixture 147: Rosenborg 2 vs Aalesund 2
+Enriching fixture 148: Treibach vs Union Gurten
+Enriching fixture 150: SV Wals Grunau vs SC Imst
+Enriching fixture 151: Torns IF vs Nosaby IF
+Enriching fixture 167: Angouleme vs Chauray
+Enriching fixture 44: Durban City vs ORBIT College
+Enriching fixture 47: Sochaux vs Bourg-en-Bresse 01
+Enriching fixture 48: Caen vs Villefranche
+Enriching fixture 49: Chateauroux vs FC Fleury 91
+Enriching fixture 50: Le Puy vs Versailles 78 FC
+Enriching fixture 52: Rouen vs Aubagne
+Enriching fixture 129: Bonner SC vs SC Paderborn 07 II
+Enriching fixture 146: Vanersborgs IF vs Skara FC
+Enriching fixture 22: Clermont Foot 63 vs Bastia
+Enriching fixture 24: Red Star FC 93 vs Guingamp
+Enriching fixture 118: FOC Farsta vs Syrianska FC
+Enriching fixture 140: Arenas Club vs Merida UD
+Enriching fixture 77: Alverca vs Arouca
+Enriching fixture 138: Afturelding vs IR
+Enriching fixture 139: Fylkir vs Aegir
+Enriching fixture 8: Deportivo Riestra vs Independiente
+Enriching fixture 87: Club Nacional vs Recoleta
+Enriching fixture 170: Racing Louisville (w) vs Orlando Pride (w)
+Enriching fixture 9: Estudiantes R.C. vs Rosario Central
+Enriching fixture 643: Leon (w) vs Atletico San Luis (w)
+Enriching fixture 209: Racing Club vs Barracas Central
+Enriching fixture 303: Audax Italiano vs Deportes Limache
+Enriching fixture 644: Club America (w) vs Pachuca (w)
+Enriching fixture 645: Guadalajara-Chivas (w) vs Toluca (w)
+Enriching fixture 270: Puebla vs Queretaro FC
+Enriching fixture 647: Monterrey (w) vs U.A.N.L. - Tigres (w)
+Enriching fixture 646: Club Tijuana (w) vs Mazatlan FC (w)
+Enriching fixture 648: Atlas (w) vs FC Juarez (w)
+Enriching fixture 429: Jubilo Iwata vs FC Gifu
+Enriching fixture 319: Paju Frontier vs Gyeongnam FC
+Enriching fixture 376: Tochigi Uva FC vs Tochigi SC
+Enriching fixture 423: Sagan Tosu vs Reilac Shiga
+Enriching fixture 428: Consadole Sapporo vs Iwaki FC
+Enriching fixture 431: Fukushima United vs Ventforet Kofu
+Enriching fixture 449: Albirex Niigata vs FC Osaka
+Enriching fixture 695: Macarthur Rams vs Dulwich Hill FC
+Enriching fixture 696: Inter Lions FC vs Blacktown Spartans
+Enriching fixture 713: Inglewood United vs Gwelup Croatia
+Enriching fixture 281: Bucheon 1995 vs Sangju Sangmu FC
+Compare scrape failed for http://www.statarea.com/compare/teams/Bucheon+1995 (South Korea)/Sangju+Sangmu+FC (South Korea) (attempt 1/3): timeout of 30000ms exceeded
+Enriching fixture 374: Sagamihara vs Shonan Bellmare
+Enriching fixture 460: CSM Slatina vs ASA Targu Mures
+Enriching fixture 484: Concordia vs FC Bacau
+Enriching fixture 485: CS Afumati vs Olimpia Satu Mare
+Enriching fixture 486: Dumbravita vs CSM Scolar Resita
+Enriching fixture 487: CS Comunal Selimbar vs CS Tunari
+Enriching fixture 701: Moreton Bay United vs Brisbane Roar FC Youth
+Enriching fixture 705: Caboolture vs Redlands United
+Enriching fixture 680: Motorlet Prague vs Jiskra Domazlice
+Enriching fixture 687: Trinec vs Vsetin
+Enriching fixture 535: PDRM vs Imigresen FC
+Enriching fixture 697: Northbridge FC Bulls vs Hakoah Sydney City
+Enriching fixture 702: Eastern Suburbs FC vs Rochedale Rovers
+Enriching fixture 706: Logan Lightning vs Broadbeach United
+Enriching fixture 632: Athletic Club (w) vs Granada Femenino (w)
+Enriching fixture 633: FC Badalona (w) vs Atletico Madrid Femenino (w)
+Enriching fixture 699: Nacka Iliria vs IK Sleipner
+Enriching fixture 704: Qviding FIF vs Ik Kongahaella
+Enriching fixture 215: Ludogorets Razgrad vs CSKA 1948
+Enriching fixture 399: Serik Belediyespor vs Hatayspor
+Enriching fixture 401: Van Spor FK vs Istanbulspor AS
+Compare scrape failed for http://www.statarea.com/compare/teams/Van+Spor+FK (Turkey)/Istanbulspor+AS (Turkey) (attempt 1/3): timeout of 30000ms exceeded
+Enriching fixture 625: Juventus (w) vs AS Roma (w)
+Enriching fixture 626: Lazio (w) vs Sassuolo (w)
+Enriching fixture 689: Kongsvinger 2 vs Alta IF
+Enriching fixture 258: Hertha Berlin vs Holstein Kiel
+Enriching fixture 478: Lysekloster vs Eik-toensberg
+Enriching fixture 479: Notodden vs Bjarg
+Enriching fixture 490: Rosengard vs Eskilsminne IF
+Enriching fixture 492: Bangkok FC vs Trat FC
+Enriching fixture 623: Brighton & Hove Albion Women (w) vs Manchester City (w)
+Enriching fixture 628: Mathare United vs Nairobi United
+Enriching fixture 629: Shabana vs Kenya Police
+Enriching fixture 636: Thanh Hoa vs Pho Hien
+Enriching fixture 661: OLS vs PK Keski-Uusimaa
+Enriching fixture 663: Stjordals Blink vs Follo
+Enriching fixture 671: IFK Skoevde FK vs Stenungsunds IF
+Enriching fixture 673: FC Rostov II vs Rubin Yalta
+Enriching fixture 675: Grei vs Ullern
+Enriching fixture 683: Metallurg Lipetsk vs Volna Nizhny Novgorod
+Enriching fixture 690: Skjetten vs Ulfstind
+Enriching fixture 693: Vaexjoe Norra If vs FK Karlskrona
+Compare scrape failed for http://www.statarea.com/compare/teams/Vaexjoe+Norra+If (Sweden)/FK+Karlskrona (Sweden) (attempt 1/3): timeout of 30000ms exceeded
+Enriching fixture 707: Sundby BK vs IF Lyseng
+Enriching fixture 711: Tamaraceite vs Lanzarote
+Enriching fixture 461: Slask Wroclaw II vs Sandecja Nowy Sacz
+Enriching fixture 289: Eyupspor vs Gaziantep FK
+Enriching fixture 505: Weiche Flensburg vs Schoeningen
+Enriching fixture 537: Aldershot Town vs Truro City
+Enriching fixture 541: Carlisle vs Brackley Town
+Enriching fixture 544: Scunthorpe vs Eastleigh
+Enriching fixture 550: Bedford Town vs Scarborough
+Compare scrape failed for http://www.statarea.com/compare/teams/Bedford+Town (England)/Scarborough (England) (attempt 1/3): timeout of 30000ms exceeded
+Enriching fixture 553: Chorley vs Worksop
+Enriching fixture 554: Darlington FC vs Oxford City
+Enriching fixture 555: Kidderminster vs South Shields
+Enriching fixture 556: Merthyr vs AFC Fylde
+Enriching fixture 557: Radcliffe FC vs Macclesfield
+Enriching fixture 572: AFC Hornchurch vs Maidenhead
+Compare scrape failed for http://www.statarea.com/compare/teams/AFC+Hornchurch (England)/Maidenhead (England) (attempt 1/3): timeout of 30000ms exceeded
+Enriching fixture 573: AFC Totton vs Farnborough
+Enriching fixture 576: Dover vs Chesham United
+Enriching fixture 578: Hemel Hempstead Town vs Salisbury FC
+Enriching fixture 579: Horsham vs Chippenham
+Enriching fixture 580: Slough Town vs Dagenham and Redbridge
+Enriching fixture 581: Tonbridge Angels vs Torquay
+Enriching fixture 582: Weston Super Mare vs Dorking Wanderers
+Enriching fixture 583: Worthing vs Ebbsfleet United
+Compare scrape failed for http://www.statarea.com/compare/teams/Worthing (England)/Ebbsfleet+United (England) (attempt 1/3): timeout of 30000ms exceeded
+Enriching fixture 672: Guangxi Hengchen vs Nanjing City FC
+Enriching fixture 257: Grenoble Foot 38 vs Le Mans
+Enriching fixture 273: Uthai Thani vs Port FC
+Enriching fixture 348: Imisli FK vs Sumqayit
+Enriching fixture 377: 1899 Hoffenheim II vs FC Ingolstadt 04
+Enriching fixture 380: TSV 1860 Munich vs SSV Ulm 1846
+Enriching fixture 494: SpVgg Hankofen-Hailing vs DJK Vilzing
+Enriching fixture 495: TSV Schwaben Augsburg vs Ansbach
+Enriching fixture 497: BSG Chemie Leipzig vs Hertha Zehlendorf
+Enriching fixture 498: Rot-Weiss Erfurt vs FC Eilenburg
+Enriching fixture 499: Fortuna Koln vs SC Wiedenbruck 2000
+Enriching fixture 506: FC 08 Homburg vs Barockstadt Fulda Lehnerz
+Enriching fixture 509: SGV Freiberg vs FSV Mainz 05 II
+Enriching fixture 510: TSV Schott Mainz vs Stuttgarter Kickers
+Enriching fixture 511: Bahlinger SC vs SG Sonnenhof Grossaspach
+Enriching fixture 624: Rb Leipzig (w) vs Werder Bremen (w)
+Enriching fixture 631: Stabaek (w) vs Valerenga (w)
+Enriching fixture 653: Atletico Sanluqueno vs Alcorcon
+Enriching fixture 659: Sanliurfaspor vs Ankaraspor
+Enriching fixture 664: Lorenskog vs Ull/Kisa
+Enriching fixture 694: IFK Trelleborg FK vs IFK Karlshamn
+Enriching fixture 331: LKS Lodz vs Stal Rzeszow
+Enriching fixture 502: SV Austria Salzburg vs Kapfenberger SV
+Enriching fixture 674: Pobeda Khasavyurt vs Druzhba Maykop
+Enriching fixture 254: Korona Kielce vs Dospel Katowice
+Enriching fixture 237: Virtus Entella vs Padova
+Enriching fixture 419: Amkar vs Dinamo Moscow 2
+Enriching fixture 421: Dinamo Bryansk vs Zenit II
+Enriching fixture 435: Spartak Kostroma vs Arsenal Tula
+Enriching fixture 439: Deportivo Capiata vs Resistencia
+Enriching fixture 477: Sotra vs Mjondalen
+Enriching fixture 493: Black Leopards vs Milford FC
+Enriching fixture 635: Djurgarden (w) vs IFK Norrkoeping (w)
+Enriching fixture 656: Jippo vs SJK Akatemia
+Enriching fixture 682: Molde 2 vs Nardo
+Enriching fixture 688: Flekkeroy vs Mandalskameratene
+Enriching fixture 715: Hammarby IF DFF (w) vs Hacken (w)
+Enriching fixture 287: NK Slaven Belupo vs Vukovar 91
+Enriching fixture 351: Minyor Pernik vs Lokomotiv G.O.
+Enriching fixture 353: Sevlievo vs Vihren
+Enriching fixture 458: Omonia Aradippou vs Krasava Ypsonas FC
+Enriching fixture 473: Rudar Velenje vs Dravinja Kostroj
+Enriching fixture 489: Laholms FK vs Trelleborgs FF
+Enriching fixture 524: Dumbarton vs East Kilbride
+Enriching fixture 529: FC Bavois vs Lugano II
+Enriching fixture 531: FC Luzern II vs FC Breitenrain Bern
+Enriching fixture 533: SC Bruhl vs FC Vevey Sports 05
+Enriching fixture 561: AFC Stamford vs Harborough Town FC
+Enriching fixture 563: Bromsgrove Sporting FC vs Real Bedford
+Enriching fixture 564: Bury Town vs Kettering
+Enriching fixture 565: Halesowen Town vs AFC Sudbury
+Enriching fixture 566: Needham Market vs Banbury United
+Enriching fixture 567: Redditch vs Quorn
+Enriching fixture 570: Barwell vs Bishops Stortford
+Enriching fixture 571: Worcester vs Spalding United
+Enriching fixture 584: Berkhamsted vs Weymouth
+Enriching fixture 585: Chertsey Town vs Hungerford Town
+Enriching fixture 586: Dorchester vs Sholing FC
+Enriching fixture 587: Gloucester City vs Walton And Hersham
+Enriching fixture 589: Hanwell Town vs Basingstoke
+Enriching fixture 590: Havant and Waterlooville vs Yate Town
+Enriching fixture 591: Taunton Town vs Evesham United
+Enriching fixture 592: Tiverton vs Farnham Town
+Enriching fixture 593: Uxbridge vs Poole Town
+Enriching fixture 594: Wimborne Town vs Bracknell Town
+Enriching fixture 595: Hebburn Town vs Rushall Olympic
+Enriching fixture 596: Hednesford Town vs Ashton United
+Enriching fixture 598: Lancaster vs Stocksbridge Park Steels
+Enriching fixture 600: Prescot Cables vs Bamber Bridge
+Enriching fixture 601: Warrington Rylands vs Stockton Town
+Enriching fixture 602: Whitby vs Cleethorpes Town
+Enriching fixture 603: Workington vs Leek Town
+Enriching fixture 604: Brentwood Town vs Chichester City
+Enriching fixture 605: Burgess Hill Town vs Cray Wanderers
+Enriching fixture 606: Canvey Island vs Ramsgate
+Enriching fixture 607: Carshalton Athletic vs St. Albans
+Enriching fixture 608: Chatham Town vs Lewes
+Enriching fixture 609: Dartford vs Cray Valley Paper Mills
+Enriching fixture 611: Hashtag United vs Dulwich Hamlet
+Enriching fixture 614: Wingate and Finchley vs Aveley
+Enriching fixture 634: Eibar (w) vs Levante (w)
+Enriching fixture 637: FC Nordsjaelland (w) vs Fortuna Hjorring (w)
+Enriching fixture 665: Tromsdalen UIL vs Rana FK
+Enriching fixture 666: Trygg-lade vs Kjelsas
+Enriching fixture 677: Atletico CP vs 1o Dezembro
+Enriching fixture 679: SR Donaufeld vs SC Wiener Viktoria
+Enriching fixture 681: FC Kiffen vs Ppj
+Enriching fixture 357: Valladolid vs Real Sociedad B
+Enriching fixture 403: Osasuna B vs CD Arenteiro
+Enriching fixture 278: Js Omrane vs AS Soliman
+Enriching fixture 347: Qabala vs Araz
+Enriching fixture 382: Waldhof Mannheim vs Schweinfurt
+Enriching fixture 453: Tatran Liptovsky Mikulas vs MFK Stara Lubovna
+Enriching fixture 456: MSK Povazska Bystrica vs STK 1914 Samorin
+Enriching fixture 472: Nafta vs Nk Bistrica
+Enriching fixture 534: Paradiso vs Team Vaud (u21)
+Enriching fixture 397: Orebro vs Norrby IF
+Enriching fixture 438: Zavrc vs Fuzinar
+Enriching fixture 447: Rukh Lviv vs Karpaty Lviv
+Enriching fixture 471: Kromeriz vs MFK Chrudim
+Enriching fixture 638: Segesta vs Trnje
+Enriching fixture 530: FC Biel Bienne vs FC Grand-Saconnex
+Enriching fixture 710: Llosetense vs Constancia
+Enriching fixture 239: Zemplin Michalovce vs Zeleziarne Podbrezova
+Enriching fixture 616: Grasse vs Istres
+Enriching fixture 627: Genoa (w) vs Inter (w)
+Enriching fixture 642: Volsungur vs Leiknir Reykjavik
+Enriching fixture 658: Avranches vs Bayonne
+Enriching fixture 241: Al-Ahli Jeddah vs Machida Zelvia
+Enriching fixture 714: Bayern Munich (w) vs Barcelona (w)
+Enriching fixture 180: Hamburger SV vs 1899 Hoffenheim
+Enriching fixture 355: Burgos vs Deportivo La Coruna
+Enriching fixture 404: Barakaldo vs Lugo
+Enriching fixture 655: Antequera CF vs CD Eldense
+Enriching fixture 738: Gotham FC (w) vs Bay FC (w)
+Enriching fixture 329: Polonia Warszawa vs Chrobry Glogow
+Enriching fixture 432: Bryne vs Odd Ballklubb
+Enriching fixture 649: Puebla (w) vs Necaxa (w)
+Enriching fixture 651: Dorogi FC vs Tatabanya
+Enriching fixture 691: Union Rochefortoise vs Habay La Neuve
+Enriching fixture 692: Virton vs RFC Meux
+Enriching fixture 712: New York Cosmos vs Brooklyn
+Enriching fixture 261: Darmstadt vs SV Elversberg
+Enriching fixture 282: Temperley vs Patronato
+Enriching fixture 360: Defensores Unidos vs Deportivo Merlo
+Enriching fixture 363: Argentino de Merlo vs Uai Urquiza
+Enriching fixture 364: Argentino De Quilmes vs Atletico Camioneros
+Enriching fixture 366: Flandria vs Sportivo Italiano
+Enriching fixture 367: Ituzaingo vs Excursionistas
+Enriching fixture 409: Ospitaletto vs Novara
+Enriching fixture 410: Inter U23 vs Brescia
+Enriching fixture 411: ASD Alcione vs AlbinoLeffe
+Enriching fixture 413: Cittadella vs GIANA Erminio
+Enriching fixture 414: Dolomiti Bellunesi vs AC Trento
+Enriching fixture 415: Lumezzane vs Virtus Verona
+Enriching fixture 618: Atletico Atlas vs Yupanqui
+Enriching fixture 619: Juventud Unida San Miguel vs Deportivo Paraguayo
+Enriching fixture 620: General Lamadrid vs Deportivo Muniz
+Enriching fixture 621: Leones De Rosario vs Canuelas
+Enriching fixture 622: Lugano vs Leandro Niceforo Alem
+Enriching fixture 405: CF Talavera Reina vs Real Madrid Castilla
+Enriching fixture 422: Joinville vs Santa Catarina
+Enriching fixture 720: Aparecidense vs Inhumas
+Enriching fixture 723: Sousa EC vs ABC
+Enriching fixture 726: Betim vs Uberlandia
+Compare scrape failed for http://www.statarea.com/compare/teams/Betim (Brazil)/Uberlandia (Brazil) (attempt 1/3): timeout of 30000ms exceeded
+Enriching fixture 362: Brown De Adrogue vs Villa San Carlos
+Enriching fixture 716: AO Itabaiana vs Paysandu
+Enriching fixture 717: Brusque vs Confianca
+Enriching fixture 724: Treze vs Serra Branca
+Enriching fixture 737: Lota Schwager vs General Velasquez
+Enriching fixture 283: San Martin S.J. vs Quilmes
+Enriching fixture 285: Atletico Rafaela vs Gimnasia Jujuy
+Enriching fixture 733: XV De Piracicaba vs Marica FC
+Enriching fixture 448: Abb vs Blooming
+Enriching fixture 195: Remo vs Cruzeiro
+Enriching fixture 729: Goiatuba Sc vs Mixto
+Enriching fixture 650: Cruz Azul (w) vs U.N.A.M. - Pumas (w)
+Enriching fixture 727: Carolina Core vs Crown Legacy
+Enriching fixture 718: Botafogo PB vs Floresta
+Enriching fixture 719: Maranhao vs Volta Redonda
+Enriching fixture 731: Imperatriz vs Tocantinopolis
+Enriching fixture 1118: Santos Laguna (w) vs Club Queretaro (w)
+Enriching fixture 1214: Indy Eleven vs Union Omaha
+Enriching fixture 1215: Westchester Sc vs Portland Hearts Of Pine
+Enriching fixture 1216: Hartford Athletic vs Rhode Island
+Enriching fixture 1217: Pittsburgh Riverhounds vs Greenville Triumph SC
+Enriching fixture 881: Guabira vs Always Ready
+Enriching fixture 965: Sport Recife vs Novorizontino
+Enriching fixture 1220: SPORTING JAX vs Miami FC
+Enriching fixture 1221: Tampa Bay Rowdies vs Sarasota Paradise
+Enriching fixture 847: Sport Boys vs Adc Juan Pablo II
+Enriching fixture 963: Juventude vs Londrina
+Enriching fixture 1212: FC Tulsa vs One Knoxville Sc
+Enriching fixture 1244: Houston Dash (w) vs North Carolina Courage (w)
+Enriching fixture 859: St. Louis City vs San Jose Earthquakes
+Enriching fixture 945: Alianza vs Zacatecoluca
+Enriching fixture 857: San Diego vs Portland Timbers
+Enriching fixture 948: Inter Fa vs Municipal Limeno
+Enriching fixture 1209: Sacramento Republic vs Spokane Velocity
+Enriching fixture 1117: Vanraure Hachinohe vs Blaublitz Akita
+Enriching fixture 910: Sydney FC vs Auckland FC
+Enriching fixture 1041: Suwon City FC vs Gimpo Citizen
+Enriching fixture 1042: Seoul E-Land FC vs Hwaseong FC
+Enriching fixture 1072: Kochi United vs Tokushima Vortis
+Enriching fixture 1128: Chuncheon FC vs Mokpo City
+Enriching fixture 1129: Siheung Citizen vs Yangpyeong FC
+Enriching fixture 1166: Blacktown City vs Spirit FC
+Enriching fixture 1167: Rockdale City Suns vs St George City
+Enriching fixture 1168: Western Sydney Youth vs SD Raiders
+Enriching fixture 1183: CC Mariners FC Youth vs Newcastle Jets Youth
+Enriching fixture 1135: Irkutsk vs Torpedo Vladimir
+Enriching fixture 1192: Brisbane City vs Wolves FC
+Enriching fixture 1043: Cheongju FC vs Chungnam Asan
+Enriching fixture 1050: Slavia Praha B vs Brno
+Enriching fixture 1169: Vitkovice vs Polanka Nad Odrou
+Enriching fixture 1019: FC Chelyabinsk vs Ural
+Enriching fixture 1170: Zlin B vs Sigma Olomouc B
+Enriching fixture 961: OFK Malzenice vs Lokomotiva Zvolen
+Enriching fixture 890: Zhetysu vs Ulytau
+Enriching fixture 917: Kryvbas Kryvyi Rih vs Dinamo Kiev
+Enriching fixture 953: B93 Copenhagen vs Middelfart
+Enriching fixture 993: Xerez Deportivo vs Xerez
+Enriching fixture 994: Almeria B vs Deportiva Minera
+Enriching fixture 995: Antoniano vs Recreativo Huelva
+Enriching fixture 996: Estepona vs CDA Aguilas FC
+Enriching fixture 997: CD Extremadura vs La Union CF
+Enriching fixture 998: CF Lorca Deportiva vs Yeclano
+Compare scrape failed for http://www.statarea.com/compare/teams/CF+Lorca+Deportiva (Spain)/Yeclano (Spain) (attempt 1/3): timeout of 30000ms exceeded
+Enriching fixture 999: Puente Genil vs Atletico Malagueno
+Enriching fixture 1000: UCAM Murcia vs Real Jaen
+Enriching fixture 1001: Lusitania Lourosa vs Pacos Ferreira
+Enriching fixture 1014: Ce Europa vs Murcia
+Enriching fixture 1035: Santarem vs Academica
+Enriching fixture 1061: Podhale Nowy Targ vs Swit Skolwin
+Enriching fixture 1136: Atletico Astorga vs Sarriana
+Enriching fixture 1137: Bergantinos vs Ourense
+Enriching fixture 1138: Burgos Promesas vs Salamanca CF UDS
+Enriching fixture 1139: CD Lealtad vs Coruxo
+Enriching fixture 1140: Gimnastica Segoviana vs Oviedo B
+Enriching fixture 1141: Marino De Luanco vs UD Samano
+Enriching fixture 1142: Deportivo Fabril vs Valladolid B
+Enriching fixture 1143: Rayo Cantabria vs Real Avila
+Enriching fixture 1144: UP Langreo vs Numancia
+Enriching fixture 1146: CD Alfaro vs SD Logrones
+Enriching fixture 1147: CD Basconia vs Gernika
+Enriching fixture 1148: Deportivo Aragon vs Real Union
+Enriching fixture 1149: Ejea vs Eibar B
+Enriching fixture 1150: Logrones CF vs UD Mutilvera
+Enriching fixture 1151: Naxara CD vs Beasain
+Enriching fixture 1153: Tudelano vs Deportivo Alaves B
+Enriching fixture 1154: Utebo vs CD Ebro
+Enriching fixture 1155: Krylya Sovetov 2 vs Nosta
+Enriching fixture 1157: Alcoyano vs Sant Andreu
+Enriching fixture 1158: Atletico Baleares vs Terrassa
+Enriching fixture 1159: Barbastro vs Castellon B
+Enriching fixture 1160: Girona B vs Torrent CF
+Enriching fixture 1161: Ibiza Islas Pitiusas vs Ce Andratx
+Enriching fixture 1162: Poblense vs Porreres
+Enriching fixture 1163: Reus vs UE Olot
+Enriching fixture 1164: Valencia B vs Espanyol B
+Enriching fixture 1172: CD Colonia Moscardo vs Navalcarnero
+Enriching fixture 1173: Conquense vs Tenerife B
+Enriching fixture 1175: Getafe B vs CF Intercity
+Enriching fixture 1176: Las Palmas B vs Orihuela
+Enriching fixture 1177: Quintanar Rey vs RSD Alcala
+Enriching fixture 1178: Rayo Vallecano B vs UD Socuellamos CF
+Enriching fixture 1179: San Sebastian De Los Reyes vs Real Madrid C
+Enriching fixture 1181: Arosa SC vs CD Boiro
+Enriching fixture 826: Wisla Plock vs Radomiak Radom
+Enriching fixture 1053: Ahrobiznes Volochysk vs Ingulets Petrove
+Enriching fixture 908: Rayong FC vs Lamphun Warrior
+Enriching fixture 1048: IFK Varnamo vs IK Oddevold
+Enriching fixture 1070: Vendsyssel FF vs HIK
+Enriching fixture 1071: Da Nang vs Viettel
+Enriching fixture 1076: FK Auda vs FK Tukums 2000
+Enriching fixture 1097: Coventry vs Wrexham
+Enriching fixture 1106: Everton (w) vs Chelsea (w)
+Enriching fixture 1107: London City Lionesses (w) vs Leicester (w)
+Enriching fixture 1108: Tottenham (w) vs Manchester United Women
+Enriching fixture 1122: Jerv vs Traeff
+Enriching fixture 1125: Kaluga vs Veles Moscow
+Compare scrape failed for http://www.statarea.com/compare/teams/Kaluga (Russia)/Veles+Moscow (Russia) (attempt 1/3): Request failed with status code 502
+Enriching fixture 1145: Arsenal Tula 2 vs Spartak Tambov
+Enriching fixture 1190: Korsnaes If FK vs Enskede IK
+Enriching fixture 1191: Taby FK vs Kungsangens IF
+Enriching fixture 1196: Torslanda IK vs BK Astrio
+Enriching fixture 837: SC Paderborn 07 vs FC Schalke 04
+Enriching fixture 839: FC Nurnberg vs FC Magdeburg
+Enriching fixture 906: Dragon Pathumwan Kanchanaburi vs Buriram United
+Enriching fixture 1085: Viktoria Koln vs Energie Cottbus
+Enriching fixture 1131: Nantong Zhiyun vs Dalian Kuncheng
+Enriching fixture 887: Dalian Zhixing vs Yunnan Yukun
+Enriching fixture 907: Ayutthaya United vs Prachuap FC
+Enriching fixture 921: FK Mladost DG vs Mornar
+Compare scrape failed for http://www.statarea.com/compare/teams/FK+Mladost+DG (Montenegro)/Mornar (Montenegro) (attempt 1/3): timeout of 30000ms exceeded
+Enriching fixture 952: Aarhus Fremad vs Hobro
+Enriching fixture 977: Persiba Balikpapan vs PSS Sleman
+Enriching fixture 978: Sportist Svoge vs Dunav Ruse
+Enriching fixture 1078: BFC Preussen vs SV Babelsberg 03
+Enriching fixture 1080: FSV 63 Luckenwalde vs FSV Zwickau
+Enriching fixture 1082: Magdeburg II vs Carl Zeiss Jena
+Enriching fixture 1083: FC Bocholt vs Borussia Dortmund II
+Enriching fixture 1084: SV Rodinghausen vs FC Schalke 04 II
+Enriching fixture 1110: Eintracht Frankfurt (w) vs VfL Wolfsburg (w)
+Enriching fixture 1116: Pitea IF (w) vs Vittsjo Gik (w)
+Enriching fixture 1130: Motala AIF FK vs Ahlafors IF
+Enriching fixture 1193: Nykobing FC vs FA 2000
+Enriching fixture 968: Guidonia Montecelio vs Carpi
+Enriching fixture 969: Pontedera vs Livorno
+Enriching fixture 970: Campobasso vs Ascoli
+Enriching fixture 971: Forli vs Perugia
+Enriching fixture 972: Gubbio vs Pineto
+Enriching fixture 973: Arezzo vs Torres
+Enriching fixture 974: Ternana vs Pianese
+Enriching fixture 975: Vis Pesaro vs Sambenedettese
+Enriching fixture 1049: Banik Ostrava B vs Vysocina Jihlava
+Enriching fixture 1062: Unia Skierniewice vs Sokol Kleczew
+Enriching fixture 1066: Wieczysta Krakow vs GKS Tychy
+Enriching fixture 1123: Brattvag vs Vidar
+Enriching fixture 827: Widzew Lodz vs Motor Lublin
+Enriching fixture 742: Genoa vs Como
+Enriching fixture 753: OFK Beograd vs Radnik Surdulica
+Enriching fixture 862: Polokwane City vs Stellenbosch FC
+Enriching fixture 864: TS Galaxy FC vs Magesi FC
+Enriching fixture 889: Kairat Almaty vs Spartak Semey
+Enriching fixture 893: Kifisia vs Panaitolikos
+Enriching fixture 903: Independiente F.B.C. vs Guairena FC
+Enriching fixture 904: Benjamin Aceval vs Fernando De La Mora
+Enriching fixture 936: Shillong Lajong FC vs Dempo SC
+Enriching fixture 1002: Vizela vs Sporting CP B
+Enriching fixture 1027: Sivasspor vs Igdir FK
+Enriching fixture 1028: Amedspor vs BB Bodrumspor
+Enriching fixture 1030: Keciorengucu vs Manisa FK
+Enriching fixture 1031: Pendikspor vs Boluspor
+Enriching fixture 1032: Sakaryaspor vs Corumspor
+Enriching fixture 1033: Sariyer vs Esenler Erokspor
+Enriching fixture 1054: Roeselare vs Thes Sport
+Enriching fixture 1055: Diegem vs Belisia Bilzen Sv
+Enriching fixture 1056: K. Lyra-lierse vs Houtvenne
+Enriching fixture 1057: KVV Zelzate vs Royal Knokke
+Enriching fixture 1058: Ninove vs KFC Merelbeke
+Enriching fixture 1059: Tienen vs Hoogstraten
+Enriching fixture 1064: Honefoss vs Levanger
+Enriching fixture 1088: SV Drochtersen/Assel vs Altona 93
+Enriching fixture 1090: Bremer SV vs Eintracht Norderstedt
+Enriching fixture 1091: Hannoverscher SC vs VfB Lubeck
+Enriching fixture 1109: Liverpool (w) vs West Ham (w)
+Enriching fixture 1121: Zabbar St Patrick vs Sliema Wanderers
+Enriching fixture 1156: Rubin 2 vs Dinamo Barnaul
+Enriching fixture 1171: Vindbjart vs Viking 2
+Enriching fixture 1184: Crossing Schaerbeek vs U.R. Namur
+Enriching fixture 1185: Asti vs SCD Ligorna
+Enriching fixture 1186: Biellese vs Gozzano
+Enriching fixture 1187: Derthona vs ASD Imperia
+Enriching fixture 1188: Ssd Novaromentin vs Vado
+Enriching fixture 1194: Castellanzese vs Milan Futuro
+Enriching fixture 1195: Villa dAlme vs FBC Oltrepo
+Enriching fixture 1200: Brian Lignano vs Bassano
+Enriching fixture 1201: Luparense vs Vigasio
+Enriching fixture 1202: Unione La Rocca Altavilla vs Mestre
+Enriching fixture 1204: Cittadella Vis Modena vs Palazzolo
+Enriching fixture 1205: Sasso Marconi vs Imolese
+Enriching fixture 1213: Grosseto vs San Donato
+Enriching fixture 1218: Maceratese vs Giulianova
+Enriching fixture 1219: Teramo vs Recanatese
+Enriching fixture 1222: Manfredonia vs Fidelis Andria
+Enriching fixture 1223: Athletic Club Palermo vs Savoia
+Enriching fixture 1224: Sambiase vs Nissa
+Enriching fixture 1736: Lodigiani vs Monterotondo
+Enriching fixture 1737: Ischia Isolaverde vs Montespaccato
+Enriching fixture 1738: Olbia vs Anziolavinio
+Enriching fixture 1740: Acireale vs Ragusa Calcio
+Enriching fixture 1742: Igea Virtus Barcellona vs Messina
+Enriching fixture 783: Krasnodar vs FK Makhachkala
+Enriching fixture 979: Fratria vs CSKA Sofia II
+Compare scrape failed for http://www.statarea.com/compare/teams/Fratria (Bulgaria)/CSKA+Sofia+II (Bulgaria) (attempt 1/3): timeout of 30000ms exceeded
+Enriching fixture 982: Al-Baqa A vs Al-Salt
+Enriching fixture 1013: Hercules vs Teruel
+Enriching fixture 1015: Marbella vs Sabadell
+Enriching fixture 1016: Tarazona vs Juventud Torremolinos CF
+Compare scrape failed for http://www.statarea.com/compare/teams/Tarazona (Spain)/Juventud+Torremolinos+CF+ (Spain) (attempt 1/3): timeout of 30000ms exceeded
+Enriching fixture 1021: Rotor Volgograd vs Volga Ulyanovsk
+Enriching fixture 1024: Chernomorets Novorossiysk vs Sokol Saratov
+Enriching fixture 1025: Kamaz Chelny vs FC Chayka
+Enriching fixture 1063: Karlbergs BK vs Gefle IF
+Enriching fixture 1089: Blau-Weiss Lohne vs SV Meppen
+Enriching fixture 1092: Kickers Emden vs VfB Oldenburg
+Enriching fixture 1111: Bayer Leverkusen (w) vs SC Freiburg (w)
+Enriching fixture 1132: Ad Marco 09 vs SC Braga B
+Enriching fixture 1133: Sanjoanense vs Paredes
+Enriching fixture 1134: Dinamo Vologda vs Zvezda St Petersburg
+Enriching fixture 1199: Team TG FF vs Lucksta
+Enriching fixture 1206: Kristianstad FC vs Utsiktens BK
+Enriching fixture 1633: Marsaxlokk vs Valletta FC
+Enriching fixture 810: Mirandes vs Cultural Leonesa
+Enriching fixture 813: IF Brommapojkarna vs Vaesteraas IK
+Enriching fixture 885: ES Zarzis vs Olympique Beja
+Enriching fixture 1230: Arsenal (w) vs Lyon (w)
+Enriching fixture 1347: CA Bizertin vs Esperance ST
+Enriching fixture 820: KFUM Oslo vs Sarpsborg 08 FF
+Enriching fixture 831: Renaissance Zemamra vs Maghreb Fes
+Enriching fixture 915: Polissya Zhytomyr vs Obolon Kiev
+Enriching fixture 916: Kudrivka vs Shakhter Donetsk
+Enriching fixture 924: Mezokovesd-Zsory vs FC Ajka
+Enriching fixture 925: Kecskemeti TE vs Tiszakecske FC
+Enriching fixture 928: Csakvar vs Kozarmisleny FC
+Enriching fixture 929: Szentlorinc SE vs Bvsc Zuglo
+Enriching fixture 933: Sandnes ULF vs Stromsgodset
+Enriching fixture 983: Racing De Casablanca vs KAC Kenitra
+Enriching fixture 984: Stade Marocain vs USM Oujda
+Enriching fixture 1037: Shturmi vs Gareji
+Enriching fixture 1038: ND Bilje vs NK Tabor Sezana
+Enriching fixture 1052: Spaeri vs FC Dila Gori
+Enriching fixture 1065: Odra Opole vs Polonia Bytom
+Enriching fixture 1182: UD Somozas vs Compostela
+Enriching fixture 1247: Leca vs Vianense
+Enriching fixture 1609: Berazategui vs Victoriano Arenas
+Enriching fixture 759: Paris FC vs Lille
+Enriching fixture 1034: Amarante vs Belenenses
+Enriching fixture 1634: Gzira United vs Naxxar Lions
+Enriching fixture 985: Atalanta (u23) vs Catania
+Enriching fixture 988: Benevento vs Audace Cerignola
+Enriching fixture 989: Casertana vs Giugliano
+Enriching fixture 990: Cavese vs Cosenza
+Enriching fixture 1007: Deportivo Armenio vs San Martin Burzaco
+Enriching fixture 1020: Rodina vs FC Ufa
+Enriching fixture 1039: NK Brinje Grosuplje vs Jesenice
+Enriching fixture 1113: Ternana Femminile (w) vs Fiorentina (w)
+Enriching fixture 1501: AZ Picerno vs ASD Sorrento
+Enriching fixture 1506: Trapani vs Siracusa
+Enriching fixture 1018: Cartagena vs Gimnastic Tarragona
+Enriching fixture 1119: Unionistas de Salamanca vs Athletic Club B
+Enriching fixture 807: Leganes vs FC Andorra
+Enriching fixture 941: Deportes Recoleta vs Antofagasta
+Enriching fixture 788: Estrela Da Amadora vs FC Porto
+Enriching fixture 926: Bekescsaba 1912 vs Karcagi Se
+Enriching fixture 1003: Benfica B vs Maritimo
+Enriching fixture 1069: Wigry Suwalki vs GKS Belchatow
+Enriching fixture 1103: FK Egnatia vs FK Vora
+Enriching fixture 1180: Brumunddal vs Bjoerkelangen
+Enriching fixture 1461: Moghreb Tetouan vs Chabab Atlas Khenifra
+Enriching fixture 816: Lillestrom vs Bodo/Glimt
+Enriching fixture 1060: Olimpia Grudziadz vs Warta Poznan
+Enriching fixture 1087: TSV Havelse vs VfB Stuttgart II
+Enriching fixture 1115: Real Madrid (w) vs EDF Logrono (w)
+Enriching fixture 754: Vojvodina vs Zeleznicar Pancevo
+Enriching fixture 800: Independiente Rivadavia vs Gimnasia Mendoza
+Enriching fixture 866: Nueva Chicago vs Colegiales
+Enriching fixture 869: Tristan Suarez vs Gimnasia Y Tiro
+Enriching fixture 870: Deportivo Moron vs Racing de Cordoba
+Enriching fixture 946: CD Cacahuatique vs Aguila
+Enriching fixture 1045: Alvarado vs Villa Mitre
+Enriching fixture 868: Chacarita Juniors vs Midland
+Enriching fixture 871: Acassuso vs Estudiantes B.A.
+Enriching fixture 1005: Arsenal Sarandi vs Villa Dalmine
+Enriching fixture 1006: Comunicaciones vs Dock Sud
+Enriching fixture 1008: Deportivo Laferrere vs Liniers
+Enriching fixture 1046: Guillermo Brown vs Kimberley
+Enriching fixture 1098: Atletico Fenix vs Claypole
+Enriching fixture 1099: Defensores De Cambaceres vs Puerto Nuevo
+Enriching fixture 1100: Estrella Del Sur vs Centro Espanol
+Enriching fixture 1101: Sacachispas vs Mercedes
+Enriching fixture 1120: Racing De Ferrol vs Real Aviles
+Enriching fixture 1233: Oratorio vs Trem Dc
+Enriching fixture 809: AD Ceuta vs Racing Santander
+Enriching fixture 832: Renaissance Berkane vs Olympique Dcheira
+Enriching fixture 867: Agropecuario vs San Martin Tucuman
+Enriching fixture 872: Deportivo Madryn vs Defensores De Belgrano
+Enriching fixture 966: Sao Bernardo vs Goias
+Enriching fixture 1010: Santa Cruz vs Amazonas FC
+Enriching fixture 1231: Araguaina vs Independencia
+Enriching fixture 1234: Parnahyba vs Sampaio Correa
+Enriching fixture 1235: Laguna Rn vs America-RN
+Enriching fixture 1236: Maguary vs Central SC
+Enriching fixture 1237: Decisao vs Retro FC Brasil
+Enriching fixture 1240: Guarany De Bage vs Sao Luiz
+Enriching fixture 1241: Azuriz vs Sao Joseense
+Enriching fixture 1226: Sportivo Belgrano vs El Linqueno
+Enriching fixture 1075: Academia Puerto Cabello B vs Urena SC
+Enriching fixture 1227: Ca Bartolome Mitre vs Sarmiento De La Banda
+Enriching fixture 873: Atletico Guemes vs Atletico Atlanta
+Enriching fixture 874: Chaco For Ever vs Atletico Mitre
+Enriching fixture 875: Central Norte vs Ciudad de Bolivar
+Enriching fixture 1009: Anapolis FC vs Figueirense
+Enriching fixture 1011: Barra FC vs Inter De Limeira
+Enriching fixture 1067: Quepos Cambute vs CS Uruguay
+Enriching fixture 1207: Minnesota United 2 vs North Texas SC
+Enriching fixture 799: Newells Old Boys vs Instituto Cordoba
+Enriching fixture 844: Atletico Grau vs Alianza Lima
+Enriching fixture 794: 2 De Mayo vs Club Guarani
+Enriching fixture 834: Platense FC vs Olancho FC
+Enriching fixture 876: Deportivo Maipu vs Almagro
+Enriching fixture 899: Aurora FC vs Mictlan
+Enriching fixture 967: Operario-PR vs Fortaleza
+Enriching fixture 1243: Ivinhema vs Operario MS
+Enriching fixture 1012: Ituano vs Maringa
+Enriching fixture 1229: Sportivo Atenas vs Deportivo Rincon
+Enriching fixture 1245: Angel City FC (w) vs Portland Thorns (w)
+Enriching fixture 1248: Real Apodaca FC vs Inter Playa del Carmen
+◇ injected env (9) from docker/.env // tip: ◈ secrets for agents [www.dotenvx.com]
+Stored tips batch 4 for 2026-04-26
+Tips written to /home/konrad/projects/Pred-Soc-2026/output/tips-2026-04-26.json
+◇ injected env (9) from docker/.env // tip: ◈ secrets for agents [www.dotenvx.com]
+Email sent for 2026-04-26

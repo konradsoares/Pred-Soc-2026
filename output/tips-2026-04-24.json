@@ -1,0 +1,1639 @@
+{
+  "date": "2026-04-24",
+  "payload": {
+    "date": "2026-04-24",
+    "rules": {
+      "min_confidence": 0.62,
+      "min_acca_total_odds": 3,
+      "max_acca_total_odds": 5,
+      "max_acca_legs": 3,
+      "allow_system_bets": true
+    },
+    "staking": {
+      "daily_bankroll": 10,
+      "currency": "EUR",
+      "singles_pct": 70,
+      "accumulators_pct": 20,
+      "systems_pct": 10,
+      "max_single_stake": 2.5,
+      "max_acca_stake": 1,
+      "max_system_stake": 1
+    },
+    "notes": {
+      "synthetic_odds": true,
+      "synthetic_odds_basis": "Odds are approximated from probabilities with margin-adjusted implied probability.",
+      "staking_warning": "Staking plan distributes risk but does not guarantee profit."
+    },
+    "fixtures": [
+      {
+        "fixture_id": "33",
+        "kickoff_utc": "2026-04-24T16:00:00.000Z",
+        "compare_url": "http://www.statarea.com/compare/teams/VPS (Finland)/Ilves (Finland)",
+        "country": "FINLAND",
+        "competition": "VEIKKAUSLIIGA",
+        "home_team": "VPS",
+        "away_team": "Ilves",
+        "source_tip": "2",
+        "prob_home": 32,
+        "prob_draw": 26,
+        "prob_away": 42,
+        "prob_over_25": 82,
+        "prob_under_25": 61,
+        "h2h": {
+          "matches_considered": 10,
+          "home_wins": 2,
+          "draws": 2,
+          "away_wins": 6,
+          "home_goals": 13,
+          "away_goals": 17
+        },
+        "recent_form": {
+          "home": {
+            "wins": 2,
+            "draws": 2,
+            "losses": 6,
+            "failed_to_score": 4,
+            "btts": 4,
+            "over_25": 6
+          },
+          "away": {
+            "wins": 5,
+            "draws": 2,
+            "losses": 3,
+            "failed_to_score": 1,
+            "btts": 7,
+            "over_25": 7
+          }
+        },
+        "available_markets": [
+          {
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 68,
+            "odds": 1.39
+          }
+        ]
+      },
+      {
+        "fixture_id": "35",
+        "kickoff_utc": "2026-04-24T16:00:00.000Z",
+        "compare_url": "http://www.statarea.com/compare/teams/TPS (Finland)/IF+Gnistan (Finland)",
+        "country": "FINLAND",
+        "competition": "VEIKKAUSLIIGA",
+        "home_team": "TPS",
+        "away_team": "IF Gnistan",
+        "source_tip": "1",
+        "prob_home": 49,
+        "prob_draw": 27,
+        "prob_away": 24,
+        "prob_over_25": 90,
+        "prob_under_25": 63,
+        "h2h": {
+          "matches_considered": 10,
+          "home_wins": 6,
+          "draws": 1,
+          "away_wins": 3,
+          "home_goals": 17,
+          "away_goals": 8
+        },
+        "recent_form": {
+          "home": {
+            "wins": 3,
+            "draws": 2,
+            "losses": 5,
+            "failed_to_score": 3,
+            "btts": 5,
+            "over_25": 4
+          },
+          "away": {
+            "wins": 3,
+            "draws": 3,
+            "losses": 4,
+            "failed_to_score": 3,
+            "btts": 4,
+            "over_25": 4
+          }
+        },
+        "available_markets": [
+          {
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 63,
+            "odds": 1.5
+          }
+        ]
+      },
+      {
+        "fixture_id": "54",
+        "kickoff_utc": "2026-04-24T16:00:00.000Z",
+        "compare_url": "http://www.statarea.com/compare/teams/Berekum+Chelsea (Ghana)/Medeama+SC (Ghana)",
+        "country": "GHANA",
+        "competition": "1. DIVISION",
+        "home_team": "Berekum Chelsea",
+        "away_team": "Medeama SC",
+        "source_tip": "1X",
+        "prob_home": 44,
+        "prob_draw": 32,
+        "prob_away": 24,
+        "prob_over_25": 67,
+        "prob_under_25": 38,
+        "h2h": {
+          "matches_considered": 10,
+          "home_wins": 5,
+          "draws": 2,
+          "away_wins": 3,
+          "home_goals": 10,
+          "away_goals": 7
+        },
+        "recent_form": {
+          "home": {
+            "wins": 4,
+            "draws": 3,
+            "losses": 3,
+            "failed_to_score": 3,
+            "btts": 4,
+            "over_25": 2
+          },
+          "away": {
+            "wins": 2,
+            "draws": 4,
+            "losses": 4,
+            "failed_to_score": 2,
+            "btts": 6,
+            "over_25": 5
+          }
+        },
+        "available_markets": [
+          {
+            "market": "goals",
+            "pick": "over_2_5",
+            "prob": 67,
+            "odds": 1.41
+          },
+          {
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 68,
+            "odds": 1.39
+          }
+        ]
+      },
+      {
+        "fixture_id": "99",
+        "kickoff_utc": "2026-04-24T16:00:00.000Z",
+        "compare_url": "http://www.statarea.com/compare/teams/Kustosija (Croatia)/Lucko (Croatia)",
+        "country": "CROATIA",
+        "competition": "3. DIVISION",
+        "home_team": "Kustosija",
+        "away_team": "Lucko",
+        "source_tip": "1",
+        "prob_home": 69,
+        "prob_draw": 20,
+        "prob_away": 11,
+        "prob_over_25": 90,
+        "prob_under_25": 70,
+        "h2h": {
+          "matches_considered": null,
+          "home_wins": null,
+          "draws": null,
+          "away_wins": null,
+          "home_goals": null,
+          "away_goals": null
+        },
+        "recent_form": {
+          "home": {
+            "wins": 5,
+            "draws": 2,
+            "losses": 3,
+            "failed_to_score": 2,
+            "btts": 3,
+            "over_25": 4
+          },
+          "away": {
+            "wins": 0,
+            "draws": 1,
+            "losses": 9,
+            "failed_to_score": 6,
+            "btts": 4,
+            "over_25": 5
+          }
+        },
+        "available_markets": [
+          {
+            "market": "1X2",
+            "pick": "1",
+            "prob": 69,
+            "odds": 1.37
+          },
+          {
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 70,
+            "odds": 1.35
+          }
+        ]
+      },
+      {
+        "fixture_id": "107",
+        "kickoff_utc": "2026-04-24T16:00:00.000Z",
+        "compare_url": "http://www.statarea.com/compare/teams/Opatija (Croatia)/Jarun (Croatia)",
+        "country": "CROATIA",
+        "competition": "PRVA NL",
+        "home_team": "Opatija",
+        "away_team": "Jarun",
+        "source_tip": "1X",
+        "prob_home": 51,
+        "prob_draw": 32,
+        "prob_away": 17,
+        "prob_over_25": 66,
+        "prob_under_25": 42,
+        "h2h": {
+          "matches_considered": null,
+          "home_wins": null,
+          "draws": null,
+          "away_wins": null,
+          "home_goals": null,
+          "away_goals": null
+        },
+        "recent_form": {
+          "home": {
+            "wins": 3,
+            "draws": 4,
+            "losses": 3,
+            "failed_to_score": 4,
+            "btts": 4,
+            "over_25": 2
+          },
+          "away": {
+            "wins": 3,
+            "draws": 1,
+            "losses": 6,
+            "failed_to_score": 5,
+            "btts": 3,
+            "over_25": 4
+          }
+        },
+        "available_markets": [
+          {
+            "market": "goals",
+            "pick": "over_2_5",
+            "prob": 66,
+            "odds": 1.43
+          },
+          {
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 68,
+            "odds": 1.39
+          }
+        ]
+      },
+      {
+        "fixture_id": "62",
+        "kickoff_utc": "2026-04-24T16:15:00.000Z",
+        "compare_url": "http://www.statarea.com/compare/teams/FC+Bunyodkor (Uzbekistan)/FK+Andijan (Uzbekistan)",
+        "country": "UZBEKISTAN",
+        "competition": "SUPERLIGA",
+        "home_team": "FC Bunyodkor",
+        "away_team": "FK Andijan",
+        "source_tip": "1X",
+        "prob_home": 45,
+        "prob_draw": 30,
+        "prob_away": 25,
+        "prob_over_25": 82,
+        "prob_under_25": 54,
+        "h2h": {
+          "matches_considered": 10,
+          "home_wins": 7,
+          "draws": 1,
+          "away_wins": 2,
+          "home_goals": 24,
+          "away_goals": 12
+        },
+        "recent_form": {
+          "home": {
+            "wins": 5,
+            "draws": 1,
+            "losses": 4,
+            "failed_to_score": 2,
+            "btts": 4,
+            "over_25": 4
+          },
+          "away": {
+            "wins": 2,
+            "draws": 1,
+            "losses": 7,
+            "failed_to_score": 5,
+            "btts": 3,
+            "over_25": 5
+          }
+        },
+        "available_markets": [
+          {
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 70,
+            "odds": 1.35
+          }
+        ]
+      },
+      {
+        "fixture_id": "96",
+        "kickoff_utc": "2026-04-24T16:30:00.000Z",
+        "compare_url": "http://www.statarea.com/compare/teams/Tampere+United (Finland)/VJS (Finland)",
+        "country": "FINLAND",
+        "competition": "YKKONEN",
+        "home_team": "Tampere United",
+        "away_team": "VJS",
+        "source_tip": "12",
+        "prob_home": 45,
+        "prob_draw": 24,
+        "prob_away": 31,
+        "prob_over_25": 92,
+        "prob_under_25": 73,
+        "h2h": {
+          "matches_considered": null,
+          "home_wins": null,
+          "draws": null,
+          "away_wins": null,
+          "home_goals": null,
+          "away_goals": null
+        },
+        "recent_form": {
+          "home": {
+            "wins": 3,
+            "draws": 0,
+            "losses": 7,
+            "failed_to_score": 6,
+            "btts": 2,
+            "over_25": 6
+          },
+          "away": {
+            "wins": 4,
+            "draws": 2,
+            "losses": 4,
+            "failed_to_score": 2,
+            "btts": 5,
+            "over_25": 5
+          }
+        },
+        "available_markets": [
+          {
+            "market": "double_chance",
+            "pick": "1X",
+            "prob": 69,
+            "odds": 1.37
+          }
+        ]
+      },
+      {
+        "fixture_id": "104",
+        "kickoff_utc": "2026-04-24T16:30:00.000Z",
+        "compare_url": "http://www.statarea.com/compare/teams/Krka (Slovenia)/ND+Ilirija (Slovenia)",
+        "country": "SLOVENIA",
+        "competition": "2. DIVISION",
+        "home_team": "Krka",
+        "away_team": "ND Ilirija",
+        "source_tip": "X",
+        "prob_home": 34,
+        "prob_draw": 37,
+        "prob_away": 29,
+        "prob_over_25": 85,
+        "prob_under_25": 58,
+        "h2h": {
+          "matches_considered": null,
+          "home_wins": null,
+          "draws": null,
+          "away_wins": null,
+          "home_goals": null,
+          "away_goals": null
+        },
+        "recent_form": {
+          "home": {
+            "wins": 1,
+            "draws": 6,
+            "losses": 3,
+            "failed_to_score": 7,
+            "btts": 2,
+            "over_25": 3
+          },
+          "away": {
+            "wins": 3,
+            "draws": 3,
+            "losses": 4,
+            "failed_to_score": 1,
+            "btts": 7,
+            "over_25": 6
+          }
+        },
+        "available_markets": [
+          {
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 66,
+            "odds": 1.43
+          },
+          {
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 63,
+            "odds": 1.5
+          }
+        ]
+      },
+      {
+        "fixture_id": "34",
+        "kickoff_utc": "2026-04-24T17:00:00.000Z",
+        "compare_url": "http://www.statarea.com/compare/teams/SJK (Finland)/FF+Jaro (Finland)",
+        "country": "FINLAND",
+        "competition": "VEIKKAUSLIIGA",
+        "home_team": "SJK",
+        "away_team": "FF Jaro",
+        "source_tip": "12",
+        "prob_home": 47,
+        "prob_draw": 22,
+        "prob_away": 31,
+        "prob_over_25": 84,
+        "prob_under_25": 69,
+        "h2h": {
+          "matches_considered": 10,
+          "home_wins": 5,
+          "draws": 2,
+          "away_wins": 3,
+          "home_goals": 18,
+          "away_goals": 10
+        },
+        "recent_form": {
+          "home": {
+            "wins": 3,
+            "draws": 1,
+            "losses": 6,
+            "failed_to_score": 6,
+            "btts": 2,
+            "over_25": 7
+          },
+          "away": {
+            "wins": 4,
+            "draws": 2,
+            "losses": 4,
+            "failed_to_score": 2,
+            "btts": 7,
+            "over_25": 6
+          }
+        },
+        "available_markets": [
+          {
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 69,
+            "odds": 1.37
+          },
+          {
+            "market": "double_chance",
+            "pick": "1X",
+            "prob": 69,
+            "odds": 1.37
+          }
+        ]
+      },
+      {
+        "fixture_id": "65",
+        "kickoff_utc": "2026-04-24T17:00:00.000Z",
+        "compare_url": "http://www.statarea.com/compare/teams/Usti+Nad+Labem (Czech Republic)/Viktoria+Zizkov (Czech Republic)",
+        "country": "CZECH REPUBLIC",
+        "competition": "FNL",
+        "home_team": "Usti Nad Labem",
+        "away_team": "Viktoria Zizkov",
+        "source_tip": "12",
+        "prob_home": 42,
+        "prob_draw": 28,
+        "prob_away": 30,
+        "prob_over_25": 82,
+        "prob_under_25": 55,
+        "h2h": {
+          "matches_considered": 10,
+          "home_wins": 4,
+          "draws": 3,
+          "away_wins": 3,
+          "home_goals": 11,
+          "away_goals": 8
+        },
+        "recent_form": {
+          "home": {
+            "wins": 5,
+            "draws": 0,
+            "losses": 5,
+            "failed_to_score": 2,
+            "btts": 6,
+            "over_25": 7
+          },
+          "away": {
+            "wins": 4,
+            "draws": 3,
+            "losses": 3,
+            "failed_to_score": 3,
+            "btts": 5,
+            "over_25": 6
+          }
+        },
+        "available_markets": [
+          {
+            "market": "double_chance",
+            "pick": "1X",
+            "prob": 70,
+            "odds": 1.35
+          }
+        ]
+      },
+      {
+        "fixture_id": "70",
+        "kickoff_utc": "2026-04-24T17:00:00.000Z",
+        "compare_url": "http://www.statarea.com/compare/teams/Podbeskidzie (Poland)/Zaglebie+Sosnowiec (Poland)",
+        "country": "POLAND",
+        "competition": "II LIGA",
+        "home_team": "Podbeskidzie",
+        "away_team": "Zaglebie Sosnowiec",
+        "source_tip": "1",
+        "prob_home": 51,
+        "prob_draw": 27,
+        "prob_away": 22,
+        "prob_over_25": 86,
+        "prob_under_25": 67,
+        "h2h": {
+          "matches_considered": 10,
+          "home_wins": 2,
+          "draws": 5,
+          "away_wins": 3,
+          "home_goals": 10,
+          "away_goals": 11
+        },
+        "recent_form": {
+          "home": {
+            "wins": 6,
+            "draws": 2,
+            "losses": 2,
+            "failed_to_score": 1,
+            "btts": 8,
+            "over_25": 8
+          },
+          "away": {
+            "wins": 2,
+            "draws": 1,
+            "losses": 7,
+            "failed_to_score": 2,
+            "btts": 6,
+            "over_25": 8
+          }
+        },
+        "available_markets": [
+          {
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 67,
+            "odds": 1.41
+          }
+        ]
+      },
+      {
+        "fixture_id": "72",
+        "kickoff_utc": "2026-04-24T17:00:00.000Z",
+        "compare_url": "http://www.statarea.com/compare/teams/Stal+Stalowa+Wola (Poland)/Rekord+Bielsko-Biala (Poland)",
+        "country": "POLAND",
+        "competition": "II LIGA",
+        "home_team": "Stal Stalowa Wola",
+        "away_team": "Rekord Bielsko-Biala",
+        "source_tip": "1X",
+        "prob_home": 42,
+        "prob_draw": 32,
+        "prob_away": 26,
+        "prob_over_25": 79,
+        "prob_under_25": 53,
+        "h2h": {
+          "matches_considered": null,
+          "home_wins": null,
+          "draws": null,
+          "away_wins": null,
+          "home_goals": null,
+          "away_goals": null
+        },
+        "recent_form": {
+          "home": {
+            "wins": 1,
+            "draws": 5,
+            "losses": 4,
+            "failed_to_score": 5,
+            "btts": 4,
+            "over_25": 3
+          },
+          "away": {
+            "wins": 4,
+            "draws": 3,
+            "losses": 3,
+            "failed_to_score": 2,
+            "btts": 6,
+            "over_25": 5
+          }
+        },
+        "available_markets": [
+          {
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 68,
+            "odds": 1.39
+          }
+        ]
+      }
+    ],
+    "accumulator_candidates": [
+      {
+        "name": "acca_3_33_35_104",
+        "legs": [
+          {
+            "fixture_id": "33",
+            "home_team": "VPS",
+            "away_team": "Ilves",
+            "country": "FINLAND",
+            "competition": "VEIKKAUSLIIGA",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 68,
+            "odds": 1.39
+          },
+          {
+            "fixture_id": "35",
+            "home_team": "TPS",
+            "away_team": "IF Gnistan",
+            "country": "FINLAND",
+            "competition": "VEIKKAUSLIIGA",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "104",
+            "home_team": "Krka",
+            "away_team": "ND Ilirija",
+            "country": "SLOVENIA",
+            "competition": "2. DIVISION",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 63,
+            "odds": 1.5
+          }
+        ],
+        "total_odds": 3.13
+      },
+      {
+        "name": "acca_3_35_54_107",
+        "legs": [
+          {
+            "fixture_id": "35",
+            "home_team": "TPS",
+            "away_team": "IF Gnistan",
+            "country": "FINLAND",
+            "competition": "VEIKKAUSLIIGA",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "54",
+            "home_team": "Berekum Chelsea",
+            "away_team": "Medeama SC",
+            "country": "GHANA",
+            "competition": "1. DIVISION",
+            "market": "goals",
+            "pick": "over_2_5",
+            "prob": 67,
+            "odds": 1.41
+          },
+          {
+            "fixture_id": "107",
+            "home_team": "Opatija",
+            "away_team": "Jarun",
+            "country": "CROATIA",
+            "competition": "PRVA NL",
+            "market": "goals",
+            "pick": "over_2_5",
+            "prob": 66,
+            "odds": 1.43
+          }
+        ],
+        "total_odds": 3.02
+      },
+      {
+        "name": "acca_3_35_54_104",
+        "legs": [
+          {
+            "fixture_id": "35",
+            "home_team": "TPS",
+            "away_team": "IF Gnistan",
+            "country": "FINLAND",
+            "competition": "VEIKKAUSLIIGA",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "54",
+            "home_team": "Berekum Chelsea",
+            "away_team": "Medeama SC",
+            "country": "GHANA",
+            "competition": "1. DIVISION",
+            "market": "goals",
+            "pick": "over_2_5",
+            "prob": 67,
+            "odds": 1.41
+          },
+          {
+            "fixture_id": "104",
+            "home_team": "Krka",
+            "away_team": "ND Ilirija",
+            "country": "SLOVENIA",
+            "competition": "2. DIVISION",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 66,
+            "odds": 1.43
+          }
+        ],
+        "total_odds": 3.02
+      },
+      {
+        "name": "acca_3_35_54_104",
+        "legs": [
+          {
+            "fixture_id": "35",
+            "home_team": "TPS",
+            "away_team": "IF Gnistan",
+            "country": "FINLAND",
+            "competition": "VEIKKAUSLIIGA",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "54",
+            "home_team": "Berekum Chelsea",
+            "away_team": "Medeama SC",
+            "country": "GHANA",
+            "competition": "1. DIVISION",
+            "market": "goals",
+            "pick": "over_2_5",
+            "prob": 67,
+            "odds": 1.41
+          },
+          {
+            "fixture_id": "104",
+            "home_team": "Krka",
+            "away_team": "ND Ilirija",
+            "country": "SLOVENIA",
+            "competition": "2. DIVISION",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 63,
+            "odds": 1.5
+          }
+        ],
+        "total_odds": 3.17
+      },
+      {
+        "name": "acca_3_35_54_104",
+        "legs": [
+          {
+            "fixture_id": "35",
+            "home_team": "TPS",
+            "away_team": "IF Gnistan",
+            "country": "FINLAND",
+            "competition": "VEIKKAUSLIIGA",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "54",
+            "home_team": "Berekum Chelsea",
+            "away_team": "Medeama SC",
+            "country": "GHANA",
+            "competition": "1. DIVISION",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 68,
+            "odds": 1.39
+          },
+          {
+            "fixture_id": "104",
+            "home_team": "Krka",
+            "away_team": "ND Ilirija",
+            "country": "SLOVENIA",
+            "competition": "2. DIVISION",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 63,
+            "odds": 1.5
+          }
+        ],
+        "total_odds": 3.13
+      },
+      {
+        "name": "acca_3_35_99_104",
+        "legs": [
+          {
+            "fixture_id": "35",
+            "home_team": "TPS",
+            "away_team": "IF Gnistan",
+            "country": "FINLAND",
+            "competition": "VEIKKAUSLIIGA",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "99",
+            "home_team": "Kustosija",
+            "away_team": "Lucko",
+            "country": "CROATIA",
+            "competition": "3. DIVISION",
+            "market": "1X2",
+            "pick": "1",
+            "prob": 69,
+            "odds": 1.37
+          },
+          {
+            "fixture_id": "104",
+            "home_team": "Krka",
+            "away_team": "ND Ilirija",
+            "country": "SLOVENIA",
+            "competition": "2. DIVISION",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 63,
+            "odds": 1.5
+          }
+        ],
+        "total_odds": 3.08
+      },
+      {
+        "name": "acca_3_35_99_104",
+        "legs": [
+          {
+            "fixture_id": "35",
+            "home_team": "TPS",
+            "away_team": "IF Gnistan",
+            "country": "FINLAND",
+            "competition": "VEIKKAUSLIIGA",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "99",
+            "home_team": "Kustosija",
+            "away_team": "Lucko",
+            "country": "CROATIA",
+            "competition": "3. DIVISION",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 70,
+            "odds": 1.35
+          },
+          {
+            "fixture_id": "104",
+            "home_team": "Krka",
+            "away_team": "ND Ilirija",
+            "country": "SLOVENIA",
+            "competition": "2. DIVISION",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 63,
+            "odds": 1.5
+          }
+        ],
+        "total_odds": 3.04
+      },
+      {
+        "name": "acca_3_35_107_104",
+        "legs": [
+          {
+            "fixture_id": "35",
+            "home_team": "TPS",
+            "away_team": "IF Gnistan",
+            "country": "FINLAND",
+            "competition": "VEIKKAUSLIIGA",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "107",
+            "home_team": "Opatija",
+            "away_team": "Jarun",
+            "country": "CROATIA",
+            "competition": "PRVA NL",
+            "market": "goals",
+            "pick": "over_2_5",
+            "prob": 66,
+            "odds": 1.43
+          },
+          {
+            "fixture_id": "104",
+            "home_team": "Krka",
+            "away_team": "ND Ilirija",
+            "country": "SLOVENIA",
+            "competition": "2. DIVISION",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 66,
+            "odds": 1.43
+          }
+        ],
+        "total_odds": 3.07
+      },
+      {
+        "name": "acca_3_35_107_104",
+        "legs": [
+          {
+            "fixture_id": "35",
+            "home_team": "TPS",
+            "away_team": "IF Gnistan",
+            "country": "FINLAND",
+            "competition": "VEIKKAUSLIIGA",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "107",
+            "home_team": "Opatija",
+            "away_team": "Jarun",
+            "country": "CROATIA",
+            "competition": "PRVA NL",
+            "market": "goals",
+            "pick": "over_2_5",
+            "prob": 66,
+            "odds": 1.43
+          },
+          {
+            "fixture_id": "104",
+            "home_team": "Krka",
+            "away_team": "ND Ilirija",
+            "country": "SLOVENIA",
+            "competition": "2. DIVISION",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 63,
+            "odds": 1.5
+          }
+        ],
+        "total_odds": 3.22
+      },
+      {
+        "name": "acca_3_35_107_70",
+        "legs": [
+          {
+            "fixture_id": "35",
+            "home_team": "TPS",
+            "away_team": "IF Gnistan",
+            "country": "FINLAND",
+            "competition": "VEIKKAUSLIIGA",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "107",
+            "home_team": "Opatija",
+            "away_team": "Jarun",
+            "country": "CROATIA",
+            "competition": "PRVA NL",
+            "market": "goals",
+            "pick": "over_2_5",
+            "prob": 66,
+            "odds": 1.43
+          },
+          {
+            "fixture_id": "70",
+            "home_team": "Podbeskidzie",
+            "away_team": "Zaglebie Sosnowiec",
+            "country": "POLAND",
+            "competition": "II LIGA",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 67,
+            "odds": 1.41
+          }
+        ],
+        "total_odds": 3.02
+      },
+      {
+        "name": "acca_3_35_107_104",
+        "legs": [
+          {
+            "fixture_id": "35",
+            "home_team": "TPS",
+            "away_team": "IF Gnistan",
+            "country": "FINLAND",
+            "competition": "VEIKKAUSLIIGA",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "107",
+            "home_team": "Opatija",
+            "away_team": "Jarun",
+            "country": "CROATIA",
+            "competition": "PRVA NL",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 68,
+            "odds": 1.39
+          },
+          {
+            "fixture_id": "104",
+            "home_team": "Krka",
+            "away_team": "ND Ilirija",
+            "country": "SLOVENIA",
+            "competition": "2. DIVISION",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 63,
+            "odds": 1.5
+          }
+        ],
+        "total_odds": 3.13
+      },
+      {
+        "name": "acca_3_35_62_104",
+        "legs": [
+          {
+            "fixture_id": "35",
+            "home_team": "TPS",
+            "away_team": "IF Gnistan",
+            "country": "FINLAND",
+            "competition": "VEIKKAUSLIIGA",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "62",
+            "home_team": "FC Bunyodkor",
+            "away_team": "FK Andijan",
+            "country": "UZBEKISTAN",
+            "competition": "SUPERLIGA",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 70,
+            "odds": 1.35
+          },
+          {
+            "fixture_id": "104",
+            "home_team": "Krka",
+            "away_team": "ND Ilirija",
+            "country": "SLOVENIA",
+            "competition": "2. DIVISION",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 63,
+            "odds": 1.5
+          }
+        ],
+        "total_odds": 3.04
+      },
+      {
+        "name": "acca_3_35_96_104",
+        "legs": [
+          {
+            "fixture_id": "35",
+            "home_team": "TPS",
+            "away_team": "IF Gnistan",
+            "country": "FINLAND",
+            "competition": "VEIKKAUSLIIGA",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "96",
+            "home_team": "Tampere United",
+            "away_team": "VJS",
+            "country": "FINLAND",
+            "competition": "YKKONEN",
+            "market": "double_chance",
+            "pick": "1X",
+            "prob": 69,
+            "odds": 1.37
+          },
+          {
+            "fixture_id": "104",
+            "home_team": "Krka",
+            "away_team": "ND Ilirija",
+            "country": "SLOVENIA",
+            "competition": "2. DIVISION",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 63,
+            "odds": 1.5
+          }
+        ],
+        "total_odds": 3.08
+      },
+      {
+        "name": "acca_3_35_104_70",
+        "legs": [
+          {
+            "fixture_id": "35",
+            "home_team": "TPS",
+            "away_team": "IF Gnistan",
+            "country": "FINLAND",
+            "competition": "VEIKKAUSLIIGA",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "104",
+            "home_team": "Krka",
+            "away_team": "ND Ilirija",
+            "country": "SLOVENIA",
+            "competition": "2. DIVISION",
+            "market": "double_chance",
+            "pick": "X2",
+            "prob": 66,
+            "odds": 1.43
+          },
+          {
+            "fixture_id": "70",
+            "home_team": "Podbeskidzie",
+            "away_team": "Zaglebie Sosnowiec",
+            "country": "POLAND",
+            "competition": "II LIGA",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 67,
+            "odds": 1.41
+          }
+        ],
+        "total_odds": 3.02
+      },
+      {
+        "name": "acca_3_35_104_34",
+        "legs": [
+          {
+            "fixture_id": "35",
+            "home_team": "TPS",
+            "away_team": "IF Gnistan",
+            "country": "FINLAND",
+            "competition": "VEIKKAUSLIIGA",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "104",
+            "home_team": "Krka",
+            "away_team": "ND Ilirija",
+            "country": "SLOVENIA",
+            "competition": "2. DIVISION",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "34",
+            "home_team": "SJK",
+            "away_team": "FF Jaro",
+            "country": "FINLAND",
+            "competition": "VEIKKAUSLIIGA",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 69,
+            "odds": 1.37
+          }
+        ],
+        "total_odds": 3.08
+      },
+      {
+        "name": "acca_3_35_104_34",
+        "legs": [
+          {
+            "fixture_id": "35",
+            "home_team": "TPS",
+            "away_team": "IF Gnistan",
+            "country": "FINLAND",
+            "competition": "VEIKKAUSLIIGA",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "104",
+            "home_team": "Krka",
+            "away_team": "ND Ilirija",
+            "country": "SLOVENIA",
+            "competition": "2. DIVISION",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "34",
+            "home_team": "SJK",
+            "away_team": "FF Jaro",
+            "country": "FINLAND",
+            "competition": "VEIKKAUSLIIGA",
+            "market": "double_chance",
+            "pick": "1X",
+            "prob": 69,
+            "odds": 1.37
+          }
+        ],
+        "total_odds": 3.08
+      },
+      {
+        "name": "acca_3_35_104_65",
+        "legs": [
+          {
+            "fixture_id": "35",
+            "home_team": "TPS",
+            "away_team": "IF Gnistan",
+            "country": "FINLAND",
+            "competition": "VEIKKAUSLIIGA",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "104",
+            "home_team": "Krka",
+            "away_team": "ND Ilirija",
+            "country": "SLOVENIA",
+            "competition": "2. DIVISION",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "65",
+            "home_team": "Usti Nad Labem",
+            "away_team": "Viktoria Zizkov",
+            "country": "CZECH REPUBLIC",
+            "competition": "FNL",
+            "market": "double_chance",
+            "pick": "1X",
+            "prob": 70,
+            "odds": 1.35
+          }
+        ],
+        "total_odds": 3.04
+      },
+      {
+        "name": "acca_3_35_104_70",
+        "legs": [
+          {
+            "fixture_id": "35",
+            "home_team": "TPS",
+            "away_team": "IF Gnistan",
+            "country": "FINLAND",
+            "competition": "VEIKKAUSLIIGA",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "104",
+            "home_team": "Krka",
+            "away_team": "ND Ilirija",
+            "country": "SLOVENIA",
+            "competition": "2. DIVISION",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "70",
+            "home_team": "Podbeskidzie",
+            "away_team": "Zaglebie Sosnowiec",
+            "country": "POLAND",
+            "competition": "II LIGA",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 67,
+            "odds": 1.41
+          }
+        ],
+        "total_odds": 3.17
+      },
+      {
+        "name": "acca_3_35_104_72",
+        "legs": [
+          {
+            "fixture_id": "35",
+            "home_team": "TPS",
+            "away_team": "IF Gnistan",
+            "country": "FINLAND",
+            "competition": "VEIKKAUSLIIGA",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "104",
+            "home_team": "Krka",
+            "away_team": "ND Ilirija",
+            "country": "SLOVENIA",
+            "competition": "2. DIVISION",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "72",
+            "home_team": "Stal Stalowa Wola",
+            "away_team": "Rekord Bielsko-Biala",
+            "country": "POLAND",
+            "competition": "II LIGA",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 68,
+            "odds": 1.39
+          }
+        ],
+        "total_odds": 3.13
+      },
+      {
+        "name": "acca_3_54_107_104",
+        "legs": [
+          {
+            "fixture_id": "54",
+            "home_team": "Berekum Chelsea",
+            "away_team": "Medeama SC",
+            "country": "GHANA",
+            "competition": "1. DIVISION",
+            "market": "goals",
+            "pick": "over_2_5",
+            "prob": 67,
+            "odds": 1.41
+          },
+          {
+            "fixture_id": "107",
+            "home_team": "Opatija",
+            "away_team": "Jarun",
+            "country": "CROATIA",
+            "competition": "PRVA NL",
+            "market": "goals",
+            "pick": "over_2_5",
+            "prob": 66,
+            "odds": 1.43
+          },
+          {
+            "fixture_id": "104",
+            "home_team": "Krka",
+            "away_team": "ND Ilirija",
+            "country": "SLOVENIA",
+            "competition": "2. DIVISION",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 63,
+            "odds": 1.5
+          }
+        ],
+        "total_odds": 3.02
+      },
+      {
+        "name": "acca_3_107_104_70",
+        "legs": [
+          {
+            "fixture_id": "107",
+            "home_team": "Opatija",
+            "away_team": "Jarun",
+            "country": "CROATIA",
+            "competition": "PRVA NL",
+            "market": "goals",
+            "pick": "over_2_5",
+            "prob": 66,
+            "odds": 1.43
+          },
+          {
+            "fixture_id": "104",
+            "home_team": "Krka",
+            "away_team": "ND Ilirija",
+            "country": "SLOVENIA",
+            "competition": "2. DIVISION",
+            "market": "double_chance",
+            "pick": "12",
+            "prob": 63,
+            "odds": 1.5
+          },
+          {
+            "fixture_id": "70",
+            "home_team": "Podbeskidzie",
+            "away_team": "Zaglebie Sosnowiec",
+            "country": "POLAND",
+            "competition": "II LIGA",
+            "market": "goals",
+            "pick": "under_2_5",
+            "prob": 67,
+            "odds": 1.41
+          }
+        ],
+        "total_odds": 3.02
+      }
+    ]
+  },
+  "ai_tips": {
+    "staking_plan": {
+      "daily_bankroll": 10,
+      "currency": "EUR",
+      "singles_total": 7,
+      "accumulators_total": 2,
+      "systems_total": 1,
+      "notes": "Singles carry most of the bankroll. Accumulators are limited to small speculative exposure. System bet used as a cautious 2/3 structure to reduce variance while keeping upside."
+    },
+    "singles": [
+      {
+        "fixture_id": 99,
+        "market": "goals",
+        "pick": "under_2_5",
+        "odds": 1.35,
+        "stake": 1.5,
+        "confidence": 0.7,
+        "reason": "Strong home edge, away in poor form, and the available market aligns with a lower-variance total-goals angle."
+      },
+      {
+        "fixture_id": 34,
+        "market": "goals",
+        "pick": "under_2_5",
+        "odds": 1.37,
+        "stake": 1.25,
+        "confidence": 0.69,
+        "reason": "Both teams have mixed scoring profiles, but the offered under is one of the safer low-variance options in the dataset."
+      },
+      {
+        "fixture_id": 65,
+        "market": "double_chance",
+        "pick": "1X",
+        "odds": 1.35,
+        "stake": 1.25,
+        "confidence": 0.7,
+        "reason": "Home side has the better recent profile and the double chance reduces draw/loss risk."
+      },
+      {
+        "fixture_id": 33,
+        "market": "double_chance",
+        "pick": "X2",
+        "odds": 1.39,
+        "stake": 1,
+        "confidence": 0.68,
+        "reason": "Away side has the stronger win probability and recent form, making X2 the safer side-based play."
+      },
+      {
+        "fixture_id": 70,
+        "market": "goals",
+        "pick": "under_2_5",
+        "odds": 1.41,
+        "stake": 1,
+        "confidence": 0.67,
+        "reason": "Recent form supports a controlled match profile and the under is the lower-variance market available."
+      }
+    ],
+    "accumulators": [
+      {
+        "name": "acca_3_35_99_104",
+        "total_odds": 3.08,
+        "stake": 1,
+        "confidence": 0.63,
+        "reason": "Three-leg speculative accumulator built from the stronger low-variance selections in the slate. Kept small due to compounding risk.",
+        "legs": [
+          {
+            "fixture_id": 35,
+            "market": "goals",
+            "pick": "under_2_5",
+            "odds": 1.5
+          },
+          {
+            "fixture_id": 99,
+            "market": "goals",
+            "pick": "under_2_5",
+            "odds": 1.35
+          },
+          {
+            "fixture_id": 104,
+            "market": "double_chance",
+            "pick": "12",
+            "odds": 1.5
+          }
+        ]
+      },
+      {
+        "name": "acca_3_35_107_70",
+        "total_odds": 3.02,
+        "stake": 1,
+        "confidence": 0.62,
+        "reason": "Balanced 3-leg acca using only qualifying markets with acceptable total odds and moderate confidence.",
+        "legs": [
+          {
+            "fixture_id": 35,
+            "market": "goals",
+            "pick": "under_2_5",
+            "odds": 1.5
+          },
+          {
+            "fixture_id": 107,
+            "market": "goals",
+            "pick": "over_2_5",
+            "odds": 1.43
+          },
+          {
+            "fixture_id": 70,
+            "market": "goals",
+            "pick": "under_2_5",
+            "odds": 1.41
+          }
+        ]
+      }
+    ],
+    "system_bets": [
+      {
+        "type": "2/3 system",
+        "stake": 1,
+        "reason": "A small system bet offers partial protection versus a straight accumulator while still targeting the same qualifying legs. This is the most practical use of the system allocation here.",
+        "legs": [
+          {
+            "fixture_id": 35,
+            "market": "goals",
+            "pick": "under_2_5",
+            "odds": 1.5
+          },
+          {
+            "fixture_id": 99,
+            "market": "goals",
+            "pick": "under_2_5",
+            "odds": 1.35
+          },
+          {
+            "fixture_id": 104,
+            "market": "double_chance",
+            "pick": "12",
+            "odds": 1.5
+          }
+        ]
+      }
+    ],
+    "excluded_fixtures": [
+      {
+        "fixture_id": 54,
+        "reason": "Useful markets exist, but not selected to keep the staking plan focused on the strongest lower-variance options."
+      },
+      {
+        "fixture_id": 62,
+        "reason": "Only a double chance market is available and it is less attractive than the selected singles."
+      },
+      {
+        "fixture_id": 96,
+        "reason": "Available market is acceptable, but confidence and price are weaker than the chosen singles."
+      },
+      {
+        "fixture_id": 107,
+        "reason": "Market is playable, but not strong enough to displace higher-confidence selections in singles."
+      },
+      {
+        "fixture_id": 104,
+        "reason": "Included in accumulator/system only; too volatile for a single at the available market."
+      },
+      {
+        "fixture_id": 35,
+        "reason": "Included in accumulator/system only; not used as a single to avoid overexposure to the same match profile."
+      },
+      {
+        "fixture_id": 72,
+        "reason": "Playable double chance, but lower priority than the selected singles."
+      }
+    ]
+  }
+}
