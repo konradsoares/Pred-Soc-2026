@@ -9,6 +9,10 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+function todayDateISO() {
+  return new Date().toISOString().slice(0, 10);
+}
+
 async function fetchCompareStatsWithRetry(compareUrl, maxRetries = MAX_RETRIES) {
   let lastError = null;
 
@@ -23,17 +27,16 @@ async function fetchCompareStatsWithRetry(compareUrl, maxRetries = MAX_RETRIES) 
         `Compare scrape failed for ${compareUrl} (attempt ${attempt}/${maxRetries}): ${err.message}`
       );
 
-      if (!isLastAttempt) {
-        await sleep(RETRY_DELAY_MS * attempt);
-      }
+      if (!isLastAttempt) await sleep(RETRY_DELAY_MS * attempt);
     }
   }
 
   throw lastError;
 }
 
-async function loadFixturesToEnrich(client) {
-  const result = await client.query(`
+async function loadFixturesToEnrich(client, targetDate) {
+  const result = await client.query(
+    `
     SELECT
       f.id AS fixture_id,
       f.compare_url,
@@ -58,13 +61,16 @@ async function loadFixturesToEnrich(client) {
      AND trs_away.team_id = f.away_team_id
      AND trs_away.matches_considered = 10
     WHERE f.compare_url IS NOT NULL
+      AND COALESCE(f.fixture_date, f.kickoff_utc::date) = $1::date
       AND (
         h2h.id IS NULL
         OR trs_home.id IS NULL
         OR trs_away.id IS NULL
       )
     ORDER BY f.kickoff_utc ASC, f.id ASC
-  `);
+    `,
+    [targetDate]
+  );
 
   return result.rows;
 }
@@ -192,10 +198,14 @@ async function upsertHeadToHeadStats(client, row) {
 }
 
 async function main() {
+  const targetDate = process.argv[2] || todayDateISO();
+  console.log(`Enrichment target date: ${targetDate}`);
+
   const client = await db.getClient();
 
   try {
-    const fixtures = await loadFixturesToEnrich(client);
+    const fixtures = await loadFixturesToEnrich(client, targetDate);
+    console.log(`Fixtures to enrich for ${targetDate}: ${fixtures.length}`);
 
     for (const fixture of fixtures) {
       console.log(`Enriching fixture ${fixture.fixture_id}: ${fixture.home_team_name} vs ${fixture.away_team_name}`);
