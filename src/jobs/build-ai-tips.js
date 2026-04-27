@@ -185,7 +185,7 @@ async function loadTodayDataset(client, targetDate) {
       ON trs_away.fixture_id = f.id
      AND trs_away.team_id = f.away_team_id
      AND trs_away.matches_considered = 10
-    WHERE f.kickoff_utc >= NOW() AND f.kickoff_utc >= (($1::date + $2::time) AT TIME ZONE 'UTC') AND f.kickoff_utc <= (($1::date + $3::time) AT TIME ZONE 'UTC')
+    WHERE f.kickoff_utc >= (($1::date + $2::time) AT TIME ZONE 'UTC') AND f.kickoff_utc <= (($1::date + $3::time) AT TIME ZONE 'UTC')
     ORDER BY f.kickoff_utc ASC, f.id ASC
     `,
     [targetDate, WINDOW_START, WINDOW_END]
