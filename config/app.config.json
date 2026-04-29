@@ -4,7 +4,7 @@
     "timezone": "Europe/Dublin"
   },
   "prediction": {
-    "target_fixture_date_offset_days": 1,
+    "target_fixture_date_offset_days": 0,
     "min_model_confidence": 0.62,
     "max_single_pick_odds": 2.2,
     "min_single_pick_odds": 1.35,
@@ -12,7 +12,7 @@
     "min_acca_total_odds": 3.0,
     "max_acca_total_odds": 5.0,
     "allow_system_bets": true,
-    "max_daily_picks": 12
+    "max_daily_picks": 32
   },
   "email": {
     "enabled": true,
