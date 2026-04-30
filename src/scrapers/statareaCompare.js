@@ -251,16 +251,18 @@ function parseStatsBlock(blockText, teamName) {
     time_without_scored_goal_min: readValueBeforeLabel(text, 'Time without scored goal'),
     time_without_conceded_goal_min: readValueBeforeLabel(text, 'Time without conceded goal')
   };
-  // const generalMatchFacts = parseLabeledPercents(text, {
-  //   win_pct: teamName,
-  //   draw_pct: 'draw',
-  //   opponent_win_pct: 'opponent'
-  // });
+  
   const generalMatchFacts = {
     win_pct: statisticFacts.wins_count !== null ? statisticFacts.wins_count * 10 : null,
     draw_pct: statisticFacts.draws_count !== null ? statisticFacts.draws_count * 10 : null,
     opponent_win_pct: statisticFacts.losses_count !== null ? statisticFacts.losses_count * 10 : null
   };
+  // const generalMatchFacts = parseLabeledPercents(text, {
+  //   win_pct: teamName,
+  //   draw_pct: 'draw',
+  //   opponent_win_pct: 'opponent'
+  // });
+
   const halftime1x2 = (() => {
     const m = text.match(
       new RegExp(
