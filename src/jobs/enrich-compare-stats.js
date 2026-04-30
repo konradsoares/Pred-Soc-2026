@@ -165,9 +165,20 @@ async function upsertTeamRecentStats(client, row) {
       clean_sheets,
       failed_to_score,
       btts,
-      over_25
+      over_25,
+      under_25,
+      avg_goals_for,
+      avg_goals_against,
+      chance_score_next_pct,
+      chance_concede_next_pct,
+      time_without_scored_goal_min,
+      time_without_conceded_goal_min,
+      raw_payload
     )
-    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
+    VALUES (
+      $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,
+      $11,$12,$13,$14,$15,$16,$17,$18,$19,$20
+    )
     ON CONFLICT (fixture_id, team_id, matches_considered)
     DO UPDATE SET
       wins = EXCLUDED.wins,
@@ -178,7 +189,15 @@ async function upsertTeamRecentStats(client, row) {
       clean_sheets = EXCLUDED.clean_sheets,
       failed_to_score = EXCLUDED.failed_to_score,
       btts = EXCLUDED.btts,
-      over_25 = EXCLUDED.over_25
+      over_25 = EXCLUDED.over_25,
+      under_25 = EXCLUDED.under_25,
+      avg_goals_for = EXCLUDED.avg_goals_for,
+      avg_goals_against = EXCLUDED.avg_goals_against,
+      chance_score_next_pct = EXCLUDED.chance_score_next_pct,
+      chance_concede_next_pct = EXCLUDED.chance_concede_next_pct,
+      time_without_scored_goal_min = EXCLUDED.time_without_scored_goal_min,
+      time_without_conceded_goal_min = EXCLUDED.time_without_conceded_goal_min,
+      raw_payload = EXCLUDED.raw_payload
     `,
     [
       row.fixture_id,
@@ -192,10 +211,64 @@ async function upsertTeamRecentStats(client, row) {
       row.clean_sheets,
       row.failed_to_score,
       row.btts,
-      row.over_25
+      row.over_25,
+      row.under_25,
+      row.avg_goals_for,
+      row.avg_goals_against,
+      row.chance_score_next_pct,
+      row.chance_concede_next_pct,
+      row.time_without_scored_goal_min,
+      row.time_without_conceded_goal_min,
+      row.raw_payload
     ]
   );
 }
+// async function upsertTeamRecentStats(client, row) {
+//   await client.query(
+//     `
+//     INSERT INTO team_recent_stats (
+//       fixture_id,
+//       team_id,
+//       matches_considered,
+//       wins,
+//       draws,
+//       losses,
+//       goals_for,
+//       goals_against,
+//       clean_sheets,
+//       failed_to_score,
+//       btts,
+//       over_25
+//     )
+//     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
+//     ON CONFLICT (fixture_id, team_id, matches_considered)
+//     DO UPDATE SET
+//       wins = EXCLUDED.wins,
+//       draws = EXCLUDED.draws,
+//       losses = EXCLUDED.losses,
+//       goals_for = EXCLUDED.goals_for,
+//       goals_against = EXCLUDED.goals_against,
+//       clean_sheets = EXCLUDED.clean_sheets,
+//       failed_to_score = EXCLUDED.failed_to_score,
+//       btts = EXCLUDED.btts,
+//       over_25 = EXCLUDED.over_25
+//     `,
+//     [
+//       row.fixture_id,
+//       row.team_id,
+//       row.matches_considered,
+//       row.wins,
+//       row.draws,
+//       row.losses,
+//       row.goals_for,
+//       row.goals_against,
+//       row.clean_sheets,
+//       row.failed_to_score,
+//       row.btts,
+//       row.over_25
+//     ]
+//   );
+// }
 
 async function upsertHeadToHeadStats(client, row) {
   await client.query(
