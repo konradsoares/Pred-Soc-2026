@@ -422,6 +422,75 @@ function parseStatsBlock(blockText, teamName) {
   };
 }
 
+function extractStatisticFactsTeamBlock(factsText, teamName, nextTeamName) {
+  if (!factsText || !teamName) return '';
+
+  const startRx = new RegExp(`${escapeRegex(teamName)}\\s+\\d+Number of ${escapeRegex(teamName)} wins`, 'i');
+  const start = factsText.search(startRx);
+  if (start < 0) return '';
+
+  const tail = factsText.slice(start);
+
+  if (nextTeamName) {
+    const endRx = new RegExp(`${escapeRegex(nextTeamName)}\\s+\\d+Number of ${escapeRegex(nextTeamName)} wins`, 'i');
+    const end = tail.search(endRx);
+    if (end >= 0) return normalizeText(tail.slice(0, end));
+  }
+
+  return normalizeText(tail);
+}
+
+function parseStatisticFactsBlock(blockText, teamName) {
+  const text = normalizeText(blockText);
+
+  return {
+    wins_count: readValueBeforeLabel(text, `Number of ${teamName} wins`),
+    draws_count: readValueBeforeLabel(text, `Number of ${teamName} draws`),
+    losses_count: readValueBeforeLabel(text, `Number of ${teamName} loses`),
+
+    avg_goals_for: readValueBeforeLabel(text, 'Average scored goals per match'),
+    avg_goals_against: readValueBeforeLabel(text, 'Average conceded goals per match'),
+
+    chance_score_next_pct: readPercentBeforeLabel(text, 'Chance to score goal next match'),
+    chance_concede_next_pct: readPercentBeforeLabel(text, 'Chance to conceded goal next match'),
+
+    clean_sheets_count: readValueBeforeLabel(text, 'Number of clean sheet matches'),
+    failed_to_score_count: readValueBeforeLabel(text, 'Failure to score matches'),
+
+    over_25_matches_count: readValueBeforeLabel(text, 'Matches over 2.5 goals in'),
+    under_25_matches_count: readValueBeforeLabel(text, 'Matches under 2.5 goals in'),
+
+    time_without_scored_goal_min: readValueBeforeLabel(text, 'Time without scored goal'),
+    time_without_conceded_goal_min: readValueBeforeLabel(text, 'Time without conceded goal'),
+
+    raw_text: text
+  };
+}
+
+function mergeStatisticFactsIntoStats(stats, facts) {
+  return {
+    ...stats,
+    statistic_facts: facts,
+
+    avg_goals_for: facts.avg_goals_for,
+    avg_goals_against: facts.avg_goals_against,
+    chance_score_next_pct: facts.chance_score_next_pct,
+    chance_concede_next_pct: facts.chance_concede_next_pct,
+    clean_sheets_count: facts.clean_sheets_count,
+    failed_to_score_count: facts.failed_to_score_count,
+    over_25_matches_count: facts.over_25_matches_count,
+    under_25_matches_count: facts.under_25_matches_count,
+    time_without_scored_goal_min: facts.time_without_scored_goal_min,
+    time_without_conceded_goal_min: facts.time_without_conceded_goal_min,
+
+    general_match_facts: {
+      ...stats.general_match_facts,
+      win_pct: facts.wins_count !== null ? facts.wins_count * 10 : stats.general_match_facts?.win_pct ?? null,
+      draw_pct: facts.draws_count !== null ? facts.draws_count * 10 : stats.general_match_facts?.draw_pct ?? null,
+      opponent_win_pct: facts.losses_count !== null ? facts.losses_count * 10 : stats.general_match_facts?.opponent_win_pct ?? null
+    }
+  };
+}
 function extractLast10TeamBlock(statsText, teamName, nextTeamName) {
   if (!statsText || !teamName) return '';
 
@@ -461,23 +530,45 @@ async function fetchCompareStats(compareUrl) {
 
   const teamsInfoText = extractSectionText(bodyText, 'Teams information');
   const matchesBetweenText = extractSectionText(bodyText, 'Matches between teams');
+  // const statsLast10Text =
+  //   extractSectionText(bodyText, 'Statistics for last 10 matches') ||
+    //   extractSectionText(bodyText, 'last 10 matches');
   const statsLast10Text =
     extractSectionText(bodyText, 'Statistics for last 10 matches') ||
     extractSectionText(bodyText, 'last 10 matches');
-
+  
+  const statisticFactsText =
+    extractSectionText(bodyText, 'Statistic facts of last 10 matches');
+  
   const homeWorldRank = extractWorldRank(teamsInfoText, homeName);
   const awayWorldRank = extractWorldRank(teamsInfoText, awayName);
 
   const h2hMatches = parseH2HMatches(matchesBetweenText, homeName, awayName);
   const h2hSummary = summarizeH2H(h2hMatches, homeName, awayName, 10);
-
+  
   const homeStatsBlock = extractLast10TeamBlock(statsLast10Text, homeName, awayName);
   const awayStatsBlock = extractLast10TeamBlock(statsLast10Text, awayName, null);
-
+  
+  const homeFactsBlock = extractStatisticFactsTeamBlock(statisticFactsText, homeName, awayName);
+  const awayFactsBlock = extractStatisticFactsTeamBlock(statisticFactsText, awayName, null);
+  
+  const homeStats = parseStatsBlock(homeStatsBlock, homeName);
+  const awayStats = parseStatsBlock(awayStatsBlock, awayName);
+  
+  const homeFacts = parseStatisticFactsBlock(homeFactsBlock, homeName);
+  const awayFacts = parseStatisticFactsBlock(awayFactsBlock, awayName);
+  
   const recentForm = {
-    home: parseStatsBlock(homeStatsBlock, homeName),
-    away: parseStatsBlock(awayStatsBlock, awayName)
+    home: mergeStatisticFactsIntoStats(homeStats, homeFacts),
+    away: mergeStatisticFactsIntoStats(awayStats, awayFacts)
   };
+  // const homeStatsBlock = extractLast10TeamBlock(statsLast10Text, homeName, awayName);
+  // const awayStatsBlock = extractLast10TeamBlock(statsLast10Text, awayName, null);
+
+  // const recentForm = {
+  //   home: parseStatsBlock(homeStatsBlock, homeName),
+  //   away: parseStatsBlock(awayStatsBlock, awayName)
+  // };
 
   return {
     compare_url: finalUrl,
@@ -498,10 +589,21 @@ async function fetchCompareStats(compareUrl) {
       teams_information_text: teamsInfoText,
       matches_between_teams_text: matchesBetweenText,
       statistics_last_10_matches_text: statsLast10Text,
+      statistic_facts_text: statisticFactsText,
       home_stats_block: homeStatsBlock,
       away_stats_block: awayStatsBlock,
+      home_facts_block: homeFactsBlock,
+      away_facts_block: awayFactsBlock,
       h2h_matches: h2hMatches
     }
+    // raw_payload: {
+    //   teams_information_text: teamsInfoText,
+    //   matches_between_teams_text: matchesBetweenText,
+    //   statistics_last_10_matches_text: statsLast10Text,
+    //   home_stats_block: homeStatsBlock,
+    //   away_stats_block: awayStatsBlock,
+    //   h2h_matches: h2hMatches
+    // }
   };
 }
 
