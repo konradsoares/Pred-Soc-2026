@@ -2,6 +2,18 @@ const env = require('../config/env');
 const axios = require('axios');
 const cheerio = require('cheerio');
 
+function readValueBeforeLabel(text, label) {
+  const rx = new RegExp(`([\\d.,]+)\\s*(?:%|min\\.)?\\s*${escapeRegex(label)}`, 'i');
+  const m = text.match(rx);
+  return m ? parseFloatSafe(m[1]) : null;
+}
+
+function readPercentBeforeLabel(text, label) {
+  const rx = new RegExp(`([\\d.,]+)%\\s*${escapeRegex(label)}`, 'i');
+  const m = text.match(rx);
+  return m ? parsePercentSafe(m[1]) : null;
+}
+
 function normalizeText(value) {
   return String(value || '').replace(/\s+/g, ' ').trim();
 }
@@ -224,12 +236,16 @@ function parseStatsBlock(blockText, teamName) {
     };
   }
 
-  const generalMatchFacts = parseLabeledPercents(text, {
-    win_pct: teamName,
-    draw_pct: 'draw',
-    opponent_win_pct: 'opponent'
-  });
-
+  // const generalMatchFacts = parseLabeledPercents(text, {
+  //   win_pct: teamName,
+  //   draw_pct: 'draw',
+  //   opponent_win_pct: 'opponent'
+  // });
+  const generalMatchFacts = {
+    win_pct: statisticFacts.wins_count !== null ? statisticFacts.wins_count * 10 : null,
+    draw_pct: statisticFacts.draws_count !== null ? statisticFacts.draws_count * 10 : null,
+    opponent_win_pct: statisticFacts.losses_count !== null ? statisticFacts.losses_count * 10 : null
+  };
   const halftime1x2 = (() => {
     const m = text.match(
       new RegExp(
@@ -258,6 +274,23 @@ function parseStatsBlock(blockText, teamName) {
     };
   })();
 
+  const statisticFacts = {
+    wins_count: readValueBeforeLabel(text, `Number of ${teamName} wins`),
+    draws_count: readValueBeforeLabel(text, `Number of ${teamName} draws`),
+    losses_count: readValueBeforeLabel(text, `Number of ${teamName} loses`),
+  
+    avg_goals_for: readValueBeforeLabel(text, 'Average scored goals per match'),
+    avg_goals_against: readValueBeforeLabel(text, 'Average conceded goals per match'),
+    chance_score_next_pct: readPercentBeforeLabel(text, 'Chance to score goal next match'),
+    chance_concede_next_pct: readPercentBeforeLabel(text, 'Chance to conceded goal next match'),
+    clean_sheets_count: readValueBeforeLabel(text, 'Number of clean sheet matches'),
+    failed_to_score_count: readValueBeforeLabel(text, 'Failure to score matches'),
+    over_25_matches_count: readValueBeforeLabel(text, 'Matches over 2.5 goals in'),
+    under_25_matches_count: readValueBeforeLabel(text, 'Matches under 2.5 goals in'),
+    time_without_scored_goal_min: readValueBeforeLabel(text, 'Time without scored goal'),
+    time_without_conceded_goal_min: readValueBeforeLabel(text, 'Time without conceded goal')
+  };
+  
   const overUnder = {
     all_goals_over_15: (text.match(/Over\/under 1\.5 for all goals in matches\s*over\s*(\d+)%/i) || [])[1] ? parsePercentSafe(text.match(/Over\/under 1\.5 for all goals in matches\s*over\s*(\d+)%/i)[1]) : null,
     all_goals_under_15: (text.match(/Over\/under 1\.5 for all goals in matches[\s\S]*?under\s*(\d+)%/i) || [])[1] ? parsePercentSafe(text.match(/Over\/under 1\.5 for all goals in matches[\s\S]*?under\s*(\d+)%/i)[1]) : null,
