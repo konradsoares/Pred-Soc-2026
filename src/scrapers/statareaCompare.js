@@ -55,22 +55,41 @@ function countryFromCompareUrl(compareUrl, side = 'home') {
   return c ? normalizeText(c[1]) : null;
 }
 
+// function sectionSlice(fullText, startLabel, endLabels = []) {
+//   const text = normalizeText(fullText);
+//   const startIdx = text.indexOf(startLabel);
+//   if (startIdx < 0) return '';
+
+//   const afterStart = text.slice(startIdx + startLabel.length);
+//   let endIdx = afterStart.length;
+
+//   for (const label of endLabels) {
+//     const idx = afterStart.indexOf(label);
+//     if (idx >= 0 && idx < endIdx) endIdx = idx;
+//   }
+
+//   return normalizeText(afterStart.slice(0, endIdx));
+// }
 function sectionSlice(fullText, startLabel, endLabels = []) {
   const text = normalizeText(fullText);
-  const startIdx = text.indexOf(startLabel);
+  const lowerText = text.toLowerCase();
+  const lowerStart = startLabel.toLowerCase();
+
+  const startIdx = lowerText.indexOf(lowerStart);
   if (startIdx < 0) return '';
 
   const afterStart = text.slice(startIdx + startLabel.length);
+  const lowerAfterStart = afterStart.toLowerCase();
+
   let endIdx = afterStart.length;
 
   for (const label of endLabels) {
-    const idx = afterStart.indexOf(label);
+    const idx = lowerAfterStart.indexOf(label.toLowerCase());
     if (idx >= 0 && idx < endIdx) endIdx = idx;
   }
 
   return normalizeText(afterStart.slice(0, endIdx));
 }
-
 function extractSectionText(bodyText, title) {
   const allTitles = [
     'Teams information',
