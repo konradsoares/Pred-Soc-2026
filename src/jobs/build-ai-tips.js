@@ -158,12 +158,41 @@ async function loadTodayDataset(client, targetDate) {
       trs_home.failed_to_score AS home_recent_failed_to_score,
       trs_home.btts AS home_recent_btts,
       trs_home.over_25 AS home_recent_over_25,
+      trs_home.under_25 AS home_recent_under_25,
+      trs_home.goals_for AS home_recent_goals_for,
+      trs_home.goals_against AS home_recent_goals_against,
+      trs_home.clean_sheets AS home_recent_clean_sheets,
+      trs_home.avg_goals_for AS home_avg_goals_for,
+      trs_home.avg_goals_against AS home_avg_goals_against,
+      trs_home.chance_score_next_pct AS home_chance_score_next_pct,
+      trs_home.chance_concede_next_pct AS home_chance_concede_next_pct,
+      trs_home.over_15_matches AS home_recent_over_15,
+      trs_home.under_15_matches AS home_recent_under_15,
+      trs_home.over_35_matches AS home_recent_over_35,
+      trs_home.under_35_matches AS home_recent_under_35,
+      trs_home.time_without_scored_goal_min AS home_time_without_scored_goal_min,
+      trs_home.time_without_conceded_goal_min AS home_time_without_conceded_goal_min,
       trs_away.wins AS away_recent_wins,
       trs_away.draws AS away_recent_draws,
       trs_away.losses AS away_recent_losses,
       trs_away.failed_to_score AS away_recent_failed_to_score,
       trs_away.btts AS away_recent_btts,
       trs_away.over_25 AS away_recent_over_25
+      trs_away.over_25 AS away_recent_over_25,
+      trs_away.under_25 AS away_recent_under_25,
+      trs_away.goals_for AS away_recent_goals_for,
+      trs_away.goals_against AS away_recent_goals_against,
+      trs_away.clean_sheets AS away_recent_clean_sheets,
+      trs_away.avg_goals_for AS away_avg_goals_for,
+      trs_away.avg_goals_against AS away_avg_goals_against,
+      trs_away.chance_score_next_pct AS away_chance_score_next_pct,
+      trs_away.chance_concede_next_pct AS away_chance_concede_next_pct,
+      trs_away.over_15_matches AS away_recent_over_15,
+      trs_away.under_15_matches AS away_recent_under_15,
+      trs_away.over_35_matches AS away_recent_over_35,
+      trs_away.under_35_matches AS away_recent_under_35,
+      trs_away.time_without_scored_goal_min AS away_time_without_scored_goal_min,
+      trs_away.time_without_conceded_goal_min AS away_time_without_conceded_goal_min
     FROM fixtures f
     JOIN teams ht ON ht.id = f.home_team_id
     JOIN teams at ON at.id = f.away_team_id
@@ -219,17 +248,45 @@ async function loadTodayDataset(client, targetDate) {
           wins: toNumber(row.home_recent_wins),
           draws: toNumber(row.home_recent_draws),
           losses: toNumber(row.home_recent_losses),
+          goals_for: toNumber(row.home_recent_goals_for),
+          goals_against: toNumber(row.home_recent_goals_against),
+          clean_sheets: toNumber(row.home_recent_clean_sheets),
           failed_to_score: toNumber(row.home_recent_failed_to_score),
           btts: toNumber(row.home_recent_btts),
-          over_25: toNumber(row.home_recent_over_25)
+          over_15: toNumber(row.home_recent_over_15),
+          under_15: toNumber(row.home_recent_under_15),
+          over_25: toNumber(row.home_recent_over_25),
+          under_25: toNumber(row.home_recent_under_25),
+          over_35: toNumber(row.home_recent_over_35),
+          under_35: toNumber(row.home_recent_under_35),
+          avg_goals_for: toNumber(row.home_avg_goals_for),
+          avg_goals_against: toNumber(row.home_avg_goals_against),
+          chance_score_next_pct: toNumber(row.home_chance_score_next_pct),
+          chance_concede_next_pct: toNumber(row.home_chance_concede_next_pct),
+          time_without_scored_goal_min: toNumber(row.home_time_without_scored_goal_min),
+          time_without_conceded_goal_min: toNumber(row.home_time_without_conceded_goal_min)
         },
         away: {
           wins: toNumber(row.away_recent_wins),
           draws: toNumber(row.away_recent_draws),
           losses: toNumber(row.away_recent_losses),
+          goals_for: toNumber(row.away_recent_goals_for),
+          goals_against: toNumber(row.away_recent_goals_against),
+          clean_sheets: toNumber(row.away_recent_clean_sheets),
           failed_to_score: toNumber(row.away_recent_failed_to_score),
           btts: toNumber(row.away_recent_btts),
-          over_25: toNumber(row.away_recent_over_25)
+          over_15: toNumber(row.away_recent_over_15),
+          under_15: toNumber(row.away_recent_under_15),
+          over_25: toNumber(row.away_recent_over_25),
+          under_25: toNumber(row.away_recent_under_25),
+          over_35: toNumber(row.away_recent_over_35),
+          under_35: toNumber(row.away_recent_under_35),
+          avg_goals_for: toNumber(row.away_avg_goals_for),
+          avg_goals_against: toNumber(row.away_avg_goals_against),
+          chance_score_next_pct: toNumber(row.away_chance_score_next_pct),
+          chance_concede_next_pct: toNumber(row.away_chance_concede_next_pct),
+          time_without_scored_goal_min: toNumber(row.away_time_without_scored_goal_min),
+          time_without_conceded_goal_min: toNumber(row.away_time_without_conceded_goal_min)
         }
       }
     };
@@ -415,7 +472,7 @@ async function callOpenAIForTips(config, payload) {
           {
             type: 'input_text',
             text:
-              'You are a football betting analysis assistant. Use only the provided dataset. Do not invent fixtures, markets, odds, or results. Favor lower variance picks. Create a practical staking plan using the provided bankroll config. Singles should carry most of the bankroll. Accumulators and systems should be smaller speculative positions. Return only schema-valid JSON.'
+                'You are a football betting analysis assistant. Use only the provided dataset. Do not invent fixtures, markets, odds, or results. Analyze all available data: source probabilities, H2H, recent form, average goals for/against, score/concede chances, clean sheets, failed-to-score, BTTS, over/under 1.5/2.5/3.5 counts, and time since scored/conceded. Avoid picks where signals conflict strongly. Prefer lower-variance picks, but do not force a pick if the data is weak. Explain each pick using specific stats from the payload. Create a practical staking plan using the provided bankroll config. Singles should carry most of the bankroll. Accumulators and systems should be smaller speculative positions. Return only schema-valid JSON.'
           }
         ]
       },
