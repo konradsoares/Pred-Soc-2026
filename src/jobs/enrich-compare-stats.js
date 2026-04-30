@@ -123,7 +123,10 @@ function buildTeamRecentRow(fixtureId, teamId, stats) {
 
     over_25: facts.over_25_matches_count ?? pctToCount(stats?.over_under?.all_goals_over_25, matchesConsidered),
     under_25: facts.under_25_matches_count ?? null,
-
+    over_15_matches: pctToCount(stats?.over_under?.all_goals_over_15, matchesConsidered),
+    under_15_matches: pctToCount(stats?.over_under?.all_goals_under_15, matchesConsidered),
+    over_35_matches: pctToCount(stats?.over_under?.all_goals_over_35, matchesConsidered),
+    under_35_matches: pctToCount(stats?.over_under?.all_goals_under_35, matchesConsidered),
     // NEW FIELDS (these were always NULL before)
     avg_goals_for: facts.avg_goals_for ?? null,
     avg_goals_against: facts.avg_goals_against ?? null,
@@ -167,6 +170,10 @@ async function upsertTeamRecentStats(client, row) {
       btts,
       over_25,
       under_25,
+      over_15_matches,
+      under_15_matches,
+      over_35_matches,
+      under_35_matches,
       avg_goals_for,
       avg_goals_against,
       chance_score_next_pct,
@@ -177,7 +184,7 @@ async function upsertTeamRecentStats(client, row) {
     )
     VALUES (
       $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,
-      $11,$12,$13,$14,$15,$16,$17,$18,$19,$20
+      $11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,$23,$24
     )
     ON CONFLICT (fixture_id, team_id, matches_considered)
     DO UPDATE SET
@@ -191,6 +198,10 @@ async function upsertTeamRecentStats(client, row) {
       btts = EXCLUDED.btts,
       over_25 = EXCLUDED.over_25,
       under_25 = EXCLUDED.under_25,
+      over_15_matches = EXCLUDED.over_15_matches,
+      under_15_matches = EXCLUDED.under_15_matches,
+      over_35_matches = EXCLUDED.over_35_matches,
+      under_35_matches = EXCLUDED.under_35_matches,
       avg_goals_for = EXCLUDED.avg_goals_for,
       avg_goals_against = EXCLUDED.avg_goals_against,
       chance_score_next_pct = EXCLUDED.chance_score_next_pct,
@@ -213,6 +224,10 @@ async function upsertTeamRecentStats(client, row) {
       row.btts,
       row.over_25,
       row.under_25,
+      row.over_15_matches,
+      row.under_15_matches,
+      row.over_35_matches,
+      row.under_35_matches,
       row.avg_goals_for,
       row.avg_goals_against,
       row.chance_score_next_pct,
