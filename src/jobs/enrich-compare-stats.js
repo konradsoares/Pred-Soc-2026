@@ -80,22 +80,59 @@ function pctToCount(value, base = 10) {
   return Math.round(Number(value) / 100 * base);
 }
 
+// function buildTeamRecentRow(fixtureId, teamId, stats) {
+//   const matchesConsidered = 10;
+
+//   return {
+//     fixture_id: fixtureId,
+//     team_id: teamId,
+//     matches_considered: matchesConsidered,
+//     wins: pctToCount(stats?.general_match_facts?.win_pct, matchesConsidered),
+//     draws: pctToCount(stats?.general_match_facts?.draw_pct, matchesConsidered),
+//     losses: pctToCount(stats?.general_match_facts?.opponent_win_pct, matchesConsidered),
+//     goals_for: null,
+//     goals_against: null,
+//     clean_sheets: null,
+//     failed_to_score: pctToCount(stats?.first_goal?.team_without_goal, matchesConsidered),
+//     btts: pctToCount(stats?.goal_characteristics?.both_score_pct, matchesConsidered),
+//     over_25: pctToCount(stats?.over_under?.all_goals_over_25, matchesConsidered)
+//   };
+// }
+
 function buildTeamRecentRow(fixtureId, teamId, stats) {
   const matchesConsidered = 10;
+  const facts = stats?.statistic_facts || {};
 
   return {
     fixture_id: fixtureId,
     team_id: teamId,
     matches_considered: matchesConsidered,
-    wins: pctToCount(stats?.general_match_facts?.win_pct, matchesConsidered),
-    draws: pctToCount(stats?.general_match_facts?.draw_pct, matchesConsidered),
-    losses: pctToCount(stats?.general_match_facts?.opponent_win_pct, matchesConsidered),
-    goals_for: null,
-    goals_against: null,
-    clean_sheets: null,
-    failed_to_score: pctToCount(stats?.first_goal?.team_without_goal, matchesConsidered),
+
+    // FROM statistic_facts (authoritative)
+    wins: facts.wins_count ?? pctToCount(stats?.general_match_facts?.win_pct, matchesConsidered),
+    draws: facts.draws_count ?? pctToCount(stats?.general_match_facts?.draw_pct, matchesConsidered),
+    losses: facts.losses_count ?? pctToCount(stats?.general_match_facts?.opponent_win_pct, matchesConsidered),
+
+    goals_for: facts.avg_goals_for !== null ? Math.round(facts.avg_goals_for * matchesConsidered) : null,
+    goals_against: facts.avg_goals_against !== null ? Math.round(facts.avg_goals_against * matchesConsidered) : null,
+
+    clean_sheets: facts.clean_sheets_count ?? null,
+    failed_to_score: facts.failed_to_score_count ?? pctToCount(stats?.first_goal?.team_without_goal, matchesConsidered),
+
     btts: pctToCount(stats?.goal_characteristics?.both_score_pct, matchesConsidered),
-    over_25: pctToCount(stats?.over_under?.all_goals_over_25, matchesConsidered)
+
+    over_25: facts.over_25_matches_count ?? pctToCount(stats?.over_under?.all_goals_over_25, matchesConsidered),
+    under_25: facts.under_25_matches_count ?? null,
+
+    // NEW FIELDS (these were always NULL before)
+    avg_goals_for: facts.avg_goals_for ?? null,
+    avg_goals_against: facts.avg_goals_against ?? null,
+    chance_score_next_pct: facts.chance_score_next_pct ?? null,
+    chance_concede_next_pct: facts.chance_concede_next_pct ?? null,
+    time_without_scored_goal_min: facts.time_without_scored_goal_min ?? null,
+    time_without_conceded_goal_min: facts.time_without_conceded_goal_min ?? null,
+
+    raw_payload: stats
   };
 }
 
