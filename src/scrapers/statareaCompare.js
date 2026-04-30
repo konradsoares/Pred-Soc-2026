@@ -235,7 +235,22 @@ function parseStatsBlock(blockText, teamName) {
       raw_text: ''
     };
   }
-
+  const statisticFacts = {
+    wins_count: readValueBeforeLabel(text, `Number of ${teamName} wins`),
+    draws_count: readValueBeforeLabel(text, `Number of ${teamName} draws`),
+    losses_count: readValueBeforeLabel(text, `Number of ${teamName} loses`),
+  
+    avg_goals_for: readValueBeforeLabel(text, 'Average scored goals per match'),
+    avg_goals_against: readValueBeforeLabel(text, 'Average conceded goals per match'),
+    chance_score_next_pct: readPercentBeforeLabel(text, 'Chance to score goal next match'),
+    chance_concede_next_pct: readPercentBeforeLabel(text, 'Chance to conceded goal next match'),
+    clean_sheets_count: readValueBeforeLabel(text, 'Number of clean sheet matches'),
+    failed_to_score_count: readValueBeforeLabel(text, 'Failure to score matches'),
+    over_25_matches_count: readValueBeforeLabel(text, 'Matches over 2.5 goals in'),
+    under_25_matches_count: readValueBeforeLabel(text, 'Matches under 2.5 goals in'),
+    time_without_scored_goal_min: readValueBeforeLabel(text, 'Time without scored goal'),
+    time_without_conceded_goal_min: readValueBeforeLabel(text, 'Time without conceded goal')
+  };
   // const generalMatchFacts = parseLabeledPercents(text, {
   //   win_pct: teamName,
   //   draw_pct: 'draw',
@@ -274,23 +289,6 @@ function parseStatsBlock(blockText, teamName) {
     };
   })();
 
-  const statisticFacts = {
-    wins_count: readValueBeforeLabel(text, `Number of ${teamName} wins`),
-    draws_count: readValueBeforeLabel(text, `Number of ${teamName} draws`),
-    losses_count: readValueBeforeLabel(text, `Number of ${teamName} loses`),
-  
-    avg_goals_for: readValueBeforeLabel(text, 'Average scored goals per match'),
-    avg_goals_against: readValueBeforeLabel(text, 'Average conceded goals per match'),
-    chance_score_next_pct: readPercentBeforeLabel(text, 'Chance to score goal next match'),
-    chance_concede_next_pct: readPercentBeforeLabel(text, 'Chance to conceded goal next match'),
-    clean_sheets_count: readValueBeforeLabel(text, 'Number of clean sheet matches'),
-    failed_to_score_count: readValueBeforeLabel(text, 'Failure to score matches'),
-    over_25_matches_count: readValueBeforeLabel(text, 'Matches over 2.5 goals in'),
-    under_25_matches_count: readValueBeforeLabel(text, 'Matches under 2.5 goals in'),
-    time_without_scored_goal_min: readValueBeforeLabel(text, 'Time without scored goal'),
-    time_without_conceded_goal_min: readValueBeforeLabel(text, 'Time without conceded goal')
-  };
-  
   const overUnder = {
     all_goals_over_15: (text.match(/Over\/under 1\.5 for all goals in matches\s*over\s*(\d+)%/i) || [])[1] ? parsePercentSafe(text.match(/Over\/under 1\.5 for all goals in matches\s*over\s*(\d+)%/i)[1]) : null,
     all_goals_under_15: (text.match(/Over\/under 1\.5 for all goals in matches[\s\S]*?under\s*(\d+)%/i) || [])[1] ? parsePercentSafe(text.match(/Over\/under 1\.5 for all goals in matches[\s\S]*?under\s*(\d+)%/i)[1]) : null,
