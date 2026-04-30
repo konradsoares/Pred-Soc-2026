@@ -30,6 +30,14 @@ function parseIntSafe(value) {
   return Number.isNaN(num) ? null : num;
 }
 
+function parseFloatSafe(value) {
+  if (value === null || value === undefined) return null;
+  const cleaned = String(value).replace(',', '.').replace(/[^\d.-]/g, '').trim();
+  if (!cleaned) return null;
+  const num = parseFloat(cleaned);
+  return Number.isNaN(num) ? null : num;
+}
+
 function parsePercentSafe(value) {
   if (value === null || value === undefined) return null;
   const cleaned = String(value).replace(/[^\d.-]/g, '').trim();
@@ -223,7 +231,18 @@ function parseStatsBlock(blockText, teamName) {
   if (!text) {
     return {
       team_name: teamName,
-      general_match_facts: {},
+      statistic_facts: statisticFacts,
+      avg_goals_for: statisticFacts.avg_goals_for,
+      avg_goals_against: statisticFacts.avg_goals_against,
+      chance_score_next_pct: statisticFacts.chance_score_next_pct,
+      chance_concede_next_pct: statisticFacts.chance_concede_next_pct,
+      clean_sheets_count: statisticFacts.clean_sheets_count,
+      failed_to_score_count: statisticFacts.failed_to_score_count,
+      over_25_matches_count: statisticFacts.over_25_matches_count,
+      under_25_matches_count: statisticFacts.under_25_matches_count,
+      time_without_scored_goal_min: statisticFacts.time_without_scored_goal_min,
+      time_without_conceded_goal_min: statisticFacts.time_without_conceded_goal_min,
+      general_match_facts: generalMatchFacts,
       halftime_1x2: {},
       second_half_1x2: {},
       over_under: {},
