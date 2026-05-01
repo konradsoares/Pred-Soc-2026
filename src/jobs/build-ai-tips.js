@@ -129,6 +129,70 @@ function buildAccumulatorCandidates(fixtures, config) {
   return candidates.slice(0, 150);
 }
 
+function applyFootballRules(fixture, markets) {
+  const home = fixture.recent_form?.home || {};
+  const away = fixture.recent_form?.away || {};
+
+  const strongHomeScoring =
+    Number(home.avg_goals_for || 0) >= 2 &&
+    Number(home.wins || 0) >= 6 &&
+    Number(home.chance_score_next_pct || 0) >= 80;
+
+  const awayInconsistent =
+    Number(away.draws || 0) >= 3 &&
+    Number(away.losses || 0) >= 2 &&
+    Number(away.avg_goals_for || 0) < 2;
+
+  const homeSignal = strongHomeScoring && awayInconsistent;
+
+  return markets
+    .map((m) => {
+      const market = { ...m };
+
+      if (homeSignal) {
+        if (market.market === '1X2' && market.pick === '1') {
+          market.prob = Math.min(95, Number(market.prob || 0) + 8);
+          market.reason_tags = [
+            ...(market.reason_tags || []),
+            'strong_home_scoring',
+            'away_inconsistency'
+          ];
+        }
+
+        if (market.market === 'double_chance' && market.pick === '1X') {
+          market.prob = Math.min(95, Number(market.prob || 0) + 5);
+          market.reason_tags = [
+            ...(market.reason_tags || []),
+            'strong_home_scoring',
+            'away_inconsistency'
+          ];
+        }
+
+        if (market.market === 'double_chance' && market.pick === 'X2') {
+          market.prob = Math.max(1, Number(market.prob || 0) - 12);
+          market.reason_tags = [
+            ...(market.reason_tags || []),
+            'penalized_away_inconsistent'
+          ];
+        }
+      }
+
+      return market;
+    })
+    .filter((market) => {
+      const hasStrongSignal =
+        (market.reason_tags || []).includes('strong_home_scoring') ||
+        (market.reason_tags || []).includes('away_inconsistency');
+
+      const isLazyDoubleChance =
+        market.market === 'double_chance' &&
+        Number(market.prob || 0) < 65 &&
+        !hasStrongSignal;
+
+      return !isLazyDoubleChance;
+    });
+}
+
 async function loadTodayDataset(client, targetDate) {
   const result = await client.query(
     `
@@ -291,8 +355,10 @@ async function loadTodayDataset(client, targetDate) {
       }
     };
 
-    const markets = uniqueByFixtureAndMarket(buildMarkets(base));
-
+    // const markets = uniqueByFixtureAndMarket(buildMarkets(base));
+    const markets = uniqueByFixtureAndMarket(
+      applyFootballRules(base, buildMarkets(base))
+    );
     return {
       ...base,
       available_markets: markets
@@ -472,8 +538,7 @@ async function callOpenAIForTips(config, payload) {
           {
             type: 'input_text',
             text:
-                // 'You are a football betting analysis assistant. Use only the provided dataset. Do not invent fixtures, markets, odds, or results. Analyze all available data: source probabilities, H2H, recent form, average goals for/against, score/concede chances, clean sheets, failed-to-score, BTTS, over/under 1.5/2.5/3.5 counts, and time since scored/conceded. Avoid picks where signals conflict strongly. Prefer lower-variance picks, but do not force a pick if the data is weak. Explain each pick using specific stats from the payload. Create a practical staking plan using the provided bankroll config. Singles should carry most of the bankroll. Accumulators and systems should be smaller speculative positions. Return only schema-valid JSON.'
-            'You are not allowed to blindly follow probabilities. You must: - Detect contextual mismatches (home advantage, travel, altitude, competition type) - Prioritize recent form over generic probabilities - Penalize away teams in difficult environments (South America, altitude, hostile venues) - Avoid generic "balanced → double chance" reasoning. If a pick is weak or unclear → DO NOT INCLUDE IT. You must justify every pick using: - recent form stats - scoring/conceding metrics - match context (competition, location) - risk level. You are NOT allowed to default to conservative picks without clear statistical support.'
+                'You are a football betting analysis assistant. Use only the provided dataset. Do not invent fixtures, markets, odds, or results. Analyze all available data: source probabilities, H2H, recent form, average goals for/against, score/concede chances, clean sheets, failed-to-score, BTTS, over/under 1.5/2.5/3.5 counts, and time since scored/conceded. Avoid picks where signals conflict strongly. Prefer lower-variance picks, but do not force a pick if the data is weak. Explain each pick using specific stats from the payload. Create a practical staking plan using the provided bankroll config. Singles should carry most of the bankroll. Accumulators and systems should be smaller speculative positions. You are not allowed to blindly follow probabilities. You must: - Detect contextual mismatches (home advantage, travel, altitude, competition type) - Prioritize recent form over generic probabilities - Penalize away teams in difficult environments (South America, altitude, hostile venues) - Avoid generic "balanced → double chance" reasoning. If a pick is weak or unclear → DO NOT INCLUDE IT. You must justify every pick using: - recent form stats - scoring/conceding metrics - match context (competition, location) - risk level. You are NOT allowed to default to conservative picks without clear statistical support. Market reason_tags are pre-AI rule signals. Treat them as important. If a market is penalized, do not select it unless other data strongly overrides it. Return only schema-valid JSON.'
           }
         ]
       },
