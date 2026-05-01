@@ -177,7 +177,7 @@ async function loadTodayDataset(client, targetDate) {
       trs_away.losses AS away_recent_losses,
       trs_away.failed_to_score AS away_recent_failed_to_score,
       trs_away.btts AS away_recent_btts,
-      trs_away.over_25 AS away_recent_over_25
+      trs_away.over_25 AS away_recent_over_25,
       trs_away.over_25 AS away_recent_over_25,
       trs_away.under_25 AS away_recent_under_25,
       trs_away.goals_for AS away_recent_goals_for,
