@@ -66,6 +66,115 @@ function filterMarkets(markets, config) {
   });
 }
 
+// function buildAccumulatorCandidates(fixtures, config) {
+//   const maxLegs = config.prediction.max_acca_legs || 3;
+//   const minTotalOdds = config.prediction.min_acca_total_odds || 3;
+//   const maxTotalOdds = config.prediction.max_acca_total_odds || 5;
+
+//   const picks = [];
+
+//   for (const fixture of fixtures) {
+//     for (const market of fixture.available_markets || []) {
+//       picks.push({
+//         fixture_id: fixture.fixture_id,
+//         home_team: fixture.home_team,
+//         away_team: fixture.away_team,
+//         country: fixture.country,
+//         competition: fixture.competition,
+//         market: market.market,
+//         pick: market.pick,
+//         prob: market.prob,
+//         odds: market.odds
+//       });
+//     }
+//   }
+
+//   const candidates = [];
+
+//   for (let i = 0; i < picks.length; i += 1) {
+//     for (let j = i + 1; j < picks.length; j += 1) {
+//       if (picks[i].fixture_id === picks[j].fixture_id) continue;
+
+//       const totalOdds2 = Number((picks[i].odds * picks[j].odds).toFixed(2));
+//       if (totalOdds2 >= minTotalOdds && totalOdds2 <= maxTotalOdds) {
+//         candidates.push({
+//           name: `acca_2_${picks[i].fixture_id}_${picks[j].fixture_id}`,
+//           legs: [picks[i], picks[j]],
+//           total_odds: totalOdds2
+//         });
+//       }
+
+//       if (maxLegs >= 3) {
+//         for (let k = j + 1; k < picks.length; k += 1) {
+//           if (
+//             picks[i].fixture_id === picks[k].fixture_id ||
+//             picks[j].fixture_id === picks[k].fixture_id
+//           ) {
+//             continue;
+//           }
+
+//           const totalOdds3 = Number((picks[i].odds * picks[j].odds * picks[k].odds).toFixed(2));
+//           if (totalOdds3 >= minTotalOdds && totalOdds3 <= maxTotalOdds) {
+//             candidates.push({
+//               name: `acca_3_${picks[i].fixture_id}_${picks[j].fixture_id}_${picks[k].fixture_id}`,
+//               legs: [picks[i], picks[j], picks[k]],
+//               total_odds: totalOdds3
+//             });
+//           }
+//         }
+//       }
+//     }
+//   }
+
+//   return candidates.slice(0, 150);
+// }
+function marketRiskScore(market) {
+  let risk = 0;
+
+  if (market.market === '1X2') risk += 3;
+  if (market.market === 'goals' && String(market.pick).startsWith('over_2_5')) risk += 3;
+  if (market.market === 'goals' && String(market.pick).startsWith('under_2_5')) risk += 3;
+  if (market.market === 'double_chance') risk += 1;
+  if (market.market === 'goals' && String(market.pick).includes('over_1_5')) risk += 1;
+
+  if (Number(market.prob || 0) < 65) risk += 2;
+  if (Number(market.odds || 0) > 1.75) risk += 2;
+
+  return risk;
+}
+
+function isLowVarianceMarket(market) {
+  return (
+    market.market === 'double_chance' ||
+    (market.market === 'goals' && ['over_1_5', 'under_3_5'].includes(market.pick))
+  );
+}
+
+function comboHasBadCorrelation(legs) {
+  const competitions = new Set(legs.map((l) => l.competition));
+  const countries = new Set(legs.map((l) => l.country));
+
+  if (legs.length >= 3 && competitions.size === 1) return true;
+  if (legs.length >= 3 && countries.size === 1) return true;
+
+  const highRiskCount = legs.filter((l) => marketRiskScore(l) >= 4).length;
+  if (highRiskCount >= 2) return true;
+
+  const lowVarianceCount = legs.filter(isLowVarianceMarket).length;
+  if (lowVarianceCount === 0) return true;
+
+  return false;
+}
+
+function scoreAccumulator(legs, totalOdds) {
+  const avgProb =
+    legs.reduce((sum, l) => sum + Number(l.prob || 0), 0) / legs.length;
+
+  const totalRisk = legs.reduce((sum, l) => sum + marketRiskScore(l), 0);
+
+  return Number((avgProb - totalRisk * 3 + totalOdds).toFixed(2));
+}
+
 function buildAccumulatorCandidates(fixtures, config) {
   const maxLegs = config.prediction.max_acca_legs || 3;
   const minTotalOdds = config.prediction.min_acca_total_odds || 3;
@@ -75,6 +184,8 @@ function buildAccumulatorCandidates(fixtures, config) {
 
   for (const fixture of fixtures) {
     for (const market of fixture.available_markets || []) {
+      if (Number(market.prob || 0) < 64) continue;
+
       picks.push({
         fixture_id: fixture.fixture_id,
         home_team: fixture.home_team,
@@ -84,7 +195,8 @@ function buildAccumulatorCandidates(fixtures, config) {
         market: market.market,
         pick: market.pick,
         prob: market.prob,
-        odds: market.odds
+        odds: market.odds,
+        reason_tags: market.reason_tags || []
       });
     }
   }
@@ -95,12 +207,19 @@ function buildAccumulatorCandidates(fixtures, config) {
     for (let j = i + 1; j < picks.length; j += 1) {
       if (picks[i].fixture_id === picks[j].fixture_id) continue;
 
+      const legs2 = [picks[i], picks[j]];
       const totalOdds2 = Number((picks[i].odds * picks[j].odds).toFixed(2));
-      if (totalOdds2 >= minTotalOdds && totalOdds2 <= maxTotalOdds) {
+
+      if (
+        totalOdds2 >= minTotalOdds &&
+        totalOdds2 <= maxTotalOdds &&
+        !comboHasBadCorrelation(legs2)
+      ) {
         candidates.push({
-          name: `acca_2_${picks[i].fixture_id}_${picks[j].fixture_id}`,
-          legs: [picks[i], picks[j]],
-          total_odds: totalOdds2
+          name: `smart_double_${picks[i].fixture_id}_${picks[j].fixture_id}`,
+          legs: legs2,
+          total_odds: totalOdds2,
+          model_score: scoreAccumulator(legs2, totalOdds2)
         });
       }
 
@@ -113,12 +232,19 @@ function buildAccumulatorCandidates(fixtures, config) {
             continue;
           }
 
+          const legs3 = [picks[i], picks[j], picks[k]];
           const totalOdds3 = Number((picks[i].odds * picks[j].odds * picks[k].odds).toFixed(2));
-          if (totalOdds3 >= minTotalOdds && totalOdds3 <= maxTotalOdds) {
+
+          if (
+            totalOdds3 >= minTotalOdds &&
+            totalOdds3 <= maxTotalOdds &&
+            !comboHasBadCorrelation(legs3)
+          ) {
             candidates.push({
-              name: `acca_3_${picks[i].fixture_id}_${picks[j].fixture_id}_${picks[k].fixture_id}`,
-              legs: [picks[i], picks[j], picks[k]],
-              total_odds: totalOdds3
+              name: `smart_treble_${picks[i].fixture_id}_${picks[j].fixture_id}_${picks[k].fixture_id}`,
+              legs: legs3,
+              total_odds: totalOdds3,
+              model_score: scoreAccumulator(legs3, totalOdds3)
             });
           }
         }
@@ -126,9 +252,10 @@ function buildAccumulatorCandidates(fixtures, config) {
     }
   }
 
-  return candidates.slice(0, 150);
+  return candidates
+    .sort((a, b) => b.model_score - a.model_score)
+    .slice(0, 50);
 }
-
 function applyFootballRules(fixture, markets) {
   const home = fixture.recent_form?.home || {};
   const away = fixture.recent_form?.away || {};
