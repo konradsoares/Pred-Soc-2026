@@ -32,6 +32,66 @@ function namesFullyMatch(a, b) {
   return left === right;
 }
 
+function tokenSet(value) {
+  return new Set(normalizeName(value).split(' ').filter(Boolean));
+}
+
+function nameScore(a, b) {
+  const left = tokenSet(a);
+  const right = tokenSet(b);
+
+  if (!left.size || !right.size) return 0;
+
+  let matches = 0;
+
+  for (const token of left) {
+    if (right.has(token)) matches += 1;
+  }
+
+  return matches / Math.max(left.size, right.size);
+}
+
+function combinedScore(betfairFixture, statareaFixture) {
+  const homeScore = nameScore(
+    betfairFixture.home_team,
+    statareaFixture.home_team
+  );
+
+  const awayScore = nameScore(
+    betfairFixture.away_team,
+    statareaFixture.away_team
+  );
+
+  const timeDiff = minutesDiff(
+    betfairFixture.kickoff_utc,
+    statareaFixture.kickoff_utc
+  );
+
+  return {
+    homeScore,
+    awayScore,
+    timeDiff,
+    totalScore: Number(((homeScore + awayScore) / 2).toFixed(3))
+  };
+}
+
+function debugClosestMatches(betfairFixture, statareaFixtures, limit = 5) {
+  return statareaFixtures
+    .map((s) => ({
+      home_team: s.home_team,
+      away_team: s.away_team,
+      kickoff_utc: s.kickoff_utc,
+      compare_url: s.compare_url,
+      ...combinedScore(betfairFixture, s)
+    }))
+    .filter((x) => x.timeDiff <= 180)
+    .sort((a, b) => {
+      if (b.totalScore !== a.totalScore) return b.totalScore - a.totalScore;
+      return a.timeDiff - b.timeDiff;
+    })
+    .slice(0, limit);
+}
+
 function minutesDiff(a, b) {
   const da = new Date(a).getTime();
   const dbb = new Date(b).getTime();
@@ -148,9 +208,29 @@ async function main() {
 
       if (!match) {
         skipped += 1;
-        console.log(
-          `No strict match: ${fixture.home_team} v ${fixture.away_team}`
-        );
+      
+        console.log('\nNo strict match:');
+        console.log(`Betfair: ${fixture.home_team} v ${fixture.away_team}`);
+        console.log(`Kickoff: ${fixture.kickoff_utc}`);
+        console.log(`Competition: ${fixture.competition || 'Unknown'}`);
+        console.log(`Country: ${fixture.country || 'Unknown'}`);
+      
+        const closest = debugClosestMatches(fixture, usableStatareaFixtures, 5);
+      
+        if (!closest.length) {
+          console.log('Closest Statarea candidates: none within 180 minutes');
+        } else {
+          console.log('Closest Statarea candidates:');
+      
+          for (const c of closest) {
+            console.log(
+              `  - ${c.home_team} v ${c.away_team} | ` +
+              `score=${c.totalScore} home=${c.homeScore.toFixed(2)} away=${c.awayScore.toFixed(2)} ` +
+              `timeDiff=${Math.round(c.timeDiff)}m | ${c.compare_url}`
+            );
+          }
+        }
+      
         continue;
       }
 
