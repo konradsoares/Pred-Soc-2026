@@ -166,13 +166,35 @@ async function main() {
     client.release();
   }
 
-  const marketFilter = {
-    ...baseFilter,
-    marketTypeCodes: MARKET_TYPES
-  };
-
-  const markets = await betfair.listMarketCatalogue(marketFilter, '1000');
-  console.log(`Markets found: ${markets.length}`);
+  const eventIds = events
+    .map((e) => e.event?.id)
+    .filter(Boolean);
+  
+  const eventIdChunks = chunkArray(eventIds, 25);
+  
+  let markets = [];
+  
+  console.log(`Fetching markets in ${eventIdChunks.length} chunks...`);
+  
+  for (let i = 0; i < eventIdChunks.length; i += 1) {
+    const chunk = eventIdChunks[i];
+  
+    const marketFilter = {
+      eventTypeIds: [FOOTBALL_EVENT_TYPE_ID],
+      eventIds: chunk,
+      marketTypeCodes: MARKET_TYPES
+    };
+  
+    console.log(`Fetching market chunk ${i + 1}/${eventIdChunks.length} (${chunk.length} events)`);
+  
+    const chunkMarkets = await betfair.listMarketCatalogue(marketFilter, '200');
+  
+    console.log(`Chunk ${i + 1}: ${chunkMarkets.length} markets`);
+  
+    markets = markets.concat(chunkMarkets);
+  }
+  
+  console.log(`Markets found total: ${markets.length}`);
 
   const client2 = await db.getClient();
 
