@@ -8,7 +8,8 @@
     "ingest:today": "node src/jobs/ingest-today.js",
     "enrich:compare": "node src/jobs/enrich-compare-stats.js",
     "build:ai-tips": "node src/jobs/build-ai-tips.js",
-    "send:tips-email": "node src/jobs/send-tips-email.js"
+    "send:tips-email": "node src/jobs/send-tips-email.js",
+    "betfair:ingest": "node src/jobs/ingest-betfair-today.js"
   },
   "keywords": [],
   "author": "",
