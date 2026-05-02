@@ -9,7 +9,8 @@
     "enrich:compare": "node src/jobs/enrich-compare-stats.js",
     "build:ai-tips": "node src/jobs/build-ai-tips.js",
     "send:tips-email": "node src/jobs/send-tips-email.js",
-    "betfair:ingest": "node src/jobs/ingest-betfair-today.js"
+    "betfair:ingest": "node src/jobs/ingest-betfair-today.js",
+    "betfair:sync-fixtures": "node src/jobs/sync-betfair-to-fixtures.js"
   },
   "keywords": [],
   "author": "",
