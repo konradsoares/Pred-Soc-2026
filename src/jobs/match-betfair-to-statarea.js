@@ -129,39 +129,72 @@ async function loadBetfairFixtures(client, targetDate) {
 }
 
 function findStrictMatch(betfairFixture, statareaFixtures) {
-  const candidates = [];
+  const exactCandidates = [];
+  const fuzzyCandidates = [];
 
   for (const statarea of statareaFixtures) {
-    const homeMatch = namesFullyMatch(
-      betfairFixture.home_team,
-      statarea.home_team
-    );
-
-    const awayMatch = namesFullyMatch(
-      betfairFixture.away_team,
-      statarea.away_team
-    );
-
-    if (!homeMatch || !awayMatch) continue;
-
     const timeDiff = minutesDiff(
       betfairFixture.kickoff_utc,
       statarea.kickoff_utc
     );
 
-    if (timeDiff > 120) continue;
+    if (timeDiff > 60) continue;
 
-    candidates.push({
-      statarea,
-      timeDiff
-    });
+    const homeExact = namesFullyMatch(
+      betfairFixture.home_team,
+      statarea.home_team
+    );
+
+    const awayExact = namesFullyMatch(
+      betfairFixture.away_team,
+      statarea.away_team
+    );
+
+    if (homeExact && awayExact) {
+      exactCandidates.push({
+        statarea,
+        timeDiff
+      });
+
+      continue;
+    }
+
+    const score = combinedScore(betfairFixture, statarea);
+
+    if (
+      score.totalScore >= 0.50 &&
+      score.homeScore >= 0.50 &&
+      score.awayScore >= 0.50
+    ) {
+      fuzzyCandidates.push({
+        statarea,
+        ...score
+      });
+    }
   }
 
-  if (candidates.length !== 1) {
-    return null;
+  if (exactCandidates.length === 1) {
+    return {
+      type: 'exact',
+      statarea: exactCandidates[0].statarea,
+      score: {
+        totalScore: 1,
+        homeScore: 1,
+        awayScore: 1,
+        timeDiff: exactCandidates[0].timeDiff
+      }
+    };
   }
 
-  return candidates[0].statarea;
+  if (fuzzyCandidates.length === 1) {
+    return {
+      type: 'fuzzy',
+      statarea: fuzzyCandidates[0].statarea,
+      score: fuzzyCandidates[0]
+    };
+  }
+
+  return null;
 }
 
 async function updateCompareUrl(client, fixtureId, compareUrl) {
