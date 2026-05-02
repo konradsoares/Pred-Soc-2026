@@ -267,12 +267,15 @@ async function main() {
         continue;
       }
 
-      await updateCompareUrl(client, fixture.fixture_id, match.compare_url);
+      await updateCompareUrl(client, fixture.fixture_id, match.statarea.compare_url);
 
       matched += 1;
 
       console.log(
-        `Matched: ${fixture.home_team} v ${fixture.away_team} -> ${match.compare_url}`
+        `Matched (${match.type}): ${fixture.home_team} v ${fixture.away_team} -> ` +
+        `${match.statarea.compare_url} ` +
+        `(score=${match.score.totalScore}, home=${match.score.homeScore.toFixed(2)}, ` +
+        `away=${match.score.awayScore.toFixed(2)}, timeDiff=${Math.round(match.score.timeDiff)}m)`
       );
     }
 
