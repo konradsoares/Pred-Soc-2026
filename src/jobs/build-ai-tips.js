@@ -1051,8 +1051,6 @@ async function main() {
     const marketPerformanceRows = await loadMarketPerformance(client);
     const marketPerformanceMap = buildMarketPerformanceMap(marketPerformanceRows);
 
-    await ensureShadowMarketTestsTable(client);
-
     let shadowCreated = 0;
 
     for (const fixture of dataset) {
