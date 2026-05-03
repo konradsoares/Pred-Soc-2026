@@ -19,7 +19,8 @@
   
     "daily:results": "npm run betfair:update-results && npm run send:results-email",
     "paper:create": "node src/jobs/create-paper-bets.js",
-    "paper:settle": "node src/jobs/settle-paper-bets-from-betfair.js"
+    "paper:settle": "node src/jobs/settle-paper-bets-from-betfair.js",
+    "shadow:settle": "node src/jobs/settle-shadow-markets-from-betfair.js"
   },
   "keywords": [],
   "author": "",
