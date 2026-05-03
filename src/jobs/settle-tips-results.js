@@ -225,6 +225,61 @@ async function settleAccumulators(client, targetDate) {
   }
 }
 
+async function loadPendingSystemLegs(client, targetDate) {
+  const result = await client.query(
+    `
+    SELECT
+      l.id AS leg_id,
+      l.sent_tip_id,
+      l.fixture_id,
+      l.market,
+      l.pick,
+      l.odds,
+      fs.home_goals,
+      fs.away_goals
+    FROM sent_tip_legs l
+    JOIN sent_tips st ON st.id = l.sent_tip_id
+    JOIN sent_tip_batches b ON b.id = st.batch_id
+    LEFT JOIN fixture_scores fs ON fs.fixture_id = l.fixture_id
+    WHERE b.tip_date = $1::date
+      AND st.bet_type = 'system'
+      AND l.status = 'pending'
+    ORDER BY l.sent_tip_id, l.id
+    `,
+    [targetDate]
+  );
+
+  return result.rows;
+}
+
+async function settleSystemLegs(client, targetDate) {
+  const legs = await loadPendingSystemLegs(client, targetDate);
+
+  for (const leg of legs) {
+    const status = settleMarket(
+      leg.market,
+      leg.pick,
+      {
+        home_goals: leg.home_goals,
+        away_goals: leg.away_goals
+      }
+    );
+
+    if (status === 'pending') continue;
+
+    await client.query(
+      `
+      UPDATE sent_tip_legs
+      SET status = $1
+      WHERE id = $2
+      `,
+      [status, leg.leg_id]
+    );
+
+    console.log(`System leg ${leg.leg_id}: ${status}`);
+  }
+}
+
 async function main() {
   const targetDate = process.argv[2] || todayDateISO();
   console.log(`Settling tips for ${targetDate}`);
@@ -236,6 +291,7 @@ async function main() {
 
     await settleSingles(client, targetDate);
     await settleAccumulatorLegs(client, targetDate);
+    await settleSystemLegs(client, targetDate);
     await settleAccumulators(client, targetDate);
 
     await client.query('COMMIT');
