@@ -4,17 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "ingest:today": "node src/jobs/ingest-today.js",
-    "enrich:compare": "node src/jobs/enrich-compare-stats.js",
-    "build:ai-tips": "node src/jobs/build-ai-tips.js",
-    "send:tips-email": "node src/jobs/send-tips-email.js",
     "betfair:ingest": "node src/jobs/ingest-betfair-today.js",
     "betfair:sync-fixtures": "node src/jobs/sync-betfair-to-fixtures.js",
     "betfair:match-statarea": "node src/jobs/match-betfair-to-statarea.js",
     "betfair:backfill-predictions": "node src/jobs/backfill-betfair-scraped-predictions.js",
+    "enrich:compare": "node src/jobs/enrich-compare-stats.js",
+    "build:ai-tips": "node src/jobs/build-ai-tips.js",
     "betfair:map-tips": "node src/jobs/map-tips-to-betfair-markets.js",
-    "betfair:update-results": "node src/jobs/update-results-from-betfair.js"
+    "send:tips-email": "node src/jobs/send-tips-email.js",
+    "betfair:update-results": "node src/jobs/update-results-from-betfair.js",
+    "send:results-email": "node src/jobs/send-results-email.js",
+  
+    "daily:tips": "npm run betfair:ingest && npm run betfair:sync-fixtures && npm run betfair:match-statarea && npm run betfair:backfill-predictions && npm run enrich:compare && npm run build:ai-tips && npm run betfair:map-tips && npm run send:tips-email",
+  
+    "daily:results": "npm run betfair:update-results && npm run send:results-email"
   },
   "keywords": [],
   "author": "",
