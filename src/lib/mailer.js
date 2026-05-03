@@ -43,10 +43,31 @@ function escapeHtml(value) {
 
 function fixtureNameMap(tipsFile) {
   const map = new Map();
-  const fixtures = tipsFile.payload?.fixtures || [];
 
-  for (const f of fixtures) {
-    map.set(Number(f.fixture_id), `${f.home_team} vs ${f.away_team}`);
+  // NEW: support batched structure
+  const batches = tipsFile.batches || [];
+
+  for (const batch of batches) {
+    const fixtures = batch.payload?.fixtures || [];
+
+    for (const f of fixtures) {
+      map.set(
+        Number(f.fixture_id),
+        `${f.home_team} vs ${f.away_team}`
+      );
+    }
+  }
+
+  // fallback (old structure support)
+  if (map.size === 0) {
+    const fixtures = tipsFile.payload?.fixtures || [];
+
+    for (const f of fixtures) {
+      map.set(
+        Number(f.fixture_id),
+        `${f.home_team} vs ${f.away_team}`
+      );
+    }
   }
 
   return map;
