@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-WINDOW=${1:-morning}
-TARGET_DATE=${2:-$(date +%F)}
+TARGET_DATE=${1:-$(date +%F)}
 YESTERDAY=$(date -d "$TARGET_DATE -1 day" +%F)
 
 export NVM_DIR="$HOME/.nvm"
@@ -11,16 +10,21 @@ nvm use 20 >/dev/null
 
 cd /home/konrad/projects/Pred-Soc-2026
 
-echo "Running results update for $YESTERDAY and $TARGET_DATE"
-node src/jobs/update-results.js "$YESTERDAY"
-node src/jobs/update-results.js "$TARGET_DATE"
-node src/jobs/settle-tips-results.js "$YESTERDAY"
-node src/jobs/settle-tips-results.js "$TARGET_DATE"
-node src/jobs/send-results-email.js "$YESTERDAY" "$WINDOW" || true
-node src/jobs/send-results-email.js "$TARGET_DATE" "$WINDOW" || true
+echo "Updating Betfair results for $YESTERDAY and $TARGET_DATE"
+node src/jobs/update-results-from-betfair.js "$YESTERDAY" || true
+node src/jobs/update-results-from-betfair.js "$TARGET_DATE" || true
 
-echo "Running PredSoc tips for $TARGET_DATE / $WINDOW"
-node src/jobs/ingest-today.js "$TARGET_DATE"
+node src/jobs/send-results-email.js "$YESTERDAY" daily || true
+node src/jobs/send-results-email.js "$TARGET_DATE" daily || true
+
+echo "Running Betfair daily tips for $TARGET_DATE"
+node src/jobs/ingest-betfair-today.js "$TARGET_DATE"
+node src/jobs/sync-betfair-to-fixtures.js "$TARGET_DATE"
+node src/jobs/match-betfair-to-statarea.js "$TARGET_DATE"
+node src/jobs/backfill-betfair-scraped-predictions.js "$TARGET_DATE"
 node src/jobs/enrich-compare-stats.js "$TARGET_DATE"
-node src/jobs/build-ai-tips.js "$WINDOW"
-node src/jobs/send-tips-email.js "$WINDOW" "$TARGET_DATE"
+node src/jobs/build-ai-tips.js "$TARGET_DATE"
+node src/jobs/map-tips-to-betfair-markets.js "$TARGET_DATE"
+node src/jobs/send-tips-email.js daily "$TARGET_DATE"
+
+echo "PredSoc daily flow completed for $TARGET_DATE"
