@@ -16,43 +16,33 @@ function hasFinalScore(fixture) {
   );
 }
 
-async function findFixtureId(client, fixture, targetDate) {
-  const byExternalId = await client.query(
-    `
-    SELECT id
-    FROM fixtures
-    WHERE source_name = $1
-      AND external_id = $2
-    LIMIT 1
-    `,
-    [fixture.source_name, fixture.external_id]
-  );
+function normalizeUrl(value) {
+  return String(value || '')
+    .replace(/^https?:\/\/www\./i, 'http://www.')
+    .replace(/\+/g, '%20')
+    .trim();
+}
 
-  if (byExternalId.rows.length) {
-    return byExternalId.rows[0].id;
+async function findFixtureId(client, fixture, targetDate) {
+  if (fixture.compare_url) {
+    const byCompareUrl = await client.query(
+      `
+      SELECT id
+      FROM fixtures
+      WHERE fixture_date = $1::date
+        AND compare_url IS NOT NULL
+        AND replace(compare_url, '+', '%20') = $2
+      LIMIT 1
+      `,
+      [targetDate, normalizeUrl(fixture.compare_url)]
+    );
+
+    if (byCompareUrl.rows.length) {
+      return byCompareUrl.rows[0].id;
+    }
   }
 
-  const fallback = await client.query(
-    `
-    SELECT f.id
-    FROM fixtures f
-    JOIN teams ht ON ht.id = f.home_team_id
-    JOIN teams at ON at.id = f.away_team_id
-    WHERE f.source_name = $1
-      AND COALESCE(f.fixture_date, f.kickoff_utc::date) = $2::date
-      AND ht.name = $3
-      AND at.name = $4
-    LIMIT 1
-    `,
-    [
-      fixture.source_name,
-      targetDate,
-      fixture.home_team,
-      fixture.away_team
-    ]
-  );
-
-  return fallback.rows[0]?.id || null;
+  return null;
 }
 
 async function upsertFixtureScore(client, fixtureId, fixture) {
