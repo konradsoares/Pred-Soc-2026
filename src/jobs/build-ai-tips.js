@@ -65,6 +65,35 @@ function chunkArray(items, size) {
 
   return chunks;
 }
+
+function enrichTipsWithFixtureInfo(tips, fixtures) {
+  const fixtureMap = new Map(fixtures.map((f) => [Number(f.fixture_id), f]));
+
+  const enrichLeg = (leg) => {
+    const fixture = fixtureMap.get(Number(leg.fixture_id));
+    return {
+      ...leg,
+      home_team: fixture?.home_team || null,
+      away_team: fixture?.away_team || null,
+      kickoff_utc: fixture?.kickoff_utc || null,
+      country: fixture?.country || null,
+      competition: fixture?.competition || null
+    };
+  };
+
+  return {
+    ...tips,
+    singles: (tips.singles || []).map(enrichLeg),
+    accumulators: (tips.accumulators || []).map((a) => ({
+      ...a,
+      legs: (a.legs || []).map(enrichLeg)
+    })),
+    system_bets: (tips.system_bets || []).map((s) => ({
+      ...s,
+      legs: (s.legs || []).map(enrichLeg)
+    }))
+  };
+}
 // function buildAccumulatorCandidates(fixtures, config) {
 //   const maxLegs = config.prediction.max_acca_legs || 3;
 //   const minTotalOdds = config.prediction.min_acca_total_odds || 3;
