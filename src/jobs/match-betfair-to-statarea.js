@@ -21,8 +21,15 @@ function normalizeName(value) {
     .replace(/\bst\b/g, 'saint')
     .replace(/[^\w\s]/g, ' ')
     .replace(/\s+/g, ' ')
+    .replace(/[^a-z0-9]/g, '')
     .trim();
 }
+const sameCountry =
+  normalize(statarea.country) === normalize(betfair.country);
+
+const sameCompetition =
+  normalize(statarea.competition).includes(normalize(betfair.competition)) ||
+  normalize(betfair.competition).includes(normalize(statarea.competition));
 
 function namesFullyMatch(a, b) {
   const left = normalizeName(a);
