@@ -105,6 +105,85 @@ async function loadMarketPerformance(client) {
 
   return result.rows;
 }
+
+function buildMarketPerformanceMap(rows) {
+  return new Map(
+    rows.map((p) => [`${p.market}|${p.pick}`, p])
+  );
+}
+
+function shouldShadowMarket(market, filteredMarkets, perfMap) {
+  const isSelected = filteredMarkets.some(
+    (m) => m.market === market.market && m.pick === market.pick
+  );
+
+  if (isSelected) return false;
+
+  const perf = perfMap.get(`${market.market}|${market.pick}`);
+
+  // New or unseen market → test it
+  if (!perf) return true;
+
+  if (Number(perf.bets) < 10) return true;
+  if (Number(perf.roi) < 0) return true;
+  if (Number(perf.win_rate) < 0.55) return true;
+
+  return false;
+}
+
+function buildShadowReason(market, perfMap) {
+  const perf = perfMap.get(`${market.market}|${market.pick}`);
+
+  if (!perf) return 'new_market';
+
+  const reasons = [];
+
+  if (Number(perf.bets) < 10) {
+    reasons.push(`low_sample_${perf.bets}`);
+  }
+
+  if (Number(perf.roi) < 0) {
+    reasons.push(`neg_roi_${perf.roi}`);
+  }
+
+  if (Number(perf.win_rate) < 0.55) {
+    reasons.push(`low_wr_${perf.win_rate}`);
+  }
+
+  return reasons.join(',') || 'rejected';
+}
+
+async function insertShadowMarketTest(client, fixture, market, reason) {
+  await client.query(
+    `
+    INSERT INTO shadow_market_tests (
+      fixture_id,
+      market,
+      pick,
+      synthetic_odds,
+      probability,
+      reason,
+      raw
+    )
+    VALUES ($1,$2,$3,$4,$5,$6,$7)
+    ON CONFLICT (fixture_id, market, pick)
+    DO UPDATE SET
+      synthetic_odds = EXCLUDED.synthetic_odds,
+      probability = EXCLUDED.probability,
+      reason = EXCLUDED.reason,
+      raw = EXCLUDED.raw
+    `,
+    [
+      fixture.fixture_id,
+      market.market,
+      market.pick,
+      market.odds || null,
+      market.prob || null,
+      reason,
+      JSON.stringify({ fixture, market })
+    ]
+  );
+}
 // function buildAccumulatorCandidates(fixtures, config) {
 //   const maxLegs = config.prediction.max_acca_legs || 3;
 //   const minTotalOdds = config.prediction.min_acca_total_odds || 3;
@@ -968,8 +1047,34 @@ async function main() {
     const targetDate = process.argv[2] || todayDateISO();
 
     const dataset = await loadTodayDataset(client, targetDate);
+    let shadowCreated = 0;
+
+    for (const fixture of dataset) {
+      const allMarkets = fixture.available_markets || [];
+      const filteredMarkets = filterMarkets(allMarkets, config);
+    
+      for (const market of allMarkets) {
+        if (!shouldShadowMarket(market, filteredMarkets, marketPerformanceMap)) {
+          continue;
+        }
+    
+        await insertShadowMarketTest(
+          client,
+          fixture,
+          market,
+          buildShadowReason(market, marketPerformanceMap)
+        );
+    
+        shadowCreated += 1;
+      }
+    }
+    
+    console.log(`Shadow markets created/updated: ${shadowCreated}`);
     const preparedFixtures = prepareFixturesForAI(dataset, config);
-    const marketPerformance = await loadMarketPerformance(client);
+    const marketPerformanceRows = await loadMarketPerformance(client);
+    const marketPerformanceMap = buildMarketPerformanceMap(marketPerformanceRows);
+    
+    await ensureShadowMarketTestsTable(client);
 
     if (!preparedFixtures.length) {
       console.log('No fixtures with usable markets found.');
