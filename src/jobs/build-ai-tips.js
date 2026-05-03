@@ -94,6 +94,17 @@ function enrichTipsWithFixtureInfo(tips, fixtures) {
     }))
   };
 }
+
+async function loadMarketPerformance(client) {
+  const result = await client.query(`
+    SELECT market, pick, runner_name, bets, win_rate, total_pl, roi
+    FROM paper_market_performance
+    WHERE bets >= 5
+    ORDER BY roi ASC
+  `);
+
+  return result.rows;
+}
 // function buildAccumulatorCandidates(fixtures, config) {
 //   const maxLegs = config.prediction.max_acca_legs || 3;
 //   const minTotalOdds = config.prediction.min_acca_total_odds || 3;
@@ -951,7 +962,7 @@ async function main() {
 
     const dataset = await loadTodayDataset(client, targetDate);
     const preparedFixtures = prepareFixturesForAI(dataset, config);
-
+    const marketPerformance = await loadMarketPerformance(client);
     if (!preparedFixtures.length) {
       console.log('No fixtures with usable markets found.');
       return;
