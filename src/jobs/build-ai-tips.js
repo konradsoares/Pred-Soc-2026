@@ -541,7 +541,7 @@ function prepareFixturesForAI(fixtures, config) {
   return prepared.slice(0, config.prediction.max_daily_picks || prepared.length);
 }
 
-function buildPromptPayload(fixtures, accumulatorCandidates, config, targetDate) {
+function buildPromptPayload(fixtures, accumulatorCandidates, config, targetDate, extra = {}) {
   return {
     date: targetDate,
     rules: {
@@ -563,6 +563,7 @@ function buildPromptPayload(fixtures, accumulatorCandidates, config, targetDate)
       synthetic_odds_basis: 'Odds are approximated from probabilities with margin-adjusted implied probability.',
       staking_warning: 'Staking plan distributes risk but does not guarantee profit.'
     },
+    historical_market_performance: extra.historical_market_performance || [],
     fixtures,
     accumulator_candidates: accumulatorCandidates
   };
@@ -748,7 +749,13 @@ async function callOpenAIForTips(config, payload) {
                   RISK CONTROL:
                   - Prefer lower variance
                   - Avoid weak/conflicting picks
-                  
+
+                  HISTORICAL PERFORMANCE:
+                  - historical_market_performance contains previous paper bet results grouped by market/pick/runner.
+                  - Treat negative ROI, low win rate, or repeated losses as risk warnings.
+                  - Avoid historically unstable markets unless the current fixture has very strong supporting stats.
+                  - Do not blindly ban a market only because ROI is negative; use it as risk context.
+
                   OUTPUT:
                   - Return ONLY valid JSON
                   - Follow schema strictly
@@ -958,11 +965,12 @@ async function main() {
   const client = await db.getClient();
 
   try {
-    const targetDate = todayDateISO();
+    const targetDate = process.argv[2] || todayDateISO();
 
     const dataset = await loadTodayDataset(client, targetDate);
     const preparedFixtures = prepareFixturesForAI(dataset, config);
     const marketPerformance = await loadMarketPerformance(client);
+
     if (!preparedFixtures.length) {
       console.log('No fixtures with usable markets found.');
       return;
@@ -990,14 +998,17 @@ async function main() {
         batchFixtures,
         accumulatorCandidates,
         batchConfig,
-        targetDate
+        targetDate,
+        {
+          historical_market_performance: marketPerformance
+        }
       );
 
       console.log(
         `Processing batch ${i + 1}/${fixtureBatches.length} with ${batchFixtures.length} fixtures`
       );
 
-      const aiTips = config.ai.enabled
+      const rawAiTips = config.ai.enabled
         ? await callOpenAIForTips(config, payload)
         : {
             staking_plan: {
@@ -1013,6 +1024,8 @@ async function main() {
             system_bets: [],
             excluded_fixtures: []
           };
+
+      const aiTips = enrichTipsWithFixtureInfo(rawAiTips, batchFixtures);
 
       batchResults.push({
         batch_number: i + 1,
