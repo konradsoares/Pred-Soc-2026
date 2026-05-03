@@ -9,20 +9,11 @@ const ROOT_DIR = path.resolve(__dirname, '../..');
 const CONFIG_PATH = path.join(ROOT_DIR, 'config', 'app.config.json');
 const OUTPUT_DIR = path.join(ROOT_DIR, 'output');
 
-const WINDOW = process.argv[2] || process.env.PREDICTION_WINDOW || 'morning';
-
-const WINDOWS = {
-  morning:   ['00:00', '11:59'],
-  noon:      ['12:00', '15:59'],
-  afternoon: ['16:00', '19:59'],
-  evening:   ['20:00', '23:59']
-};
-
-if (!WINDOWS[WINDOW]) {
-  throw new Error(`Invalid window: ${WINDOW}`);
-}
-
-const [WINDOW_START, WINDOW_END] = WINDOWS[WINDOW];
+const BATCH_BANKROLL = Number(process.env.BATCH_BANKROLL || 10);
+const PICKS_PER_BATCH = Number(process.env.PICKS_PER_BATCH || 10);
+const WINDOW = 'daily';
+const WINDOW_START = '00:00';
+const WINDOW_END = '23:59';
 
 function loadConfig() {
   return JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
@@ -65,7 +56,15 @@ function filterMarkets(markets, config) {
     return true;
   });
 }
+function chunkArray(items, size) {
+  const chunks = [];
 
+  for (let i = 0; i < items.length; i += size) {
+    chunks.push(items.slice(i, i + size));
+  }
+
+  return chunks;
+}
 // function buildAccumulatorCandidates(fixtures, config) {
 //   const maxLegs = config.prediction.max_acca_legs || 3;
 //   const minTotalOdds = config.prediction.min_acca_total_odds || 3;
@@ -405,10 +404,8 @@ async function loadTodayDataset(client, targetDate) {
       ON trs_away.fixture_id = f.id
      AND trs_away.team_id = f.away_team_id
      AND trs_away.matches_considered = 10
-    WHERE f.kickoff_utc >= (($1::date + $2::time) AT TIME ZONE 'UTC') AND f.kickoff_utc <= (($1::date + $3::time) AT TIME ZONE 'UTC')
-    ORDER BY f.kickoff_utc ASC, f.id ASC
-    `,
-    [targetDate, WINDOW_START, WINDOW_END]
+     WHERE f.compare_url IS NOT NULL AND f.kickoff_utc >= ($1::date AT TIME ZONE 'UTC') AND f.kickoff_utc < (($1::date + INTERVAL '1 day') AT TIME ZONE 'UTC')    ORDER BY f.kickoff_utc ASC, f.id ASC`,
+    [targetDate]
   );
 
   return result.rows.map((row) => {
@@ -868,14 +865,62 @@ async function main() {
     const targetDate = todayDateISO();
     const dataset = await loadTodayDataset(client, targetDate);
     const preparedFixtures = prepareFixturesForAI(dataset, config);
-    const accumulatorCandidates = buildAccumulatorCandidates(preparedFixtures, config);
-
+    
     if (!preparedFixtures.length) {
       console.log('No fixtures with usable markets found.');
       return;
     }
-
-    const payload = buildPromptPayload(preparedFixtures, accumulatorCandidates, config, targetDate);
+    
+    const fixtureBatches = chunkArray(preparedFixtures, PICKS_PER_BATCH);
+    const batchResults = [];
+    
+    for (let i = 0; i < fixtureBatches.length; i += 1) {
+      const batchFixtures = fixtureBatches[i];
+      const accumulatorCandidates = buildAccumulatorCandidates(batchFixtures, config);
+    
+      const payload = buildPromptPayload(
+        batchFixtures,
+        accumulatorCandidates,
+        {
+          ...config,
+          staking: {
+            daily_bankroll: BATCH_BANKROLL,
+            currency: 'EUR',
+            singles_pct: 70,
+            accumulators_pct: 20,
+            systems_pct: 10
+          }
+        },
+        targetDate
+      );
+    
+      console.log(`Processing batch ${i + 1}/${fixtureBatches.length} with ${batchFixtures.length} fixtures`);
+    
+      const aiTips = config.ai.enabled
+        ? await callOpenAIForTips(config, payload)
+        : {
+            staking_plan: {
+              daily_bankroll: BATCH_BANKROLL,
+              currency: 'EUR',
+              singles_total: 7,
+              accumulators_total: 2,
+              systems_total: 1,
+              notes: 'AI disabled.'
+            },
+            singles: [],
+            accumulators: [],
+            system_bets: [],
+            excluded_fixtures: []
+          };
+    
+      batchResults.push({
+        batch_number: i + 1,
+        batch_bankroll: BATCH_BANKROLL,
+        fixture_count: batchFixtures.length,
+        payload,
+        ai_tips: aiTips
+      });
+    }
 
     if (!config.ai.enabled) {
       const tipsFile = {
@@ -906,19 +951,29 @@ async function main() {
       window: WINDOW,
       window_start: WINDOW_START,
       window_end: WINDOW_END,
-      payload,
-      ai_tips: aiTips
+      batch_bankroll: BATCH_BANKROLL,
+      picks_per_batch: PICKS_PER_BATCH,
+      batches: batchResults,
+      ai_tips: {
+        staking_plan: {
+          daily_bankroll: Number((batchResults.length * BATCH_BANKROLL).toFixed(2)),
+          currency: 'EUR',
+          singles_total: Number((batchResults.length * 7).toFixed(2)),
+          accumulators_total: Number((batchResults.length * 2).toFixed(2)),
+          systems_total: Number((batchResults.length * 1).toFixed(2)),
+          notes: `Generated ${batchResults.length} batches of €${BATCH_BANKROLL.toFixed(2)}.`
+        },
+        singles: batchResults.flatMap((b) => b.ai_tips.singles || []),
+        accumulators: batchResults.flatMap((b) => b.ai_tips.accumulators || []),
+        system_bets: batchResults.flatMap((b) => b.ai_tips.system_bets || []),
+        excluded_fixtures: batchResults.flatMap((b) => b.ai_tips.excluded_fixtures || [])
+      }
     };
-
+    
     const file = writeOutputFile(targetDate, tipsFile);
     await storeTipsInDb(client, targetDate, tipsFile, config);
-
-    console.log(`Tips written to ${file}`);
-  } finally {
-    client.release();
-    await db.pool.end();
-  }
-}
+    
+    console.log(`Daily tips written to ${file}`);
 
 main().catch((err) => {
   console.error(err);
