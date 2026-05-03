@@ -6,7 +6,7 @@ const ROOT_DIR = path.resolve(__dirname, '../..');
 const CONFIG_PATH = path.join(ROOT_DIR, 'config', 'app.config.json');
 const OUTPUT_DIR = path.join(ROOT_DIR, 'output');
 
-const WINDOW = process.argv[2] || process.env.PREDICTION_WINDOW || 'morning';
+const WINDOW = 'daily';
 
 function loadConfig() {
   return JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
