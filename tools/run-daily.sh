@@ -12,14 +12,14 @@ cd /home/konrad/projects/Pred-Soc-2026
 
 echo "Updating Betfair results for $YESTERDAY and $TARGET_DATE"
 node src/jobs/update-results-from-betfair.js "$YESTERDAY" || true
-node src/jobs/update-results-from-betfair.js "$TARGET_DATE" || true
+#node src/jobs/update-results-from-betfair.js "$TARGET_DATE" || true
 
 echo "Settling shadow markets for $YESTERDAY and $TARGET_DATE"
 node src/jobs/settle-shadow-markets-from-betfair.js "$YESTERDAY" || true
-node src/jobs/settle-shadow-markets-from-betfair.js "$TARGET_DATE" || true
+#node src/jobs/settle-shadow-markets-from-betfair.js "$TARGET_DATE" || true
 
 node src/jobs/send-results-email.js "$YESTERDAY" daily || true
-node src/jobs/send-results-email.js "$TARGET_DATE" daily || true
+#node src/jobs/send-results-email.js "$TARGET_DATE" daily || true
 
 echo "Running Betfair daily tips for $TARGET_DATE"
 node src/jobs/ingest-betfair-today.js "$TARGET_DATE"
