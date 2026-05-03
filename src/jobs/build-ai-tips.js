@@ -1047,34 +1047,37 @@ async function main() {
     const targetDate = process.argv[2] || todayDateISO();
 
     const dataset = await loadTodayDataset(client, targetDate);
+
+    const marketPerformanceRows = await loadMarketPerformance(client);
+    const marketPerformanceMap = buildMarketPerformanceMap(marketPerformanceRows);
+
+    await ensureShadowMarketTestsTable(client);
+
     let shadowCreated = 0;
 
     for (const fixture of dataset) {
       const allMarkets = fixture.available_markets || [];
       const filteredMarkets = filterMarkets(allMarkets, config);
-    
+
       for (const market of allMarkets) {
         if (!shouldShadowMarket(market, filteredMarkets, marketPerformanceMap)) {
           continue;
         }
-    
+
         await insertShadowMarketTest(
           client,
           fixture,
           market,
           buildShadowReason(market, marketPerformanceMap)
         );
-    
+
         shadowCreated += 1;
       }
     }
-    
+
     console.log(`Shadow markets created/updated: ${shadowCreated}`);
+
     const preparedFixtures = prepareFixturesForAI(dataset, config);
-    const marketPerformanceRows = await loadMarketPerformance(client);
-    const marketPerformanceMap = buildMarketPerformanceMap(marketPerformanceRows);
-    
-    await ensureShadowMarketTestsTable(client);
 
     if (!preparedFixtures.length) {
       console.log('No fixtures with usable markets found.');
@@ -1105,7 +1108,7 @@ async function main() {
         batchConfig,
         targetDate,
         {
-          historical_market_performance: marketPerformance
+          historical_market_performance: marketPerformanceRows
         }
       );
 
@@ -1174,7 +1177,6 @@ async function main() {
     await db.pool.end();
   }
 }
-
 main().catch((err) => {
   console.error(err);
   process.exit(1);
