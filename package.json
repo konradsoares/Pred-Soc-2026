@@ -17,7 +17,7 @@
   
     "daily:tips": "npm run betfair:ingest && npm run betfair:sync-fixtures && npm run betfair:match-statarea && npm run betfair:backfill-predictions && npm run enrich:compare && npm run build:ai-tips && npm run betfair:map-tips && npm run send:tips-email",
   
-    "daily:results": "npm run betfair:update-results && npm run send:results-email",
+    "daily:results": "npm run betfair:update-results && npm run shadow:settle && npm run send:results-email",
     "paper:create": "node src/jobs/create-paper-bets.js",
     "paper:settle": "node src/jobs/settle-paper-bets-from-betfair.js",
     "shadow:settle": "node src/jobs/settle-shadow-markets-from-betfair.js"
