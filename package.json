@@ -11,7 +11,8 @@
     "send:tips-email": "node src/jobs/send-tips-email.js",
     "betfair:ingest": "node src/jobs/ingest-betfair-today.js",
     "betfair:sync-fixtures": "node src/jobs/sync-betfair-to-fixtures.js",
-    "betfair:match-statarea": "node src/jobs/match-betfair-to-statarea.js"
+    "betfair:match-statarea": "node src/jobs/match-betfair-to-statarea.js",
+    "betfair:backfill-predictions": "node src/jobs/backfill-betfair-scraped-predictions.js"
   },
   "keywords": [],
   "author": "",
