@@ -12,7 +12,8 @@
     "betfair:ingest": "node src/jobs/ingest-betfair-today.js",
     "betfair:sync-fixtures": "node src/jobs/sync-betfair-to-fixtures.js",
     "betfair:match-statarea": "node src/jobs/match-betfair-to-statarea.js",
-    "betfair:backfill-predictions": "node src/jobs/backfill-betfair-scraped-predictions.js"
+    "betfair:backfill-predictions": "node src/jobs/backfill-betfair-scraped-predictions.js",
+    "betfair:map-tips": "node src/jobs/map-tips-to-betfair-markets.js"
   },
   "keywords": [],
   "author": "",
