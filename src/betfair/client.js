@@ -61,6 +61,14 @@ class BetfairClient {
       ]
     });
   }
+  listMarketBook(marketIds) {
+    return this.rpc('listMarketBook', {
+      marketIds,
+      priceProjection: {
+        priceData: ['EX_BEST_OFFERS']
+      }
+    });
+  }  
 }
 
 module.exports = BetfairClient;
