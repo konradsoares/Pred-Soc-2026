@@ -31,6 +31,10 @@ const sameCompetition =
   normalize(statarea.competition).includes(normalize(betfair.competition)) ||
   normalize(betfair.competition).includes(normalize(statarea.competition));
 
+if (!sameCountry || !sameCompetition) {
+  continue;
+}
+
 function namesFullyMatch(a, b) {
   const left = normalizeName(a);
   const right = normalizeName(b);
