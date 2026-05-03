@@ -14,6 +14,10 @@ echo "Updating Betfair results for $YESTERDAY and $TARGET_DATE"
 node src/jobs/update-results-from-betfair.js "$YESTERDAY" || true
 node src/jobs/update-results-from-betfair.js "$TARGET_DATE" || true
 
+echo "Settling shadow markets for $YESTERDAY and $TARGET_DATE"
+node src/jobs/settle-shadow-markets-from-betfair.js "$YESTERDAY" || true
+node src/jobs/settle-shadow-markets-from-betfair.js "$TARGET_DATE" || true
+
 node src/jobs/send-results-email.js "$YESTERDAY" daily || true
 node src/jobs/send-results-email.js "$TARGET_DATE" daily || true
 
@@ -25,6 +29,10 @@ node src/jobs/backfill-betfair-scraped-predictions.js "$TARGET_DATE"
 node src/jobs/enrich-compare-stats.js "$TARGET_DATE"
 node src/jobs/build-ai-tips.js "$TARGET_DATE"
 node src/jobs/map-tips-to-betfair-markets.js "$TARGET_DATE"
+
+echo "Creating paper bets for $TARGET_DATE"
+node src/jobs/create-paper-bets.js "$TARGET_DATE"
+
 node src/jobs/send-tips-email.js daily "$TARGET_DATE"
 
 echo "PredSoc daily flow completed for $TARGET_DATE"
