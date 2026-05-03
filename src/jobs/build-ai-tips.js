@@ -863,39 +863,44 @@ async function main() {
 
   try {
     const targetDate = todayDateISO();
+
     const dataset = await loadTodayDataset(client, targetDate);
     const preparedFixtures = prepareFixturesForAI(dataset, config);
-    
+
     if (!preparedFixtures.length) {
       console.log('No fixtures with usable markets found.');
       return;
     }
-    
+
     const fixtureBatches = chunkArray(preparedFixtures, PICKS_PER_BATCH);
     const batchResults = [];
-    
+
     for (let i = 0; i < fixtureBatches.length; i += 1) {
       const batchFixtures = fixtureBatches[i];
       const accumulatorCandidates = buildAccumulatorCandidates(batchFixtures, config);
-    
+
+      const batchConfig = {
+        ...config,
+        staking: {
+          daily_bankroll: BATCH_BANKROLL,
+          currency: 'EUR',
+          singles_pct: 70,
+          accumulators_pct: 20,
+          systems_pct: 10
+        }
+      };
+
       const payload = buildPromptPayload(
         batchFixtures,
         accumulatorCandidates,
-        {
-          ...config,
-          staking: {
-            daily_bankroll: BATCH_BANKROLL,
-            currency: 'EUR',
-            singles_pct: 70,
-            accumulators_pct: 20,
-            systems_pct: 10
-          }
-        },
+        batchConfig,
         targetDate
       );
-    
-      console.log(`Processing batch ${i + 1}/${fixtureBatches.length} with ${batchFixtures.length} fixtures`);
-    
+
+      console.log(
+        `Processing batch ${i + 1}/${fixtureBatches.length} with ${batchFixtures.length} fixtures`
+      );
+
       const aiTips = config.ai.enabled
         ? await callOpenAIForTips(config, payload)
         : {
@@ -912,7 +917,7 @@ async function main() {
             system_bets: [],
             excluded_fixtures: []
           };
-    
+
       batchResults.push({
         batch_number: i + 1,
         batch_bankroll: BATCH_BANKROLL,
@@ -921,30 +926,6 @@ async function main() {
         ai_tips: aiTips
       });
     }
-
-    if (!config.ai.enabled) {
-      const tipsFile = {
-        date: targetDate,
-        window: WINDOW,
-        window_start: WINDOW_START,
-        window_end: WINDOW_END,
-        payload,
-        ai_tips: {
-          staking_plan: config.staking || {},
-          singles: [],
-          accumulators: [],
-          system_bets: [],
-          excluded_fixtures: []
-        }
-      };
-
-      const file = writeOutputFile(targetDate, tipsFile);
-      await storeTipsInDb(client, targetDate, tipsFile, config);
-      console.log(`AI disabled. Wrote dataset to ${file}`);
-      return;
-    }
-
-    const aiTips = await callOpenAIForTips(config, payload);
 
     const tipsFile = {
       date: targetDate,
@@ -969,11 +950,16 @@ async function main() {
         excluded_fixtures: batchResults.flatMap((b) => b.ai_tips.excluded_fixtures || [])
       }
     };
-    
+
     const file = writeOutputFile(targetDate, tipsFile);
     await storeTipsInDb(client, targetDate, tipsFile, config);
-    
+
     console.log(`Daily tips written to ${file}`);
+  } finally {
+    client.release();
+    await db.pool.end();
+  }
+}
 
 main().catch((err) => {
   console.error(err);
