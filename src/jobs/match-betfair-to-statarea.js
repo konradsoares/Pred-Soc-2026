@@ -131,45 +131,109 @@ function normalize(value) {
     .replace(/[^a-z0-9]/g, '');
 }
 
+function countryCompatible(betfairCountry, statareaCountry) {
+  const bf = normalize(betfairCountry);
+  const st = normalize(statareaCountry);
+
+  if (!bf || !st) return true;
+  if (bf === st) return true;
+
+  const aliases = {
+    gb: ['england', 'scotland', 'wales', 'northernireland'],
+    uk: ['england', 'scotland', 'wales', 'northernireland'],
+    us: ['usa', 'unitedstates'],
+    usa: ['us', 'unitedstates'],
+    kr: ['southkorea', 'korea'],
+    jp: ['japan'],
+    de: ['germany'],
+    fr: ['france'],
+    it: ['italy'],
+    es: ['spain'],
+    pt: ['portugal'],
+    br: ['brazil'],
+    ar: ['argentina'],
+    nl: ['netherlands'],
+    be: ['belgium'],
+    at: ['austria'],
+    ch: ['switzerland'],
+    se: ['sweden'],
+    no: ['norway'],
+    dk: ['denmark'],
+    fi: ['finland'],
+    ie: ['ireland'],
+    mx: ['mexico']
+  };
+
+  return (aliases[bf] || []).includes(st) || (aliases[st] || []).includes(bf);
+}
+
+function competitionCompatible(betfairCompetition, statareaCompetition) {
+  const bf = normalize(betfairCompetition);
+  const st = normalize(statareaCompetition);
+
+  if (!bf || !st) return true;
+  if (bf === st) return true;
+  if (bf.includes(st) || st.includes(bf)) return true;
+
+  // Do not hard reject on competition naming differences.
+  return false;
+}
+
 function findStrictMatch(betfairFixture, statareaFixtures) {
   const exactCandidates = [];
   const fuzzyCandidates = [];
 
   for (const statarea of statareaFixtures) {
-
-    const sameCountry =
-      normalize(statarea.country) === normalize(betfairFixture.country);
-
-    const sameCompetition =
-      normalize(statarea.competition).includes(normalize(betfairFixture.competition)) ||
-      normalize(betfairFixture.competition).includes(normalize(statarea.competition));
-
-    if (!sameCountry || !sameCompetition) {
-      continue;
-    }
-
     const timeDiff = minutesDiff(betfairFixture.kickoff_utc, statarea.kickoff_utc);
-
     if (timeDiff > 60) continue;
+
+    const score = combinedScore(betfairFixture, statarea);
+
+    const sameCountry = countryCompatible(
+      betfairFixture.country,
+      statarea.country
+    );
+
+    const sameCompetition = competitionCompatible(
+      betfairFixture.competition,
+      statarea.competition
+    );
+
+    // Hard reject only if country is clearly incompatible.
+    if (!sameCountry) continue;
 
     const homeExact = namesFullyMatch(betfairFixture.home_team, statarea.home_team);
     const awayExact = namesFullyMatch(betfairFixture.away_team, statarea.away_team);
 
     if (homeExact && awayExact) {
-      exactCandidates.push({ statarea, timeDiff });
+      exactCandidates.push({
+        statarea,
+        timeDiff,
+        country_ok: sameCountry,
+        competition_ok: sameCompetition
+      });
       continue;
     }
 
-    const score = combinedScore(betfairFixture, statarea);
+    let minTotalScore = 0.50;
+    let minTeamScore = 0.50;
+
+    // If competition naming does not align, require stronger team match.
+    if (!sameCompetition) {
+      minTotalScore = 0.70;
+      minTeamScore = 0.50;
+    }
 
     if (
-      score.totalScore >= 0.50 &&
-      score.homeScore >= 0.50 &&
-      score.awayScore >= 0.50
+      score.totalScore >= minTotalScore &&
+      score.homeScore >= minTeamScore &&
+      score.awayScore >= minTeamScore
     ) {
       fuzzyCandidates.push({
         statarea,
-        ...score
+        ...score,
+        country_ok: sameCountry,
+        competition_ok: sameCompetition
       });
     }
   }
