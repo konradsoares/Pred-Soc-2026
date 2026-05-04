@@ -21,18 +21,7 @@ function normalizeName(value) {
     .replace(/\bst\b/g, 'saint')
     .replace(/[^\w\s]/g, ' ')
     .replace(/\s+/g, ' ')
-    .replace(/[^a-z0-9]/g, '')
     .trim();
-}
-const sameCountry =
-  normalize(statarea.country) === normalize(betfair.country);
-
-const sameCompetition =
-  normalize(statarea.competition).includes(normalize(betfair.competition)) ||
-  normalize(betfair.competition).includes(normalize(statarea.competition));
-
-if (!sameCountry || !sameCompetition) {
-  continue;
 }
 
 function namesFullyMatch(a, b) {
@@ -136,11 +125,29 @@ async function loadBetfairFixtures(client, targetDate) {
   return result.rows;
 }
 
+function normalize(value) {
+  return String(value || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, '');
+}
+
 function findStrictMatch(betfairFixture, statareaFixtures) {
   const exactCandidates = [];
   const fuzzyCandidates = [];
 
   for (const statarea of statareaFixtures) {
+
+    const sameCountry =
+      normalize(statarea.country) === normalize(betfairFixture.country);
+
+    const sameCompetition =
+      normalize(statarea.competition).includes(normalize(betfairFixture.competition)) ||
+      normalize(betfairFixture.competition).includes(normalize(statarea.competition));
+
+    if (!sameCountry || !sameCompetition) {
+      continue;
+    }
+
     const timeDiff = minutesDiff(betfairFixture.kickoff_utc, statarea.kickoff_utc);
 
     if (timeDiff > 60) continue;
