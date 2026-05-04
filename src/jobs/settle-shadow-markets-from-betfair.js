@@ -136,7 +136,17 @@ async function main() {
     const marketIds = markets.map((m) => m.betfair_market_id);
     const runners = await loadBetfairRunners(client, marketIds);
 
-    const books = await betfair.listMarketBook(marketIds);
+    const uniqueMarketIds = [...new Set(marketIds.filter(Boolean))];
+    const marketIdChunks = chunkArray(uniqueMarketIds, 40);
+    
+    const books = [];
+    
+    for (let i = 0; i < marketIdChunks.length; i += 1) {
+      console.log(`Fetching market books ${i + 1}/${marketIdChunks.length}`);
+      const chunkBooks = await betfair.listMarketBook(marketIdChunks[i]);
+      books.push(...chunkBooks);
+    }
+    
     const bookMap = new Map(books.map((b) => [b.marketId, b]));
 
     await client.query('BEGIN');
