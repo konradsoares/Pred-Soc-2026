@@ -50,6 +50,7 @@ async function main() {
   console.table(
     games.slice(0, 20).map(g => ({
       id: g.id,
+      ourEventId: g.ourEventId,
       league: g.league,
       eventName: g.eventName,
       home: g.home,
@@ -70,7 +71,7 @@ async function main() {
   }
 
   console.log('\nFetching match stats/details...');
-  const stats = await getBetsApiMatchStats(match.id);
+  const stats = await getBetsApiMatchStats(match.ourEventId || match.id);
 
   console.log(JSON.stringify({
     score: stats.score,
