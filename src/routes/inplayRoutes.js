@@ -32,16 +32,20 @@ router.post('/scan', async (req, res) => {
 
     const result = await scanInplayOpportunities({ debug });
 
-    let telegramSent = 0;
-
+    let telegramResult = {
+      sent: 0,
+      skippedDuplicate: 0
+    };
+    
     if (telegram) {
-      telegramSent = await sendOpportunityAlerts(result.opportunities || []);
+      telegramResult = await sendOpportunityAlerts(result.opportunities || []);
     }
 
     res.json({
       ok: true,
       telegramEnabled: telegram,
-      telegramSent,
+      telegramSent: telegramResult.sent,
+      telegramSkippedDuplicate: telegramResult.skippedDuplicate,
       ...result
     });
   } catch (error) {
