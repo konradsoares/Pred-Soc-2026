@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>In-Play Opportunities</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #111;
+      color: #eee;
+      padding: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .low { color: #00ff88; }
+    .medium { color: #ffaa00; }
+    .high { color: #ff4444; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #333;
+      text-align: left;
+    }
+
+    tr:hover {
+      background: #1c1c1c;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Live In-Play Opportunities</h1>
+
+<button onclick="scan()">Scan Now</button>
+<button onclick="toggleAuto()">Auto Refresh: OFF</button>
+
+<div id="status"></div>
+
+<table id="table">
+  <thead>
+    <tr>
+      <th>Match</th>
+      <th>Market</th>
+      <th>Pick</th>
+      <th>Odds</th>
+      <th>Implied</th>
+      <th>Model</th>
+      <th>Edge</th>
+      <th>Risk</th>
+      <th>Reason</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<script>
+let auto = false;
+let interval = null;
+
+async function scan() {
+  document.getElementById('status').innerText = 'Scanning...';
+
+  const res = await fetch('/api/inplay/scan', { method: 'POST' });
+  const data = await res.json();
+
+  if (!data.ok) {
+    document.getElementById('status').innerText = data.error;
+    return;
+  }
+
+  render(data.opportunities);
+  document.getElementById('status').innerText =
+    `Events: ${data.totalEvents} | Markets: ${data.totalMarkets} | Opportunities: ${data.totalOpportunities}`;
+}
+
+async function loadRecent() {
+  const res = await fetch('/api/inplay/recent');
+  const data = await res.json();
+
+  if (!data.ok) return;
+
+  render(data.opportunities);
+}
+
+function render(opps) {
+  const tbody = document.querySelector('#table tbody');
+  tbody.innerHTML = '';
+
+  if (!opps.length) {
+    tbody.innerHTML = '<tr><td colspan="9">No opportunities</td></tr>';
+    return;
+  }
+
+  for (const o of opps) {
+    const tr = document.createElement('tr');
+
+    tr.innerHTML = `
+      <td>${o.home_team || o.homeTeam} vs ${o.away_team || o.awayTeam}</td>
+      <td>${o.market_type || o.marketType}</td>
+      <td>${o.runner_name || o.runnerName}</td>
+      <td>${o.back_odd || o.backOdd}</td>
+      <td>${(o.implied_probability || o.impliedProbability).toFixed(2)}</td>
+      <td>${(o.model_probability || o.modelProbability).toFixed(2)}</td>
+      <td>${(o.edge).toFixed(3)}</td>
+      <td class="${o.risk_level || o.riskLevel}">${o.risk_level || o.riskLevel}</td>
+      <td>${o.reason}</td>
+    `;
+
+    tbody.appendChild(tr);
+  }
+}
+
+function toggleAuto() {
+  auto = !auto;
+
+  const btn = document.querySelectorAll('button')[1];
+
+  if (auto) {
+    btn.innerText = 'Auto Refresh: ON';
+    interval = setInterval(loadRecent, 30000);
+  } else {
+    btn.innerText = 'Auto Refresh: OFF';
+    clearInterval(interval);
+  }
+}
+
+loadRecent();
+</script>
+
+</body>
+</html>
