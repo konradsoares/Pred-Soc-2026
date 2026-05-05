@@ -178,6 +178,7 @@ function normalizeInplayGame(row) {
 
   return {
     id: id ? String(id) : null,
+    ourEventId: row.our_event_id ? String(row.our_event_id) : null,
     home: String(home),
     away: String(away),
     eventName: String(eventName),
@@ -333,7 +334,7 @@ function normalizeStatsFromEventResponse(data) {
 }
 
 async function getBetsApiMatchStats(eventId) {
-  const data = await betsApiGet('/betfair/event', {
+  const data = await betsApiGet('/event/view', {
     event_id: eventId
   });
 
@@ -505,7 +506,8 @@ async function validateLiveStats(opportunity) {
       };
     }
 
-    const liveStats = await getBetsApiMatchStats(match.id);
+    const statsEventId = match.ourEventId || match.id;
+    const liveStats = await getBetsApiMatchStats(statsEventId);
 
     const market = String(opportunity.marketType || '').toUpperCase();
 
@@ -529,7 +531,8 @@ async function validateLiveStats(opportunity) {
       matchScore: match.matchScore,
       matchedHome: match.home,
       matchedAway: match.away,
-      reversed: match.reversed
+      reversed: match.reversed,
+      betsapiStatsEventId: statsEventId
     };
   } catch (error) {
     return {
