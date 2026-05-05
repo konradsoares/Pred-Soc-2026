@@ -99,7 +99,10 @@
 <button onclick="scan(true)">Scan Debug</button>
 <button onclick="toggleAuto()">Auto Refresh: OFF</button>
 <button class="danger" onclick="toggleSound()">Sound Alert: ON</button>
-
+<label>
+  <input type="checkbox" id="telegramToggle">
+  Telegram alert
+</label>
 <div id="status" class="status">Ready.</div>
 
 <table>
@@ -161,9 +164,14 @@ function playAlertSound() {
 async function scan(debug) {
   document.getElementById('status').innerText = 'Scanning Betfair in-play markets...';
 
-  const url = debug
-    ? '/api/inplay/scan?debug=true'
-    : '/api/inplay/scan';
+  const telegram = document.getElementById('telegramToggle').checked;
+
+  const params = new URLSearchParams();
+
+  if (debug) params.set('debug', 'true');
+  if (telegram) params.set('telegram', 'true');
+
+  const url = '/api/inplay/scan' + (params.toString() ? `?${params.toString()}` : '');
 
   const res = await fetch(url, { method: 'POST' });
   const data = await res.json();
@@ -183,7 +191,7 @@ async function scan(debug) {
   }
 
   document.getElementById('status').innerText =
-    `Events: ${data.totalEvents} | Markets: ${data.totalMarkets} | Raw: ${data.totalRawOpportunities} | Grouped: ${data.totalOpportunities} | Alerts: ${alerts.length}`;
+    `Events: ${data.totalEvents} | Markets: ${data.totalMarkets} | Raw: ${data.totalRawOpportunities} | Grouped: ${data.totalOpportunities} | Alerts: ${alerts.length} | Telegram: ${data.telegramSent || 0}`;
 }
 
 function renderOpportunities(opportunities) {
