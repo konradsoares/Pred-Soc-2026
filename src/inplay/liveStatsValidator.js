@@ -1,7 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-const BETSAPI_INPLAY_URL = 'https://betsapi.com/cip/soccer';
+const BETSAPI_INPLAY_URL = 'https://betsapi.com';
 const BETSAPI_BASE_URL = 'https://betsapi.com';
 
 function normalizeTeamName(name) {
