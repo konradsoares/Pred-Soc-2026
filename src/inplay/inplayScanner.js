@@ -589,7 +589,7 @@ async function scanInplayOpportunities(options = {}) {
     };
   }
 
-  const marketBooks = await betfair.listMarketBook(marketIds);
+  const marketBooks = await listMarketBooksInChunks(betfair, marketIds);
 
   const catalogueByMarketId = new Map(
     catalogues.map(catalogue => [catalogue.marketId, catalogue])
