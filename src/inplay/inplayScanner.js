@@ -107,7 +107,8 @@ function shouldTriggerAlert(opportunity) {
   return (
     opportunity.edge >= 0.10 &&
     opportunity.riskLevel === 'low' &&
-    opportunity.confidenceScore >= 75
+    opportunity.confidenceScore >= 80 &&
+    opportunity.modelProbability >= 0.60
   );
 }
 
@@ -327,39 +328,80 @@ async function getBasicModelProbability({ fixtureId, marketType, runnerName }) {
   };
 }
 
+function getGoalDirection(opp) {
+  const pick = String(opp.runnerName || '').toLowerCase();
+
+  if (pick.includes('over')) return 'over';
+  if (pick.includes('under')) return 'under';
+
+  return 'other';
+}
+
+function isGoalsMarket(opp) {
+  return String(opp.marketType || '').startsWith('OVER_UNDER');
+}
+
 function groupOpportunities(opportunities) {
   const byEvent = new Map();
 
   for (const opp of opportunities) {
-    const existing = byEvent.get(opp.betfairEventId);
-
-    if (!existing) {
-      byEvent.set(opp.betfairEventId, opp);
-      continue;
+    if (!byEvent.has(opp.betfairEventId)) {
+      byEvent.set(opp.betfairEventId, []);
     }
 
-    if (opp.confidenceScore > existing.confidenceScore) {
-      byEvent.set(opp.betfairEventId, opp);
-      continue;
+    byEvent.get(opp.betfairEventId).push(opp);
+  }
+
+  const final = [];
+
+  for (const eventOpps of byEvent.values()) {
+    const goals = eventOpps.filter(isGoalsMarket);
+    const nonGoals = eventOpps.filter(o => !isGoalsMarket(o));
+
+    if (goals.length) {
+      const bestGoal = goals.sort((a, b) => {
+        if (b.confidenceScore !== a.confidenceScore) {
+          return b.confidenceScore - a.confidenceScore;
+        }
+
+        if (b.modelProbability !== a.modelProbability) {
+          return b.modelProbability - a.modelProbability;
+        }
+
+        return b.edge - a.edge;
+      })[0];
+
+      final.push(bestGoal);
     }
 
-    if (
-      opp.confidenceScore === existing.confidenceScore &&
-      opp.edge > existing.edge
-    ) {
-      byEvent.set(opp.betfairEventId, opp);
+    if (nonGoals.length) {
+      const bestNonGoal = nonGoals.sort((a, b) => {
+        if (b.confidenceScore !== a.confidenceScore) {
+          return b.confidenceScore - a.confidenceScore;
+        }
+
+        if (b.modelProbability !== a.modelProbability) {
+          return b.modelProbability - a.modelProbability;
+        }
+
+        return b.edge - a.edge;
+      })[0];
+
+      final.push(bestNonGoal);
     }
   }
 
-  return Array.from(byEvent.values())
-    .sort((a, b) => {
-      if (b.confidenceScore !== a.confidenceScore) {
-        return b.confidenceScore - a.confidenceScore;
-      }
+  return final.sort((a, b) => {
+    if (b.confidenceScore !== a.confidenceScore) {
+      return b.confidenceScore - a.confidenceScore;
+    }
 
-      return b.edge - a.edge;
-    })
-    .slice(0, MAX_OPPORTUNITIES_PER_EVENT * byEvent.size);
+    if (b.modelProbability !== a.modelProbability) {
+      return b.modelProbability - a.modelProbability;
+    }
+
+    return b.edge - a.edge;
+  });
 }
 
 async function scanInplayOpportunities(options = {}) {
