@@ -120,7 +120,7 @@ function normalizeInplayGame(row) {
       'home',
       'home_team',
       'team_home',
-      'participants.0.name'
+      'event.home.name'
     ]) || '';
 
   const away =
@@ -129,7 +129,7 @@ function normalizeInplayGame(row) {
       'away',
       'away_team',
       'team_away',
-      'participants.1.name'
+      'event.away.name'
     ]) || '';
 
   const id =
@@ -137,15 +137,17 @@ function normalizeInplayGame(row) {
       'id',
       'event_id',
       'betfair_event_id',
-      'bf_event_id'
+      'bf_event_id',
+      'event.id'
     ]);
 
   const league =
     pick(row, [
       'league.name',
       'competition.name',
+      'competition',
       'league',
-      'competition'
+      'event.competition.name'
     ]) || '';
 
   const score =
@@ -153,7 +155,8 @@ function normalizeInplayGame(row) {
       'ss',
       'score',
       'scores',
-      'result'
+      'result',
+      'event.ss'
     ]) || '';
 
   const timer =
@@ -161,13 +164,23 @@ function normalizeInplayGame(row) {
       'timer.tm',
       'timer',
       'time',
-      'minute'
+      'minute',
+      'event.timer.tm',
+      'event.openDate'
     ]);
+
+  const eventName =
+    pick(row, [
+      'name',
+      'event.name',
+      'event_name'
+    ]) || '';
 
   return {
     id: id ? String(id) : null,
     home: String(home),
     away: String(away),
+    eventName: String(eventName),
     league: String(league),
     score: String(score || ''),
     minute: timer !== null && timer !== undefined ? String(timer) : null,
@@ -176,7 +189,9 @@ function normalizeInplayGame(row) {
 }
 
 async function getBetsApiInplayGames() {
-  const data = await betsApiGet('/betfair/inplay');
+  const data = await betsApiGet('/betfair/ex/inplay', {
+    sport_id: 1
+  });
 
   const results =
     data.results ||
