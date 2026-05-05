@@ -1,6 +1,6 @@
 const express = require('express');
 const { scanInplayOpportunities } = require('../inplay/inplayScanner');
-
+const { sendOpportunityAlerts } = require('../inplay/telegramAlert');
 const router = express.Router();
 
 // router.post('/scan', async (req, res) => {
@@ -26,10 +26,22 @@ router.post('/scan', async (req, res) => {
       req.query.debug === 'true' ||
       req.body?.debug === true;
 
+    const telegram =
+      req.query.telegram === 'true' ||
+      req.body?.telegram === true;
+
     const result = await scanInplayOpportunities({ debug });
+
+    let telegramSent = 0;
+
+    if (telegram) {
+      telegramSent = await sendOpportunityAlerts(result.opportunities || []);
+    }
 
     res.json({
       ok: true,
+      telegramEnabled: telegram,
+      telegramSent,
       ...result
     });
   } catch (error) {
