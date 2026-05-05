@@ -1,4 +1,5 @@
 const BetfairClient = require('../betfair/client');
+const { validateLiveStats } = require('./liveStatsValidator');
 const db = require('../db/connection');
 
 const MARKET_TYPES = [
@@ -794,8 +795,55 @@ async function scanInplayOpportunities(options = {}) {
         }
       };
 
+      const liveValidation = await validateLiveStats(opportunity);
+      opportunity.liveValidation = liveValidation;
+      
+      if (liveValidation.liveStatsFound) {
+        opportunity.liveContext = {
+          minute: null,
+          score: liveValidation.score || null,
+          source: liveValidation.source || 'betsapi'
+        };
+      
+        opportunity.statsSummary.liveValidation = liveValidation.validation;
+        opportunity.statsSummary.livePressureScore = liveValidation.livePressureScore;
+        opportunity.statsSummary.liveStatsReason = liveValidation.reason;
+        opportunity.statsSummary.betsapiMatchUrl = liveValidation.matchUrl || null;
+      }
+      
+      if (liveValidation.validation === 'contradicts') {
+        addRejection(rejections, {
+          scope: 'runner',
+          eventId,
+          eventName,
+          marketId: marketBook.marketId,
+          marketType,
+          runnerName,
+          selectionId: runner.selectionId,
+          reason: 'live_stats_contradict_model',
+          liveStatsReason: liveValidation.reason,
+          livePressureScore: liveValidation.livePressureScore,
+          betsapiMatchUrl: liveValidation.matchUrl || null
+        });
+        continue;
+      }
+      
+      if (liveValidation.validation === 'supports') {
+        opportunity.confidenceScore = Math.min(100, opportunity.confidenceScore + 10);
+      
+        if (opportunity.riskLevel === 'high') {
+          opportunity.riskLevel = 'medium';
+        } else if (opportunity.riskLevel === 'medium') {
+          opportunity.riskLevel = 'low';
+        }
+      }
+      
+      if (liveValidation.validation === 'unknown' || liveValidation.validation === 'error') {
+        opportunity.confidenceScore = Math.max(0, opportunity.confidenceScore - 10);
+      }
+      
       opportunity.alert = shouldTriggerAlert(opportunity);
-
+      
       rawOpportunities.push(opportunity);
     }
   }
