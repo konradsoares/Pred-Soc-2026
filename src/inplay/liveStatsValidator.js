@@ -201,7 +201,9 @@ async function getBetsApiInplayGames() {
     [];
 
   if (!Array.isArray(results)) {
-    throw new Error(`Unexpected BetsAPI inplay response shape: ${JSON.stringify(data).slice(0, 500)}`);
+    throw new Error(
+      `Unexpected BetsAPI ex/inplay response shape: ${JSON.stringify(data).slice(0, 800)}`
+    );
   }
 
   return results.map(normalizeInplayGame);
