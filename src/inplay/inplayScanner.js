@@ -62,11 +62,12 @@ async function findFixture(eventId, eventName) {
       ht.name AS home_team,
       at.name AS away_team,
       f.compare_url
-    FROM betfair_events be
-    JOIN fixtures f ON f.id = be.fixture_id
+    FROM betfair_tip_mappings btm
+    JOIN fixtures f ON f.id = btm.fixture_id
     LEFT JOIN teams ht ON ht.id = f.home_team_id
     LEFT JOIN teams at ON at.id = f.away_team_id
-    WHERE be.betfair_event_id = $1
+    WHERE btm.betfair_event_id = $1
+    ORDER BY btm.updated_at DESC NULLS LAST, btm.id DESC
     LIMIT 1
     `,
     [String(eventId)]
@@ -79,7 +80,7 @@ async function findFixture(eventId, eventName) {
       awayTeam: mapped.rows[0].away_team,
       compareUrl: mapped.rows[0].compare_url,
       confidence: 'high',
-      method: 'betfair_events'
+      method: 'betfair_tip_mappings'
     };
   }
 
@@ -88,6 +89,9 @@ async function findFixture(eventId, eventName) {
   if (!parsed) {
     return {
       fixtureId: null,
+      homeTeam: null,
+      awayTeam: null,
+      compareUrl: null,
       confidence: 'none',
       method: 'parse_failed'
     };
@@ -126,11 +130,11 @@ async function findFixture(eventId, eventName) {
     fixtureId: null,
     homeTeam: parsed.homeTeam,
     awayTeam: parsed.awayTeam,
+    compareUrl: null,
     confidence: 'low',
     method: 'parsed_only'
   };
 }
-
 async function getBasicModelProbability({ fixtureId, marketType, runnerName }) {
   if (!fixtureId) {
     return null;
