@@ -520,6 +520,28 @@ function groupOpportunities(opportunities) {
   });
 }
 
+function chunkArray(items, size) {
+  const chunks = [];
+
+  for (let i = 0; i < items.length; i += size) {
+    chunks.push(items.slice(i, i + size));
+  }
+
+  return chunks;
+}
+
+async function listMarketBooksInChunks(betfair, marketIds) {
+  const chunks = chunkArray(marketIds, 10);
+  const allBooks = [];
+
+  for (const chunk of chunks) {
+    const books = await betfair.listMarketBook(chunk);
+    allBooks.push(...books);
+  }
+
+  return allBooks;
+}
+
 async function scanInplayOpportunities(options = {}) {
   const debug = options.debug === true;
   const betfair = new BetfairClient();
