@@ -1,8 +1,17 @@
 const axios = require('axios');
-const cheerio = require('cheerio');
+const env = require('../config/env');
 
-const BETSAPI_INPLAY_URL = 'https://betsapi.com';
-const BETSAPI_BASE_URL = 'https://betsapi.com';
+const BETSAPI_BASE_URL = 'https://api.b365api.com/v1';
+
+function getToken() {
+  const token = env.BETSAPI_TOKEN || process.env.BETSAPI_TOKEN;
+
+  if (!token) {
+    throw new Error('BETSAPI_TOKEN is missing from docker/.env');
+  }
+
+  return token;
+}
 
 function normalizeTeamName(name) {
   return String(name || '')
@@ -64,81 +73,123 @@ function parseScore(scoreText) {
   };
 }
 
-function cleanText(value) {
-  return String(value || '')
-    .replace(/\s+/g, ' ')
-    .trim();
+function pick(obj, paths) {
+  for (const path of paths) {
+    const parts = path.split('.');
+    let current = obj;
+
+    for (const part of parts) {
+      if (current === null || current === undefined) {
+        current = undefined;
+        break;
+      }
+
+      current = current[part];
+    }
+
+    if (current !== undefined && current !== null && current !== '') {
+      return current;
+    }
+  }
+
+  return null;
 }
 
-async function fetchHtml(url) {
-  const response = await axios.get(url, {
+async function betsApiGet(path, params = {}) {
+  const response = await axios.get(`${BETSAPI_BASE_URL}${path}`, {
     timeout: 15000,
-    headers: {
-      'User-Agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.7727.114 Mobile Safari/537.36',
-      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    params: {
+      token: getToken(),
+      ...params
     }
   });
+
+  if (response.data && response.data.success === 0) {
+    throw new Error(
+      `BetsAPI error: ${response.data.error || JSON.stringify(response.data)}`
+    );
+  }
 
   return response.data;
 }
 
+function normalizeInplayGame(row) {
+  const home =
+    pick(row, [
+      'home.name',
+      'home',
+      'home_team',
+      'team_home',
+      'participants.0.name'
+    ]) || '';
+
+  const away =
+    pick(row, [
+      'away.name',
+      'away',
+      'away_team',
+      'team_away',
+      'participants.1.name'
+    ]) || '';
+
+  const id =
+    pick(row, [
+      'id',
+      'event_id',
+      'betfair_event_id',
+      'bf_event_id'
+    ]);
+
+  const league =
+    pick(row, [
+      'league.name',
+      'competition.name',
+      'league',
+      'competition'
+    ]) || '';
+
+  const score =
+    pick(row, [
+      'ss',
+      'score',
+      'scores',
+      'result'
+    ]) || '';
+
+  const timer =
+    pick(row, [
+      'timer.tm',
+      'timer',
+      'time',
+      'minute'
+    ]);
+
+  return {
+    id: id ? String(id) : null,
+    home: String(home),
+    away: String(away),
+    league: String(league),
+    score: String(score || ''),
+    minute: timer !== null && timer !== undefined ? String(timer) : null,
+    raw: row
+  };
+}
+
 async function getBetsApiInplayGames() {
-  const html = await fetchHtml(BETSAPI_INPLAY_URL);
-  const $ = cheerio.load(html);
+  const data = await betsApiGet('/betfair/inplay');
 
-  const games = [];
+  const results =
+    data.results ||
+    data.result ||
+    data.events ||
+    data.data ||
+    [];
 
-  $('tr[id^="r_"]').each((_, row) => {
-    const $row = $(row);
+  if (!Array.isArray(results)) {
+    throw new Error(`Unexpected BetsAPI inplay response shape: ${JSON.stringify(data).slice(0, 500)}`);
+  }
 
-    const rowId = $row.attr('id') || '';
-    const betsapiId = rowId.replace('r_', '');
-
-    const link = $row.find('a[href^="/soccer/r/"]').first();
-    const href = link.attr('href');
-
-    if (!href) return;
-
-    const cells = $row.find('td').map((i, td) => cleanText($(td).text())).get();
-
-    /*
-      BetsAPI table normally gives:
-      League | Time | Home | Score | Away | 1 | X | 2
-      But there may be hidden/empty cells, so we also rely on ids.
-    */
-
-    const home =
-      cleanText($row.find(`td[id$="_home"]`).text()) ||
-      cells[2] ||
-      '';
-
-    const score =
-      cleanText($row.find(`td[id$="_ss"]`).text()) ||
-      cells[3] ||
-      '';
-
-    const away =
-      cleanText($row.find(`td[id$="_away"]`).text()) ||
-      cells[4] ||
-      '';
-
-    const league =
-      cleanText($row.find('td').first().text()) ||
-      cells[0] ||
-      '';
-
-    games.push({
-      betsapiId,
-      league,
-      home,
-      away,
-      score,
-      url: `${BETSAPI_BASE_URL}${href}`,
-      rawCells: cells
-    });
-  });
-
-  return games;
+  return results.map(normalizeInplayGame);
 }
 
 function findBestBetsApiMatch(opportunity, games) {
@@ -160,13 +211,13 @@ function findBestBetsApiMatch(opportunity, games) {
     const score = Math.max(homeScore, reversedScore) / 2;
     const reversed = reversedScore > homeScore;
 
-    const eventNameBonus =
+    const eventBonus =
       eventName &&
-      normalizeTeamName(eventName).includes(normalizeTeamName(game.home).split(' ')[0])
+      normalizeTeamName(eventName).includes(tokenize(game.home)[0] || '___')
         ? 0.05
         : 0;
 
-    const finalScore = Math.min(1, score + eventNameBonus);
+    const finalScore = Math.min(1, score + eventBonus);
 
     if (!best || finalScore > best.matchScore) {
       best = {
@@ -184,77 +235,127 @@ function findBestBetsApiMatch(opportunity, games) {
   return best;
 }
 
-function parseNumber(value) {
-  const match = String(value || '').match(/-?\d+(\.\d+)?/);
-  return match ? Number(match[0]) : null;
-}
+function normalizeStatsFromEventResponse(data) {
+  const source =
+    data.results ||
+    data.result ||
+    data.event ||
+    data.data ||
+    data;
 
-async function getBetsApiMatchStats(matchUrl) {
-  const html = await fetchHtml(matchUrl);
-  const $ = cheerio.load(html);
+  const rawStats =
+    pick(source, [
+      'stats',
+      'statistics',
+      'extra.stats',
+      'extra.statistics'
+    ]) || [];
 
   const stats = {};
 
-  /*
-    Match Stats table structure seen from your screenshot:
-    left value | stat name | right value
+  if (Array.isArray(rawStats)) {
+    for (const item of rawStats) {
+      const label =
+        item.type ||
+        item.name ||
+        item.label ||
+        item.key;
 
-    Example:
-    66 | Attacks | 85
-    45 | Dangerous Attacks | 49
-    1 | On Target | 2
-  */
+      if (!label) continue;
 
-  $('table tr').each((_, row) => {
-    const cells = $(row).find('td').map((i, td) => cleanText($(td).text())).get();
+      const key = String(label)
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '_')
+        .replace(/^_+|_+$/g, '');
 
-    if (cells.length < 3) return;
+      stats[key] = {
+        home: Number(item.home ?? item.home_value ?? item.value_home ?? item[0]),
+        away: Number(item.away ?? item.away_value ?? item.value_away ?? item[1]),
+        label
+      };
+    }
+  }
 
-    const left = cells[0];
-    const label = cells[1];
-    const right = cells[2];
+  if (rawStats && typeof rawStats === 'object' && !Array.isArray(rawStats)) {
+    for (const [label, value] of Object.entries(rawStats)) {
+      const key = String(label)
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '_')
+        .replace(/^_+|_+$/g, '');
 
-    const normalizedLabel = label
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '_')
-      .replace(/^_+|_+$/g, '');
+      if (Array.isArray(value)) {
+        stats[key] = {
+          home: Number(value[0]),
+          away: Number(value[1]),
+          label
+        };
+      } else if (value && typeof value === 'object') {
+        stats[key] = {
+          home: Number(value.home ?? value.home_value ?? value.value_home),
+          away: Number(value.away ?? value.away_value ?? value.value_away),
+          label
+        };
+      }
+    }
+  }
 
-    if (!normalizedLabel) return;
+  const score =
+    pick(source, ['ss', 'score', 'scores', 'result']) ||
+    pick(data, ['ss', 'score']);
 
-    stats[normalizedLabel] = {
-      home: parseNumber(left),
-      away: parseNumber(right),
-      label
-    };
-  });
+  const minute =
+    pick(source, ['timer.tm', 'timer', 'time', 'minute']) ||
+    pick(data, ['timer.tm', 'timer', 'time', 'minute']);
 
-  return stats;
+  return {
+    score: score ? String(score) : null,
+    minute: minute !== null && minute !== undefined ? String(minute) : null,
+    stats,
+    raw: data
+  };
 }
 
-function getStat(stats, key) {
-  return stats[key] || { home: null, away: null };
+async function getBetsApiMatchStats(eventId) {
+  const data = await betsApiGet('/betfair/event', {
+    event_id: eventId
+  });
+
+  return normalizeStatsFromEventResponse(data);
+}
+
+function getStat(stats, keys) {
+  for (const key of keys) {
+    if (stats[key]) return stats[key];
+  }
+
+  return { home: null, away: null };
+}
+
+function numberOrZero(value) {
+  const n = Number(value);
+  return Number.isFinite(n) ? n : 0;
 }
 
 function validateGoalsOpportunity(opportunity, liveStats) {
-  const pick = String(opportunity.runnerName || '').toLowerCase();
+  const pickName = String(opportunity.runnerName || '').toLowerCase();
   const market = String(opportunity.marketType || '').toUpperCase();
 
-  const isOver = pick.includes('over');
-  const isUnder = pick.includes('under');
+  const isOver = pickName.includes('over');
+  const isUnder = pickName.includes('under');
 
   const scoreData = parseScore(liveStats.score);
 
-  const attacks = getStat(liveStats.stats, 'attacks');
-  const dangerousAttacks = getStat(liveStats.stats, 'dangerous_attacks');
-  const onTarget = getStat(liveStats.stats, 'on_target');
-  const offTarget = getStat(liveStats.stats, 'off_target');
-  const corners = getStat(liveStats.stats, 'corners');
+  const attacks = getStat(liveStats.stats, ['attacks', 'attack']);
+  const dangerousAttacks = getStat(liveStats.stats, ['dangerous_attacks', 'dangerous_attack']);
+  const onTarget = getStat(liveStats.stats, ['on_target', 'shots_on_target', 'shot_on_target']);
+  const offTarget = getStat(liveStats.stats, ['off_target', 'shots_off_target', 'shot_off_target']);
+  const corners = getStat(liveStats.stats, ['corners', 'corner']);
 
-  const totalOnTarget = (onTarget.home || 0) + (onTarget.away || 0);
-  const totalOffTarget = (offTarget.home || 0) + (offTarget.away || 0);
-  const totalCorners = (corners.home || 0) + (corners.away || 0);
-  const totalDangerousAttacks = (dangerousAttacks.home || 0) + (dangerousAttacks.away || 0);
-  const totalAttacks = (attacks.home || 0) + (attacks.away || 0);
+  const totalOnTarget = numberOrZero(onTarget.home) + numberOrZero(onTarget.away);
+  const totalOffTarget = numberOrZero(offTarget.home) + numberOrZero(offTarget.away);
+  const totalCorners = numberOrZero(corners.home) + numberOrZero(corners.away);
+  const totalDangerousAttacks = numberOrZero(dangerousAttacks.home) + numberOrZero(dangerousAttacks.away);
+  const totalAttacks = numberOrZero(attacks.home) + numberOrZero(attacks.away);
 
   let pressureScore = 0;
 
@@ -353,6 +454,7 @@ function validateGoalsOpportunity(opportunity, liveStats) {
     riskAdjustment,
     reason: reasons.join('. '),
     score: scoreData.score,
+    minute: liveStats.minute,
     stats: {
       attacks,
       dangerousAttacks,
@@ -367,18 +469,6 @@ function validateGoalsOpportunity(opportunity, liveStats) {
         attacks: totalAttacks
       }
     }
-  };
-}
-
-function validateResultOpportunity(opportunity, liveStats) {
-  return {
-    liveStatsFound: true,
-    validation: 'neutral',
-    livePressureScore: null,
-    riskAdjustment: 0,
-    reason: 'Live result-market validation not implemented yet',
-    score: parseScore(liveStats.score).score,
-    stats: liveStats.stats
   };
 }
 
@@ -398,29 +488,27 @@ async function validateLiveStats(opportunity) {
       };
     }
 
-    const stats = await getBetsApiMatchStats(match.url);
-
-    const liveStats = {
-      source: 'betsapi',
-      matchUrl: match.url,
-      matchScore: match.matchScore,
-      reversed: match.reversed,
-      home: match.home,
-      away: match.away,
-      score: match.score,
-      stats
-    };
+    const liveStats = await getBetsApiMatchStats(match.id);
 
     const market = String(opportunity.marketType || '').toUpperCase();
 
     const validation = market.startsWith('OVER_UNDER')
       ? validateGoalsOpportunity(opportunity, liveStats)
-      : validateResultOpportunity(opportunity, liveStats);
+      : {
+          liveStatsFound: true,
+          validation: 'neutral',
+          livePressureScore: null,
+          riskAdjustment: 0,
+          reason: 'Live result-market validation not implemented yet',
+          score: liveStats.score,
+          minute: liveStats.minute,
+          stats: liveStats.stats
+        };
 
     return {
       ...validation,
-      source: 'betsapi',
-      matchUrl: match.url,
+      source: 'betsapi_api',
+      betsapiEventId: match.id,
       matchScore: match.matchScore,
       matchedHome: match.home,
       matchedAway: match.away,
@@ -432,7 +520,7 @@ async function validateLiveStats(opportunity) {
       validation: 'error',
       livePressureScore: null,
       riskAdjustment: 0,
-      reason: `BetsAPI live stats validation failed: ${error.message}`,
+      reason: `BetsAPI API validation failed: ${error.message}`,
       match: null
     };
   }
