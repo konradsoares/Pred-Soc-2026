@@ -191,7 +191,7 @@ async function scan(debug) {
   }
 
   document.getElementById('status').innerText =
-    `Events: ${data.totalEvents} | Markets: ${data.totalMarkets} | Raw: ${data.totalRawOpportunities} | Grouped: ${data.totalOpportunities} | Alerts: ${alerts.length} | Telegram: ${data.telegramSent || 0}`;
+    `Events: ${data.totalEvents} | Markets: ${data.totalMarkets} | Raw: ${data.totalRawOpportunities} | Grouped: ${data.totalOpportunities} | Alerts: ${alerts.length} | Telegram sent: ${data.telegramSent || 0} | Skipped duplicate: ${data.telegramSkippedDuplicate || 0}`;
 }
 
 function renderOpportunities(opportunities) {
