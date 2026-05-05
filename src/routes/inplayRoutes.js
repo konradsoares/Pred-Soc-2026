@@ -3,9 +3,30 @@ const { scanInplayOpportunities } = require('../inplay/inplayScanner');
 
 const router = express.Router();
 
+// router.post('/scan', async (req, res) => {
+//   try {
+//     const result = await scanInplayOpportunities();
+
+//     res.json({
+//       ok: true,
+//       ...result
+//     });
+//   } catch (error) {
+//     console.error('[inplay scan failed]', error);
+
+//     res.status(500).json({
+//       ok: false,
+//       error: error.message
+//     });
+//   }
+// });
 router.post('/scan', async (req, res) => {
   try {
-    const result = await scanInplayOpportunities();
+    const debug =
+      req.query.debug === 'true' ||
+      req.body?.debug === true;
+
+    const result = await scanInplayOpportunities({ debug });
 
     res.json({
       ok: true,
