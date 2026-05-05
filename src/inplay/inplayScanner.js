@@ -197,6 +197,53 @@ async function findFixture(eventId, eventName) {
 async function getBasicModelProbability({ fixtureId, marketType, runnerName }) {
   if (!fixtureId) return null;
 
+  function toProb(value) {
+    if (value === null || value === undefined || value === '') return null;
+
+    const n = Number(value);
+
+    if (!Number.isFinite(n)) return null;
+
+    if (n > 1) return n / 100;
+
+    return n;
+  }
+
+  function firstProb(row, keys) {
+    if (!row) return null;
+
+    for (const key of keys) {
+      if (row[key] !== undefined && row[key] !== null) {
+        const p = toProb(row[key]);
+        if (p !== null && p > 0 && p < 1) return p;
+      }
+    }
+
+    return null;
+  }
+
+  function poissonCdf(k, lambda) {
+    let sum = 0;
+
+    for (let i = 0; i <= k; i++) {
+      sum += (Math.exp(-lambda) * Math.pow(lambda, i)) / factorial(i);
+    }
+
+    return sum;
+  }
+
+  function factorial(n) {
+    if (n <= 1) return 1;
+
+    let result = 1;
+
+    for (let i = 2; i <= n; i++) {
+      result *= i;
+    }
+
+    return result;
+  }
+
   const prediction = await db.query(
     `
     SELECT *
@@ -227,59 +274,118 @@ async function getBasicModelProbability({ fixtureId, marketType, runnerName }) {
   let probability = null;
   const reasons = [];
 
+  const isOver = pick.includes('over');
+  const isUnder = pick.includes('under');
+
   if (predictionRow) {
-    const homeProb = Number(
-      predictionRow.home_probability ||
-      predictionRow.home_prob ||
-      predictionRow.prob_home ||
-      0
-    );
+    const homeProb = firstProb(predictionRow, [
+      'home_probability',
+      'home_prob',
+      'prob_home',
+      'home_win_probability',
+      'home_win_prob'
+    ]);
 
-    const drawProb = Number(
-      predictionRow.draw_probability ||
-      predictionRow.draw_prob ||
-      predictionRow.prob_draw ||
-      0
-    );
+    const drawProb = firstProb(predictionRow, [
+      'draw_probability',
+      'draw_prob',
+      'prob_draw'
+    ]);
 
-    const awayProb = Number(
-      predictionRow.away_probability ||
-      predictionRow.away_prob ||
-      predictionRow.prob_away ||
-      0
-    );
+    const awayProb = firstProb(predictionRow, [
+      'away_probability',
+      'away_prob',
+      'prob_away',
+      'away_win_probability',
+      'away_win_prob'
+    ]);
 
-    const hp = homeProb > 1 ? homeProb / 100 : homeProb;
-    const dp = drawProb > 1 ? drawProb / 100 : drawProb;
-    const ap = awayProb > 1 ? awayProb / 100 : awayProb;
+    const over15 = firstProb(predictionRow, [
+      'over_1_5',
+      'over15',
+      'over_15',
+      'over_1_5_probability',
+      'over15_probability',
+      'prob_over_1_5',
+      'prob_over15'
+    ]);
+
+    const over25 = firstProb(predictionRow, [
+      'over_2_5',
+      'over25',
+      'over_25',
+      'over_2_5_probability',
+      'over25_probability',
+      'prob_over_2_5',
+      'prob_over25'
+    ]);
+
+    const over35 = firstProb(predictionRow, [
+      'over_3_5',
+      'over35',
+      'over_35',
+      'over_3_5_probability',
+      'over35_probability',
+      'prob_over_3_5',
+      'prob_over35'
+    ]);
 
     if (market === 'MATCH_ODDS') {
-      if (pick.includes('draw')) probability = dp;
-      else if (
+      if (pick.includes('draw')) {
+        probability = drawProb;
+      } else if (
         predictionRow.home_team &&
         pick.includes(String(predictionRow.home_team).toLowerCase())
       ) {
-        probability = hp;
+        probability = homeProb;
       } else if (
         predictionRow.away_team &&
         pick.includes(String(predictionRow.away_team).toLowerCase())
       ) {
-        probability = ap;
+        probability = awayProb;
+      }
+
+      if (probability !== null) {
+        reasons.push('Statarea match result probability used');
       }
     }
 
     if (market === 'DOUBLE_CHANCE') {
-      if (pick.includes('1x') || pick.includes('home or draw')) probability = hp + dp;
-      if (pick.includes('x2') || pick.includes('draw or away')) probability = dp + ap;
-      if (pick.includes('12') || pick.includes('home or away')) probability = hp + ap;
+      if ((pick.includes('1x') || pick.includes('home or draw')) && homeProb !== null && drawProb !== null) {
+        probability = homeProb + drawProb;
+      }
+
+      if ((pick.includes('x2') || pick.includes('draw or away')) && drawProb !== null && awayProb !== null) {
+        probability = drawProb + awayProb;
+      }
+
+      if ((pick.includes('12') || pick.includes('home or away')) && homeProb !== null && awayProb !== null) {
+        probability = homeProb + awayProb;
+      }
+
+      if (probability !== null) {
+        probability = Math.min(probability, 0.98);
+        reasons.push('Statarea double chance probability used');
+      }
     }
 
-    if (probability) {
-      reasons.push('Statarea prediction probability used');
+    if (market === 'OVER_UNDER_15' && over15 !== null) {
+      probability = isOver ? over15 : isUnder ? 1 - over15 : null;
+      reasons.push('Statarea Over/Under 1.5 distribution used');
+    }
+
+    if (market === 'OVER_UNDER_25' && over25 !== null) {
+      probability = isOver ? over25 : isUnder ? 1 - over25 : null;
+      reasons.push('Statarea Over/Under 2.5 distribution used');
+    }
+
+    if (market === 'OVER_UNDER_35' && over35 !== null) {
+      probability = isOver ? over35 : isUnder ? 1 - over35 : null;
+      reasons.push('Statarea Over/Under 3.5 distribution used');
     }
   }
 
-  if (!probability && statsRows.length) {
+  if (probability === null && statsRows.length) {
     const avgGoalsFor = statsRows
       .map(r => Number(r.avg_goals_for))
       .filter(Number.isFinite);
@@ -296,25 +402,34 @@ async function getBasicModelProbability({ fixtureId, marketType, runnerName }) {
       ? avgGoalsAgainst.reduce((a, b) => a + b, 0) / avgGoalsAgainst.length
       : null;
 
-    const goalTrend =
+    const lambda =
       avgFor !== null && avgAgainst !== null
-        ? avgFor + avgAgainst
+        ? Math.max(0.2, Math.min(5.0, avgFor + avgAgainst))
         : null;
 
-    if (market === 'OVER_UNDER_15' && goalTrend !== null) {
-      if (pick.includes('over')) probability = goalTrend >= 2.0 ? 0.72 : 0.56;
-      if (pick.includes('under')) probability = goalTrend < 2.0 ? 0.62 : 0.42;
-      reasons.push('Recent goals trend used');
-    }
+    if (lambda !== null) {
+      if (market === 'OVER_UNDER_15') {
+        const under15 = poissonCdf(1, lambda);
+        probability = isOver ? 1 - under15 : isUnder ? under15 : null;
+      }
 
-    if (market === 'OVER_UNDER_25' && goalTrend !== null) {
-      if (pick.includes('over')) probability = goalTrend >= 2.8 ? 0.66 : 0.48;
-      if (pick.includes('under')) probability = goalTrend < 2.8 ? 0.60 : 0.44;
-      reasons.push('Recent goals trend used');
+      if (market === 'OVER_UNDER_25') {
+        const under25 = poissonCdf(2, lambda);
+        probability = isOver ? 1 - under25 : isUnder ? under25 : null;
+      }
+
+      if (market === 'OVER_UNDER_35') {
+        const under35 = poissonCdf(3, lambda);
+        probability = isOver ? 1 - under35 : isUnder ? under35 : null;
+      }
+
+      if (probability !== null) {
+        reasons.push('Poisson estimate from recent goals trend used');
+      }
     }
   }
 
-  if (!probability || probability <= 0 || probability >= 1) {
+  if (probability === null || probability <= 0 || probability >= 1) {
     return null;
   }
 
@@ -323,7 +438,8 @@ async function getBasicModelProbability({ fixtureId, marketType, runnerName }) {
     reason: reasons.join('. '),
     statsSummary: {
       hasPrediction: Boolean(predictionRow),
-      recentStatsRows: statsRows.length
+      recentStatsRows: statsRows.length,
+      probabilitySource: reasons[0] || null
     }
   };
 }
