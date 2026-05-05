@@ -1,6 +1,299 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Pred-Soc-2026 In-Play</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #eee;
+      padding: 20px;
+    }
+
+    button {
+      padding: 10px 16px;
+      margin-right: 8px;
+      cursor: pointer;
+      border: 0;
+      border-radius: 4px;
+    }
+
+    .primary {
+      background: #2b7cff;
+      color: white;
+    }
+
+    .danger {
+      background: #aa3333;
+      color: white;
+    }
+
+    .status {
+      margin-top: 15px;
+      color: #ccc;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    th, td {
+      padding: 9px;
+      border-bottom: 1px solid #333;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    tr:hover {
+      background: #1d1d1d;
+    }
+
+    .low {
+      color: #00ff88;
+      font-weight: bold;
+    }
+
+    .medium {
+      color: #ffaa00;
+      font-weight: bold;
+    }
+
+    .high {
+      color: #ff5555;
+      font-weight: bold;
+    }
+
+    .alert {
+      background: #263d24;
+    }
+
+    .debug {
+      margin-top: 25px;
+      background: #181818;
+      border: 1px solid #333;
+      padding: 12px;
+      max-height: 380px;
+      overflow: auto;
+      display: none;
+    }
+
+    .small {
+      color: #aaa;
+      font-size: 12px;
+    }
+
+    .score {
+      color: #ccc;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Pred-Soc-2026 — Live In-Play Opportunities</h1>
+
+<button class="primary" onclick="scan(false)">Scan Now</button>
+<button onclick="scan(true)">Scan Debug</button>
+<button onclick="toggleAuto()">Auto Refresh: OFF</button>
+<button class="danger" onclick="toggleSound()">Sound Alert: ON</button>
+
+<div id="status" class="status">Ready.</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Match</th>
+      <th>Live</th>
+      <th>Market</th>
+      <th>Pick</th>
+      <th>Odds</th>
+      <th>Implied</th>
+      <th>Model</th>
+      <th>Edge</th>
+      <th>Risk</th>
+      <th>Confidence</th>
+      <th>Reason</th>
+    </tr>
+  </thead>
+  <tbody id="oppsBody"></tbody>
+</table>
+
+<div id="debugBox" class="debug"></div>
+
+<script>
+let auto = false;
+let interval = null;
+let soundEnabled = true;
+
+function pct(value) {
+  if (value === null || value === undefined) return '-';
+  return (Number(value) * 100).toFixed(1) + '%';
+}
+
+function num(value, decimals = 2) {
+  if (value === null || value === undefined) return '-';
+  return Number(value).toFixed(decimals);
+}
+
+function playAlertSound() {
+  if (!soundEnabled) return;
+
+  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  const oscillator = audioContext.createOscillator();
+  const gain = audioContext.createGain();
+
+  oscillator.connect(gain);
+  gain.connect(audioContext.destination);
+
+  oscillator.frequency.value = 880;
+  gain.gain.value = 0.1;
+
+  oscillator.start();
+  setTimeout(() => {
+    oscillator.stop();
+    audioContext.close();
+  }, 250);
+}
+
+async function scan(debug) {
+  document.getElementById('status').innerText = 'Scanning Betfair in-play markets...';
+
+  const url = debug
+    ? '/api/inplay/scan?debug=true'
+    : '/api/inplay/scan';
+
+  const res = await fetch(url, { method: 'POST' });
+  const data = await res.json();
+
+  if (!data.ok) {
+    document.getElementById('status').innerText = data.error;
+    return;
+  }
+
+  renderOpportunities(data.opportunities || []);
+  renderDebug(data.rejections || []);
+
+  const alerts = (data.opportunities || []).filter(o => o.alert);
+
+  if (alerts.length > 0) {
+    playAlertSound();
+  }
+
+  document.getElementById('status').innerText =
+    `Events: ${data.totalEvents} | Markets: ${data.totalMarkets} | Raw: ${data.totalRawOpportunities} | Grouped: ${data.totalOpportunities} | Alerts: ${alerts.length}`;
+}
+
+function renderOpportunities(opportunities) {
+  const tbody = document.getElementById('oppsBody');
+  tbody.innerHTML = '';
+
+  if (!opportunities.length) {
+    tbody.innerHTML = '<tr><td colspan="11">No opportunities found.</td></tr>';
+    return;
+  }
+
+  for (const o of opportunities) {
+    const tr = document.createElement('tr');
+
+    if (o.alert) {
+      tr.classList.add('alert');
+    }
+
+    const minute = o.liveContext?.minute || '-';
+    const score = o.liveContext?.score || '-';
+
+    tr.innerHTML = `
+      <td>
+        ${o.homeTeam} v ${o.awayTeam}
+        <div class="small">${o.betfairEventName}</div>
+      </td>
+      <td>
+        <div class="score">Minute: ${minute}</div>
+        <div class="score">Score: ${score}</div>
+        <div class="small">${o.liveContext?.source || ''}</div>
+      </td>
+      <td>${o.marketType}</td>
+      <td>${o.runnerName}</td>
+      <td>${num(o.backOdd, 2)}</td>
+      <td>${pct(o.impliedProbability)}</td>
+      <td>${pct(o.modelProbability)}</td>
+      <td>${pct(o.edge)}</td>
+      <td class="${o.riskLevel}">${o.riskLevel}</td>
+      <td>${o.confidenceScore}/100</td>
+      <td>
+        ${o.reason || ''}
+        <div class="small">
+          Mapping: ${o.statsSummary?.mappingMethod || '-'} |
+          Stats rows: ${o.statsSummary?.recentStatsRows || 0}
+        </div>
+      </td>
+    `;
+
+    tbody.appendChild(tr);
+  }
+}
+
+function renderDebug(rejections) {
+  const box = document.getElementById('debugBox');
+
+  if (!rejections.length) {
+    box.style.display = 'none';
+    box.innerHTML = '';
+    return;
+  }
+
+  box.style.display = 'block';
+
+  const grouped = {};
+
+  for (const r of rejections) {
+    grouped[r.reason] = (grouped[r.reason] || 0) + 1;
+  }
+
+  let html = '<h3>Rejected Items</h3>';
+  html += '<h4>Summary</h4><ul>';
+
+  for (const [reason, count] of Object.entries(grouped)) {
+    html += `<li>${reason}: ${count}</li>`;
+  }
+
+  html += '</ul><h4>Details</h4><pre>';
+  html += JSON.stringify(rejections.slice(0, 100), null, 2);
+  html += '</pre>';
+
+  box.innerHTML = html;
+}
+
+function toggleAuto() {
+  auto = !auto;
+
+  const btn = event.target;
+
+  if (auto) {
+    btn.innerText = 'Auto Refresh: ON';
+    interval = setInterval(() => scan(false), 30000);
+  } else {
+    btn.innerText = 'Auto Refresh: OFF';
+    clearInterval(interval);
+  }
+}
+
+function toggleSound() {
+  soundEnabled = !soundEnabled;
+  event.target.innerText = soundEnabled
+    ? 'Sound Alert: ON'
+    : 'Sound Alert: OFF';
+}
+</script>
+
+</body>
+</html>
+<!-- <!DOCTYPE html>
+<html>
+<head>
   <title>In-Play Opportunities</title>
   <style>
     body {
@@ -139,4 +432,4 @@ loadRecent();
 </script>
 
 </body>
-</html>
+</html> -->
