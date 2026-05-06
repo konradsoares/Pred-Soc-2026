@@ -227,17 +227,19 @@ async function upsertFixture(client, event, parsedTeams) {
       fixture_date
     )
     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
-    ON CONFLICT (source_name, home_team_id, away_team_id, fixture_date)
+    ON CONFLICT (source_name, external_id)
     DO UPDATE SET
-      external_id = EXCLUDED.external_id,
       competition_id = EXCLUDED.competition_id,
       season_id = EXCLUDED.season_id,
       country_id = EXCLUDED.country_id,
+      home_team_id = EXCLUDED.home_team_id,
+      away_team_id = EXCLUDED.away_team_id,
       kickoff_utc = EXCLUDED.kickoff_utc,
       status = EXCLUDED.status,
       is_friendly = EXCLUDED.is_friendly,
+      fixture_date = EXCLUDED.fixture_date,
       scraped_at = NOW()
-    RETURNING id
+    RETURNING id;
     `,
     [
       SOURCE_NAME,
