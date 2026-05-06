@@ -103,12 +103,140 @@ function calculateConfidenceScore({
   return score;
 }
 
+
+async function saveOddsSnapshot({
+  eventId,
+  marketId,
+  marketType,
+  selectionId,
+  runnerName,
+  backOdd,
+  marketStatus,
+  inplay
+}) {
+  await db.query(
+    `
+    INSERT INTO inplay_market_snapshots (
+      betfair_event_id,
+      market_id,
+      market_type,
+      selection_id,
+      runner_name,
+      back_odd,
+      market_status,
+      inplay
+    )
+    VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
+    `,
+    [
+      String(eventId),
+      marketId,
+      marketType,
+      selectionId,
+      runnerName,
+      backOdd,
+      marketStatus,
+      inplay
+    ]
+  );
+}
+
+async function getOddsMovement({ eventId, marketId, selectionId, currentOdd }) {
+  const result = await db.query(
+    `
+    SELECT back_odd, captured_at
+    FROM inplay_market_snapshots
+    WHERE betfair_event_id = $1
+      AND market_id = $2
+      AND selection_id = $3
+      AND back_odd IS NOT NULL
+    ORDER BY captured_at ASC
+    LIMIT 1
+    `,
+    [String(eventId), marketId, selectionId]
+  );
+
+  if (!result.rows.length) {
+    return {
+      hasBaseline: false,
+      baselineOdd: null,
+      currentOdd,
+      movementPct: null,
+      direction: 'unknown',
+      reason: 'No baseline odds snapshot yet'
+    };
+  }
+
+  const baselineOdd = Number(result.rows[0].back_odd);
+
+  if (!baselineOdd || !currentOdd) {
+    return {
+      hasBaseline: false,
+      baselineOdd,
+      currentOdd,
+      movementPct: null,
+      direction: 'unknown',
+      reason: 'Invalid baseline/current odds'
+    };
+  }
+
+  const movementPct = Number(
+    (((currentOdd - baselineOdd) / baselineOdd) * 100).toFixed(2)
+  );
+
+  let direction = 'stable';
+
+  if (movementPct <= -8) {
+    direction = 'steaming';
+  } else if (movementPct >= 15) {
+    direction = 'drifting';
+  }
+
+  return {
+    hasBaseline: true,
+    baselineOdd,
+    currentOdd,
+    movementPct,
+    direction,
+    capturedAt: result.rows[0].captured_at,
+    reason: `Odd moved from ${baselineOdd} to ${currentOdd} (${movementPct}%)`
+  };
+}
+
+function hasUsableLiveContext(liveContext) {
+  return Boolean(
+    liveContext &&
+    liveContext.score &&
+    liveContext.minute &&
+    liveContext.source !== 'not_available_from_current_betfair_json_rpc_calls'
+  );
+}
+
+function oddsMovementSupportsPick(oddsMovement) {
+  if (!oddsMovement || !oddsMovement.hasBaseline) {
+    return false;
+  }
+
+  return (
+    oddsMovement.direction === 'steaming' ||
+    oddsMovement.direction === 'stable'
+  );
+}
+
+function requiresStateValidation() {
+  return true;
+}
+
 function shouldTriggerAlert(opportunity) {
+  const liveKnown = hasUsableLiveContext(opportunity.liveContext);
+  const movementSupports = oddsMovementSupportsPick(opportunity.oddsMovement);
+
   return (
     opportunity.edge >= 0.10 &&
     opportunity.riskLevel === 'low' &&
     opportunity.confidenceScore >= 80 &&
-    opportunity.modelProbability >= 0.60
+    opportunity.modelProbability >= 0.60 &&
+    (liveKnown || movementSupports)
   );
 }
 
@@ -726,6 +854,23 @@ async function scanInplayOpportunities(options = {}) {
       }
 
       const impliedProbability = impliedProbabilityFromOdd(backOdd);
+      await saveOddsSnapshot({
+        eventId,
+        marketId: marketBook.marketId,
+        marketType,
+        selectionId: runner.selectionId,
+        runnerName,
+        backOdd,
+        marketStatus: marketBook.status,
+        inplay: marketBook.inplay
+      });
+      
+      const oddsMovement = await getOddsMovement({
+        eventId,
+        marketId: marketBook.marketId,
+        selectionId: runner.selectionId,
+        currentOdd: backOdd
+      });      
 
       const model = await getBasicModelProbability({
         fixtureId: fixtureMatch.fixtureId,
@@ -806,6 +951,7 @@ async function scanInplayOpportunities(options = {}) {
         edge,
         riskLevel,
         confidenceScore,
+        oddsMovement,
         alert: false,
 
         reason: model.reason,
@@ -816,8 +962,29 @@ async function scanInplayOpportunities(options = {}) {
         }
       };
 
+      const liveKnown = hasUsableLiveContext(opportunity.liveContext);
+      const movementSupports = oddsMovementSupportsPick(opportunity.oddsMovement);
+      
+      if (requiresStateValidation() && !liveKnown && !movementSupports) {
+        addRejection(rejections, {
+          scope: 'runner',
+          eventId,
+          eventName,
+          marketId: marketBook.marketId,
+          marketType,
+          runnerName,
+          selectionId: runner.selectionId,
+          reason: 'missing_live_context_and_odds_movement_not_supportive',
+          backOdd,
+          modelProbability: model.modelProbability,
+          liveContext: opportunity.liveContext,
+          oddsMovement: opportunity.oddsMovement
+        });
+        continue;
+      }
+      
       opportunity.alert = shouldTriggerAlert(opportunity);
-
+      
       rawOpportunities.push(opportunity);
     }
   }
