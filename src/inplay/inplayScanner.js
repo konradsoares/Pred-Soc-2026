@@ -150,6 +150,7 @@ async function getOddsMovement({ eventId, marketId, selectionId, currentOdd }) {
       AND market_id = $2
       AND selection_id = $3
       AND back_odd IS NOT NULL
+      AND captured_at <= NOW() - INTERVAL '60 seconds'
     ORDER BY captured_at ASC
     LIMIT 1
     `,
@@ -854,6 +855,13 @@ async function scanInplayOpportunities(options = {}) {
       }
 
       const impliedProbability = impliedProbabilityFromOdd(backOdd);
+      const oddsMovement = await getOddsMovement({
+        eventId,
+        marketId: marketBook.marketId,
+        selectionId: runner.selectionId,
+        currentOdd: backOdd
+      });
+      
       await saveOddsSnapshot({
         eventId,
         marketId: marketBook.marketId,
@@ -863,14 +871,7 @@ async function scanInplayOpportunities(options = {}) {
         backOdd,
         marketStatus: marketBook.status,
         inplay: marketBook.inplay
-      });
-      
-      const oddsMovement = await getOddsMovement({
-        eventId,
-        marketId: marketBook.marketId,
-        selectionId: runner.selectionId,
-        currentOdd: backOdd
-      });      
+      });    
 
       const model = await getBasicModelProbability({
         fixtureId: fixtureMatch.fixtureId,
