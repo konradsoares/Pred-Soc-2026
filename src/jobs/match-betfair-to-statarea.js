@@ -185,7 +185,7 @@ function findStrictMatch(betfairFixture, statareaFixtures) {
 
   for (const statarea of statareaFixtures) {
     const timeDiff = minutesDiff(betfairFixture.kickoff_utc, statarea.kickoff_utc);
-    if (timeDiff > 60) continue;
+    if (timeDiff >= 60) continue;
 
     const score = combinedScore(betfairFixture, statarea);
 
