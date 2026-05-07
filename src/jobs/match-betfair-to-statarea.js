@@ -35,19 +35,50 @@ function tokenSet(value) {
   return new Set(normalizeName(value).split(' ').filter(Boolean));
 }
 
-function nameScore(a, b) {
-  const left = tokenSet(a);
-  const right = tokenSet(b);
+function addNameAliases(value) {
+  const normalized = normalizeName(value);
+  const compact = normalized.replace(/\s+/g, '');
 
-  if (!left.size || !right.size) return 0;
+  const aliases = new Set([normalized, compact]);
 
-  let matches = 0;
-
-  for (const token of left) {
-    if (right.has(token)) matches += 1;
+  if (compact.startsWith('o') && compact.length > 1) {
+    aliases.add(`o ${compact.slice(1)}`);
   }
 
-  return matches / Math.max(left.size, right.size);
+  return aliases;
+}
+
+function nameScore(a, b) {
+  const aAliases = addNameAliases(a);
+  const bAliases = addNameAliases(b);
+
+  for (const aa of aAliases) {
+    for (const bb of bAliases) {
+      if (aa && bb && aa === bb) return 1;
+    }
+  }
+
+  let best = 0;
+
+  for (const aa of aAliases) {
+    for (const bb of bAliases) {
+      const left = new Set(aa.split(' ').filter(Boolean));
+      const right = new Set(bb.split(' ').filter(Boolean));
+
+      if (!left.size || !right.size) continue;
+
+      let matches = 0;
+
+      for (const token of left) {
+        if (right.has(token)) matches += 1;
+      }
+
+      const score = matches / Math.max(left.size, right.size);
+      if (score > best) best = score;
+    }
+  }
+
+  return best;
 }
 
 function minutesDiff(a, b) {
@@ -131,12 +162,22 @@ function normalize(value) {
     .replace(/[^a-z0-9]/g, '');
 }
 
-function countryCompatible(betfairCountry, statareaCountry) {
+function countryCompatible(betfairCountry, statareaCountry, betfairCompetition = '') {
   const bf = normalize(betfairCountry);
   const st = normalize(statareaCountry);
+  const comp = normalize(betfairCompetition);
 
-  if (!bf || !st) return true;
+  if (!bf || bf === 'unknown') return true;
+  if (!st || st === 'unknown') return true;
   if (bf === st) return true;
+
+  if (
+    comp.includes('conmebol') ||
+    comp.includes('libertadores') ||
+    comp.includes('sudamericana')
+  ) {
+    return true;
+  }
 
   const aliases = {
     gb: ['england', 'scotland', 'wales', 'northernireland'],
@@ -161,7 +202,15 @@ function countryCompatible(betfairCountry, statareaCountry) {
     dk: ['denmark'],
     fi: ['finland'],
     ie: ['ireland'],
-    mx: ['mexico']
+    mx: ['mexico'],
+    uy: ['uruguay'],
+    co: ['colombia'],
+    cl: ['chile'],
+    ec: ['ecuador'],
+    py: ['paraguay'],
+    pe: ['peru'],
+    bo: ['bolivia'],
+    ve: ['venezuela']
   };
 
   return (aliases[bf] || []).includes(st) || (aliases[st] || []).includes(bf);
@@ -191,7 +240,8 @@ function findStrictMatch(betfairFixture, statareaFixtures) {
 
     const sameCountry = countryCompatible(
       betfairFixture.country,
-      statarea.country
+      statarea.country,
+      betfairFixture.competition
     );
 
     const sameCompetition = competitionCompatible(
