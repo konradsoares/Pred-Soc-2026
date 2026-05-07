@@ -19,6 +19,9 @@ function normalizeName(value) {
     .replace(/\bfk\b/g, '')
     .replace(/\butd\b/g, 'united')
     .replace(/\bst\b/g, 'saint')
+    .replace(/\bamman\b/g, '')
+    .replace(/\bmahallah\b/g, 'mahalla')
+    .replace(/\bmahalleh\b/g, 'mahalla')
     .replace(/[^\w\s]/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
@@ -182,8 +185,10 @@ function countryCompatible(betfairCountry, statareaCountry, betfairCompetition =
   const aliases = {
     gb: ['england', 'scotland', 'wales', 'northernireland'],
     uk: ['england', 'scotland', 'wales', 'northernireland'],
+  
     us: ['usa', 'unitedstates'],
     usa: ['us', 'unitedstates'],
+  
     kr: ['southkorea', 'korea'],
     jp: ['japan'],
     de: ['germany'],
@@ -203,6 +208,7 @@ function countryCompatible(betfairCountry, statareaCountry, betfairCompetition =
     fi: ['finland'],
     ie: ['ireland'],
     mx: ['mexico'],
+  
     uy: ['uruguay'],
     co: ['colombia'],
     cl: ['chile'],
@@ -210,7 +216,32 @@ function countryCompatible(betfairCountry, statareaCountry, betfairCompetition =
     py: ['paraguay'],
     pe: ['peru'],
     bo: ['bolivia'],
-    ve: ['venezuela']
+    ve: ['venezuela'],
+  
+    jo: ['jordan'],
+    eg: ['egypt'],
+    dz: ['algeria'],
+    lv: ['latvia'],
+    ro: ['romania'],
+    ma: ['morocco'],
+    ge: ['georgia'],
+    ee: ['estonia'],
+    pl: ['poland'],
+    lt: ['lithuania'],
+    sk: ['slovakia'],
+    cz: ['czechrepublic', 'czechia'],
+    bg: ['bulgaria'],
+    hr: ['croatia'],
+    si: ['slovenia'],
+    rs: ['serbia'],
+    ba: ['bosniaandherzegovina', 'bosnia'],
+    tr: ['turkey'],
+    gr: ['greece'],
+    cy: ['cyprus'],
+    il: ['israel'],
+    sa: ['saudiarabia'],
+    ae: ['unitedarabemirates', 'uae'],
+    qa: ['qatar']
   };
 
   return (aliases[bf] || []).includes(st) || (aliases[st] || []).includes(bf);
