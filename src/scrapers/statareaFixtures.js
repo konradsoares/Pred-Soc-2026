@@ -183,7 +183,7 @@ function extractScores(match) {
 }
 
 async function fetchFixturesByDate(date = formatTargetDate(0)) {
-  const url = `${env.SCRAPER_BASE_URL}/predictions/date/${date}/`;
+  const url = `${env.SCRAPER_BASE_URL}/predictions/date/${date}/starttime`;
 
   console.log(`Scraping: ${url}`);
 
