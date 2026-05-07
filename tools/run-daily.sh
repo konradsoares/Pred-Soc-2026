@@ -19,7 +19,7 @@ node src/jobs/match-betfair-to-statarea.js "$TARGET_DATE"
 node src/jobs/backfill-betfair-scraped-predictions.js "$TARGET_DATE" 
 node src/jobs/enrich-compare-stats.js "$TARGET_DATE" 
 node src/jobs/build-ai-tips.js "$TARGET_DATE"
-node src/jobs/export-bfbot-tips.js "$TARGET_DATE"
+node src/jobs/export-bfbot-tips.js daily "$TARGET_DATE"
 node src/jobs/map-tips-to-betfair-markets.js "$TARGET_DATE" 
 
 echo "Creating paper bets for $TARGET_DATE"
