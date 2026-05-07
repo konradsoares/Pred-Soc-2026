@@ -81,7 +81,7 @@ function debugClosestMatches(betfairFixture, statareaFixtures, limit = 5) {
       compare_url: s.compare_url,
       ...combinedScore(betfairFixture, s)
     }))
-    .filter((x) => x.timeDiff <= 180)
+    .filter((x) => x.timeDiff <= 60)
     .sort((a, b) => {
       if (b.totalScore !== a.totalScore) return b.totalScore - a.totalScore;
       return a.timeDiff - b.timeDiff;
@@ -185,7 +185,7 @@ function findStrictMatch(betfairFixture, statareaFixtures) {
 
   for (const statarea of statareaFixtures) {
     const timeDiff = minutesDiff(betfairFixture.kickoff_utc, statarea.kickoff_utc);
-    if (timeDiff >= 60) continue;
+    if (timeDiff > 60) continue;
 
     const score = combinedScore(betfairFixture, statarea);
 
