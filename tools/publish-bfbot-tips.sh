@@ -14,8 +14,7 @@ node src/jobs/export-bfbot-tips.js "$WINDOW" "$TARGET_DATE"
 mkdir -p "$PAGES_DIR"
 
 cp "$PROJECT_DIR/output/bfbot/bfbot-latest.csv" "$PAGES_DIR/tips.csv"
-cp "$PROJECT_DIR/output/bfbot/bfbot-$TARGET_DATE-$WINDOW-all.csv" "$PAGES_DIR/tips-$TARGET_DATE-$WINDOW.csv"
 
-git add docs/bfbot/tips.csv docs/bfbot/tips-$TARGET_DATE-$WINDOW.csv
-git commit -m "Update BF Bot tips for $TARGET_DATE $WINDOW" || true
+git add docs/bfbot/tips.csv
+git commit -m "Update BF Bot tips" || true
 git push origin main
