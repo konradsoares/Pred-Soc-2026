@@ -182,8 +182,39 @@ async function loadMappedSelections(client) {
   if (!hasMappings) return [];
 
   const cols = await columnsForTable(client, 'betfair_tip_mappings');
+
   const hasTipId = cols.has('sent_tip_id');
   const hasLegId = cols.has('sent_tip_leg_id');
+
+  const eventCol = cols.has('betfair_event_id')
+    ? 'm.betfair_event_id'
+    : cols.has('event_id')
+      ? 'm.event_id'
+      : 'NULL';
+
+  const marketCol = cols.has('betfair_market_id')
+    ? 'm.betfair_market_id'
+    : cols.has('market_id')
+      ? 'm.market_id'
+      : 'NULL';
+
+  const selectionCol = cols.has('betfair_selection_id')
+    ? 'm.betfair_selection_id'
+    : cols.has('selection_id')
+      ? 'm.selection_id'
+      : 'NULL';
+
+  const marketTypeCol = cols.has('market_type_code')
+    ? 'm.market_type_code'
+    : cols.has('betfair_market_type')
+      ? 'm.betfair_market_type'
+      : cols.has('market_type')
+        ? 'm.market_type'
+        : 'NULL';
+
+  const handicapCol = cols.has('handicap')
+    ? 'm.handicap'
+    : '0';
 
   const joinTip = hasTipId ? 'st.id = m.sent_tip_id' : 'FALSE';
   const joinLeg = hasLegId ? 'leg.id = m.sent_tip_leg_id' : 'FALSE';
@@ -191,7 +222,11 @@ async function loadMappedSelections(client) {
   const r = await client.query(
     `
     SELECT
-      m.*,
+      ${eventCol} AS mapped_event_id,
+      ${marketCol} AS mapped_market_id,
+      ${selectionCol} AS mapped_selection_id,
+      ${marketTypeCol} AS mapped_market_type,
+      ${handicapCol} AS mapped_handicap,
 
       COALESCE(st.id, parent_st.id) AS resolved_sent_tip_id,
       leg.id AS resolved_sent_tip_leg_id,
@@ -232,8 +267,8 @@ async function loadMappedSelections(client) {
     WHERE COALESCE(b.tip_date, parent_b.tip_date) = $1::date
       AND ($2 = 'daily' OR COALESCE(b.tip_window, parent_b.tip_window) = $2)
       AND COALESCE(st.status, parent_st.status, 'pending') = 'pending'
-      AND m.market_id IS NOT NULL
-      AND m.selection_id IS NOT NULL
+      AND ${marketCol} IS NOT NULL
+      AND ${selectionCol} IS NOT NULL
 
     ORDER BY f.kickoff_utc ASC NULLS LAST, resolved_sent_tip_id ASC, resolved_sent_tip_leg_id ASC
     `,
@@ -257,11 +292,11 @@ async function loadMappedSelections(client) {
     return {
       source: 'mapping',
       provider: providerForTip(tip),
-      eventId: firstValue(row, ['event_id', 'betfair_event_id']),
-      marketId: firstValue(row, ['market_id', 'betfair_market_id']),
-      selectionId: firstValue(row, ['selection_id', 'betfair_selection_id']),
-      marketType: firstValue(row, ['market_type', 'betfair_market_type']) || cfg?.marketType,
-      handicap: firstValue(row, ['handicap']) ?? cfg?.handicap ?? 0,
+      eventId: row.mapped_event_id,
+      marketId: row.mapped_market_id,
+      selectionId: row.mapped_selection_id,
+      marketType: row.mapped_market_type || cfg?.marketType,
+      handicap: row.mapped_handicap ?? cfg?.handicap ?? 0,
       tip
     };
   }).filter((x) => x.eventId && x.marketId && x.selectionId && x.marketType);
