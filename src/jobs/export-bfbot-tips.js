@@ -145,7 +145,7 @@ function bfbotRow({ provider, eventId, marketId, selectionId, marketType, handic
     selectionId,
     marketType,
     handicap ?? 0,
-    'UNKNOWN'
+    'BACK'
   ].map(csvEscape).join(',');
 }
 
@@ -608,25 +608,23 @@ async function main() {
     }
 
     const header = 'Provider,EventId,MarketId,SelectionId,MarketType,Handicap,BetType';
+    
     const allRows = [];
-
-    for (const [provider, rows] of grouped.entries()) {
-      const uniqueRows = [...new Set(rows)];
-      allRows.push(...uniqueRows);
-
-      const filename = path.join(
-        OUTPUT_DIR,
-        `bfbot-${TARGET_DATE}-${WINDOW}-${safeFile(provider)}.csv`
-      );
-
-      fs.writeFileSync(filename, [header, ...uniqueRows].join('\n') + '\n', 'utf8');
-      console.log(`Wrote ${uniqueRows.length} rows: ${filename}`);
+    
+    for (const rows of grouped.values()) {
+      allRows.push(...rows);
     }
-
+    
+    const uniqueRows = [...new Set(allRows)];
+    
     const allFile = path.join(OUTPUT_DIR, `bfbot-${TARGET_DATE}-${WINDOW}-all.csv`);
-    fs.writeFileSync(allFile, [header, ...new Set(allRows)].join('\n') + '\n', 'utf8');
-    console.log(`Wrote ${new Set(allRows).size} rows: ${allFile}`);
-
+    fs.writeFileSync(allFile, [header, ...uniqueRows].join('\n') + '\n', 'utf8');
+    console.log(`Wrote ${uniqueRows.length} rows: ${allFile}`);
+    
+    const latestFile = path.join(OUTPUT_DIR, 'bfbot-latest.csv');
+    fs.writeFileSync(latestFile, [header, ...uniqueRows].join('\n') + '\n', 'utf8');
+    console.log(`Wrote latest file: ${latestFile}`);
+    
     const skippedFile = path.join(OUTPUT_DIR, `bfbot-${TARGET_DATE}-${WINDOW}-skipped.json`);
     fs.writeFileSync(skippedFile, JSON.stringify(skipped, null, 2), 'utf8');
     console.log(`Skipped ${skipped.length} tips: ${skippedFile}`);
