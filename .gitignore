@@ -29,7 +29,7 @@ config/private.js
 # ------------------------
 # Output / Generated files
 # ------------------------
-output/
+
 logs/
 *.log
 

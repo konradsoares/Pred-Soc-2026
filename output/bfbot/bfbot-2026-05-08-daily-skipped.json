@@ -1,0 +1,17 @@
+[
+  {
+    "sent_tip_id": "523",
+    "sent_tip_leg_id": null,
+    "fixture_id": "10956",
+    "market_id": "1.257886417",
+    "market_type": "DOUBLE_CHANCE",
+    "market": "double_chance",
+    "pick": "1",
+    "runners": [
+      "Home or Draw",
+      "Draw or Away",
+      "Home or Away"
+    ],
+    "reason": "Selection not found in Betfair market"
+  }
+]
